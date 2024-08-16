@@ -11,7 +11,7 @@ public class MyFrame extends JFrame {
         setSize(520, 680);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
-        setLocationRelativeTo(null);
+        setLocation(100, 100); //Fazem as telas aparecerem no lado superior esquerdo 
         setResizable(false);
         getContentPane().setBackground(Colors.PRIMARY_COLOR);
     }
