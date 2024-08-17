@@ -3,7 +3,7 @@ package br.ufrn.imd.Models;
 import br.ufrn.imd.Dao.KitnetDAO;
 
 public class Kitnet {
-    public Number nKitnet;
+    public int nKitnet;
     public String mobilia;
     public String nomeInquilino;
     public String estadoUso;
@@ -12,11 +12,22 @@ public class Kitnet {
     public String cidade;
     public String esdereco;
 
+    public Kitnet(int nKitnet, String mobilia, String nomeInquilino, String estadoUso, String cep, String estado, String cidade, String esdereco) {
+        this.nKitnet = nKitnet;
+        this.mobilia = mobilia;
+        this.nomeInquilino = nomeInquilino;
+        this.estadoUso = estadoUso;
+        this.cep = cep;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.esdereco = esdereco;
+    }
+
     public Number getnKitnet() {
         return nKitnet;
     }
 
-    public void setnKitnet(Number nKitnet) {
+    public void setnKitnet(int nKitnet) {
         this.nKitnet = nKitnet;
     }
 
@@ -78,5 +89,17 @@ public class Kitnet {
 
     public void cadastrarKitnet(Kitnet kitnet){
         new KitnetDAO().cadastrarKitnet(kitnet);
+    }
+
+    @Override
+    public String toString() {
+        return "nKitnet:" + nKitnet +
+                ", mobilia:" + mobilia +
+                ", nomeInquilino:" + nomeInquilino +
+                ", estadoUso:" + estadoUso +
+                ", cep:" + cep +
+                ", estado:" + estado +
+                ", cidade:" + cidade +
+                ", esdereco:" + esdereco;
     }
 }
