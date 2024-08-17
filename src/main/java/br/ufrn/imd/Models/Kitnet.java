@@ -4,55 +4,55 @@ import br.ufrn.imd.Dao.GenericDAO;
 
 public class Kitnet {
     public int nKitnet;
-    public String mobilia;
-    public String nomeInquilino;
-    public String estadoUso;
+    public String furniture;
+    public String tenantName;
+    public String stateOfUse;
     public String cep;
-    public String estado;
-    public String cidade;
-    public String esdereco;
+    public String state;
+    public String city;
+    public String address;
 
-    public Kitnet(int nKitnet, String mobilia, String nomeInquilino, String estadoUso, String cep, String estado, String cidade, String esdereco) {
+    public Kitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address) {
         this.nKitnet = nKitnet;
-        this.mobilia = mobilia;
-        this.nomeInquilino = nomeInquilino;
-        this.estadoUso = estadoUso;
+        this.furniture = furniture;
+        this.tenantName = tenantName;
+        this.stateOfUse = stateOfUse;
         this.cep = cep;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.esdereco = esdereco;
+        this.state = state;
+        this.city = city;
+        this.address = address;
     }
 
-    public Number getnKitnet() {
+    public Number getNKitnet() {
         return nKitnet;
     }
 
-    public void setnKitnet(int nKitnet) {
+    public void setNKitnet(int nKitnet) {
         this.nKitnet = nKitnet;
     }
 
-    public String getMobilia() {
-        return mobilia;
+    public String getUrniture() {
+        return furniture;
     }
 
-    public void setMobilia(String mobilia) {
-        this.mobilia = mobilia;
+    public void setFurniture(String furniture) {
+        this.furniture = furniture;
     }
 
-    public String getNomeInquilino() {
-        return nomeInquilino;
+    public String getTenantName() {
+        return tenantName;
     }
 
-    public void setNomeInquilino(String nomeInquilino) {
-        this.nomeInquilino = nomeInquilino;
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
     }
 
-    public String getEstadoUso() {
-        return estadoUso;
+    public String getStateOfUse() {
+        return stateOfUse;
     }
 
-    public void setEstadoUso(String estadoUso) {
-        this.estadoUso = estadoUso;
+    public void setStateOfUse(String stateOfUse) {
+        this.stateOfUse = stateOfUse;
     }
 
     public String getCep() {
@@ -63,46 +63,46 @@ public class Kitnet {
         this.cep = cep;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getState() {
+        return state;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCity() {
+        return city;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getEsdereco() {
-        return esdereco;
+    public String getAddress() {
+        return address;
     }
 
-    public void setEsdereco(String esdereco) {
-        this.esdereco = esdereco;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void cadastrarKitnet(Kitnet kitnet){
+    public void registerKitnet(Kitnet kitnet){
         GenericDAO<Kitnet> kitnetGenericDAO = new GenericDAO<Kitnet>();
         // Esses caminhos podem ser enums!!!
-        kitnetGenericDAO.setCaminhoArquivo("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
-        kitnetGenericDAO.cadastrarKitnet(kitnet);
+        kitnetGenericDAO.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
+        kitnetGenericDAO.registerKitnet(kitnet);
     }
 
     @Override
     public String toString() {
         return "nKitnet:" + nKitnet +
-                ", mobilia:" + mobilia +
-                ", nomeInquilino:" + nomeInquilino +
-                ", estadoUso:" + estadoUso +
+                ", furniture:" + furniture +
+                ", tenantName:" + tenantName +
+                ", stateOfUse:" + stateOfUse +
                 ", cep:" + cep +
-                ", estado:" + estado +
-                ", cidade:" + cidade +
-                ", esdereco:" + esdereco;
+                ", state:" + state +
+                ", city:" + city +
+                ", address:" + address;
     }
 }

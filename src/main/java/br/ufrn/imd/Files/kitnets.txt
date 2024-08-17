@@ -1,2 +1,4 @@
 nKitnet:123, mobilia:aaaa, nomeInquilino:, estadoUso:aaaa, cep:, estado:, cidade:, esdereco:
 nKitnet:123, mobilia:Não mobiliada, nomeInquilino:luiz gustavo da Silva, estadoUso:novo, cep:59086-340, estado:rn, cidade:natal, esdereco:testes 1234
+nKitnet:113, mobilia:não mobiliada, nomeInquilino:luiz, estadoUso:novo, cep:59086-340, estado:rn, cidade:natal, esdereco:tete
+nKitnet:123, furniture:não, tenantName:luiz teste 2, stateOfUse:novo, cep:59200-000, state:rn, city:natal, esdereco:teste

@@ -11,9 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import br.ufrn.imd.Views.kitnetRegistrationPage;
 
-public class kitnetsPage extends MyFrame implements ActionListener {
+public class KitnetsPage extends MyFrame implements ActionListener {
 
     private JTable table;
 
@@ -23,7 +22,7 @@ public class kitnetsPage extends MyFrame implements ActionListener {
     JTable contractTable;
     DefaultTableModel tableModel;
 
-    public kitnetsPage() {
+    public KitnetsPage() {
         super("Lista de Kitnets");
         setSize(1280, 680);
         addUIComponents();
@@ -40,7 +39,7 @@ public class kitnetsPage extends MyFrame implements ActionListener {
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                kitnetsPage.this.dispose();
+                KitnetsPage.this.dispose();
                 new LoginForm().setVisible(true);
             }
         });
@@ -53,8 +52,8 @@ public class kitnetsPage extends MyFrame implements ActionListener {
         addKitnet.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                kitnetsPage.this.dispose();
-                new kitnetRegistrationPage().setVisible(true);
+                KitnetsPage.this.dispose();
+                new KitnetRegistrationPage().setVisible(true);
             }
         });
 
@@ -94,16 +93,16 @@ public class kitnetsPage extends MyFrame implements ActionListener {
         contractTable.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 14));
 
         TableColumn viewColumn = contractTable.getColumnModel().getColumn(5);
-        viewColumn.setCellRenderer(new kitnetsPage.ButtonRenderer("Visualizar"));
-        viewColumn.setCellEditor(new kitnetsPage.ButtonEditor(new JCheckBox(), "Visualizar"));
+        viewColumn.setCellRenderer(new KitnetsPage.ButtonRenderer("Visualizar"));
+        viewColumn.setCellEditor(new KitnetsPage.ButtonEditor(new JCheckBox(), "Visualizar"));
 
         TableColumn editColumn = contractTable.getColumnModel().getColumn(6);
-        editColumn.setCellRenderer(new kitnetsPage.ButtonRenderer("Editar"));
-        editColumn.setCellEditor(new kitnetsPage.ButtonEditor(new JCheckBox(), "Editar"));
+        editColumn.setCellRenderer(new KitnetsPage.ButtonRenderer("Editar"));
+        editColumn.setCellEditor(new KitnetsPage.ButtonEditor(new JCheckBox(), "Editar"));
 
         TableColumn deleteColumn = contractTable.getColumnModel().getColumn(7);
-        deleteColumn.setCellRenderer(new kitnetsPage.ButtonRenderer("Deletar"));
-        deleteColumn.setCellEditor(new kitnetsPage.ButtonEditor(new JCheckBox(), "Deletar"));
+        deleteColumn.setCellRenderer(new KitnetsPage.ButtonRenderer("Deletar"));
+        deleteColumn.setCellEditor(new KitnetsPage.ButtonEditor(new JCheckBox(), "Deletar"));
 
         JScrollPane scrollPane = new JScrollPane(contractTable);
         scrollPane.setBounds(140, 100, 1000, 400);
@@ -114,8 +113,8 @@ public class kitnetsPage extends MyFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exitButton) {
-            JOptionPane.showMessageDialog(kitnetsPage.this, "Returning!");
-            kitnetsPage.this.dispose();
+            JOptionPane.showMessageDialog(KitnetsPage.this, "Returning!");
+            KitnetsPage.this.dispose();
             new LoginForm().setVisible(true);
         }
     }

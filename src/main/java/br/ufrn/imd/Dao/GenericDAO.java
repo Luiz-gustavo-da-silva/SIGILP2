@@ -7,18 +7,18 @@ import java.io.IOException;
 
 public class GenericDAO<O> {
 
-    private String caminhoArquivo;
+    private String pathFile;
 
     public String getCaminhoArquivo() {
-        return caminhoArquivo;
+        return pathFile;
     }
 
-    public void setCaminhoArquivo(String caminhoArquivo) {
-        this.caminhoArquivo = caminhoArquivo;
+    public void setFilePath(String caminhoArquivo) {
+        this.pathFile = caminhoArquivo;
     }
 
-    public void cadastrarKitnet(O obj) {
-        File arquivo = new File(caminhoArquivo);
+    public void registerKitnet(O obj) {
+        File arquivo = new File(pathFile);
         FileWriter fw = null;
         BufferedWriter bw = null;
 

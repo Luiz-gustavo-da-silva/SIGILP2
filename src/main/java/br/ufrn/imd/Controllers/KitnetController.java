@@ -4,10 +4,10 @@ import br.ufrn.imd.Models.Kitnet;
 
 public class KitnetController {
 
-    public boolean cadastrarKitnet(int nKitnet, String mobilia, String nomeInquilino, String estadoUso, String cep, String estado, String cidade, String endereco){
-        if (nKitnet >= 0 && mobilia.length() > 0 && nomeInquilino.length()  > 0 && estadoUso.length() > 0 && isValidCep(cep) && estado.length() > 0 && cidade.length() > 0 && endereco.length() > 0){
-            Kitnet kitnet = new Kitnet(nKitnet, mobilia, nomeInquilino, estadoUso, cep, estado, cidade, endereco);
-            kitnet.cadastrarKitnet(kitnet);
+    public boolean registerKitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address){
+        if (nKitnet >= 0 && furniture.length() > 0 && tenantName.length()  > 0 && stateOfUse.length() > 0 && isValidCep(cep) && state.length() > 0 && city.length() > 0 && address.length() > 0){
+            Kitnet kitnet = new Kitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address);
+            kitnet.registerKitnet(kitnet);
             return true;
         }
         return false;

@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
  * Esta classe herda de `MyFrame` e implementa a interface `ActionListener` para
  * tratar eventos de ação, como cliques de botão.
  */
-public class kitnetRegistrationPage extends MyFrame implements ActionListener {
+public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JButton salvarButton = new JButton("Adicionar");
     JTextField nKitnetField = new JTextField();
     JTextField mobiliaField = new JTextField();
@@ -33,7 +33,7 @@ public class kitnetRegistrationPage extends MyFrame implements ActionListener {
      * Construtor da classe `kitnetRegistrationPage`.
      * Inicializa a interface de usuário e configura a janela.
      */
-    public kitnetRegistrationPage() {
+    public KitnetRegistrationPage() {
         super("Cadatrar kitnet");
         setSize(1280, 680);
         addUIComponents();
@@ -192,23 +192,25 @@ public class kitnetRegistrationPage extends MyFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == salvarButton){
             saveKitnet();
+            KitnetRegistrationPage.this.dispose();
+            new KitnetsPage().setVisible(true);
         }
     }
 
     public void saveKitnet(){
         int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
-        String mobilia = mobiliaField.getText().trim();
-        String nomeInquilino = inquilinoAlocadoField.getText().trim();
-        String estadoUso = estadoUsoField.getText().trim();
+        String furniture = mobiliaField.getText().trim();
+        String tenantName = inquilinoAlocadoField.getText().trim();
+        String stateOfUse = estadoUsoField.getText().trim();
         String cep = cepField.getText().trim();
-        String estado = estadoField.getText().trim();
-        String cidade = cidadeField.getText().trim();
-        String endereco = enderecoField.getText().trim();
+        String state = estadoField.getText().trim();
+        String city = cidadeField.getText().trim();
+        String address = enderecoField.getText().trim();
         boolean success;
 
         try {
             KitnetController kitnetController = new KitnetController();
-            success = kitnetController.cadastrarKitnet(nKitnet, mobilia, nomeInquilino, estadoUso, cep, estado, cidade, endereco);
+            success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address);
             if(success == true){
                 JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nKitnet + " realizado com sucesso!");
             }else{
