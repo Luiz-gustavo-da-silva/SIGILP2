@@ -7,7 +7,15 @@ import java.io.IOException;
 
 public class GenericDAO<O> {
 
-    private String caminhoArquivo = "C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt";
+    private String caminhoArquivo;
+
+    public String getCaminhoArquivo() {
+        return caminhoArquivo;
+    }
+
+    public void setCaminhoArquivo(String caminhoArquivo) {
+        this.caminhoArquivo = caminhoArquivo;
+    }
 
     public void cadastrarKitnet(O obj) {
         File arquivo = new File(caminhoArquivo);

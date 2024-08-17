@@ -88,7 +88,10 @@ public class Kitnet {
     }
 
     public void cadastrarKitnet(Kitnet kitnet){
-        new GenericDAO<Kitnet>().cadastrarKitnet(kitnet);
+        GenericDAO<Kitnet> kitnetGenericDAO = new GenericDAO<Kitnet>();
+        // Esses caminhos podem ser enums!!!
+        kitnetGenericDAO.setCaminhoArquivo("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
+        kitnetGenericDAO.cadastrarKitnet(kitnet);
     }
 
     @Override
