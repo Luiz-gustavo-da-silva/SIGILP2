@@ -4,20 +4,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class GenericDAO<O> {
 
     private String pathFile;
 
-    public String getCaminhoArquivo() {
+    public String getFilePath() {
         return pathFile;
     }
 
-    public void setFilePath(String caminhoArquivo) {
-        this.pathFile = caminhoArquivo;
+    public void setFilePath(String pathFile) {
+        this.pathFile = pathFile;
     }
 
-    public void registerKitnet(O obj) {
+    public void registerObj(O obj) {
         File arquivo = new File(pathFile);
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -49,7 +50,10 @@ public class GenericDAO<O> {
         }
     }
 
-    /*public List<obj> recuperarObj(String cpf){
-        return
-    }*/
+    public List<O> retrieveObj(String cpf){
+
+        // Lógica de recuperação das informações do arquivo!
+
+        return;
+    }
 }
