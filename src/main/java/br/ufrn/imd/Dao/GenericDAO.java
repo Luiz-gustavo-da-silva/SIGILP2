@@ -1,17 +1,15 @@
 package br.ufrn.imd.Dao;
 
-import br.ufrn.imd.Models.Kitnet;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
-public class KitnetDAO {
+public class GenericDAO<O> {
 
     private String caminhoArquivo = "C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt";
 
-    public void cadastrarKitnet(Kitnet kitnet) {
+    public void cadastrarKitnet(O obj) {
         File arquivo = new File(caminhoArquivo);
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -24,7 +22,7 @@ public class KitnetDAO {
             fw = new FileWriter(arquivo, true);
             bw = new BufferedWriter(fw);
 
-            bw.write(kitnet.toString());
+            bw.write(obj.toString());
             bw.newLine();
 
         } catch (IOException e) {
@@ -43,7 +41,7 @@ public class KitnetDAO {
         }
     }
 
-    /*public List<Kitnet> recuperarKitnets(String cpf){
+    /*public List<obj> recuperarObj(String cpf){
         return
     }*/
 }

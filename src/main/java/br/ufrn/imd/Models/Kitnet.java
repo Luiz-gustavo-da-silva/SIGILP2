@@ -1,6 +1,6 @@
 package br.ufrn.imd.Models;
 
-import br.ufrn.imd.Dao.KitnetDAO;
+import br.ufrn.imd.Dao.GenericDAO;
 
 public class Kitnet {
     public int nKitnet;
@@ -88,7 +88,7 @@ public class Kitnet {
     }
 
     public void cadastrarKitnet(Kitnet kitnet){
-        new KitnetDAO().cadastrarKitnet(kitnet);
+        new GenericDAO<Kitnet>().cadastrarKitnet(kitnet);
     }
 
     @Override
