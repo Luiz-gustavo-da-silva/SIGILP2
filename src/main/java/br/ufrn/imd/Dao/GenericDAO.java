@@ -1,9 +1,9 @@
 package br.ufrn.imd.Dao;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import br.ufrn.imd.Models.Kitnet;
+
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GenericDAO<O> {
@@ -50,10 +50,65 @@ public class GenericDAO<O> {
         }
     }
 
-    public List<O> retrieveObj(String cpf){
+    public List<Kitnet> retrieveObj(String cpf) {
+        List<Kitnet> kitchenettes = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(pathFile))) {
+            String line;
+            boolean correctCpf = false;
 
-        // Lógica de recuperação das informações do arquivo!
+            while ((line = reader.readLine()) != null) {
+                System.out.println("Linha lida: " + line); // Mensagem de depuração
 
-        return;
+                if (line.equals(cpf)) {
+                    correctCpf = true;
+                    continue;
+                }
+
+                if (correctCpf && line.startsWith("nKitnet:")) {
+                    String[] attributes = line.split(", ");
+                    Kitnet kitnet = new Kitnet();
+
+                    for (String attribute : attributes) {
+                        String[] keyValue = attribute.split(":");
+                        if (keyValue.length == 2) {
+                            System.out.println("Atributo: " + keyValue[0] + " Valor: " + keyValue[1]); // Mensagem de depuração
+                            switch (keyValue[0].trim()) {
+                                case "nKitnet":
+                                    kitnet.setNKitnet(Integer.parseInt(keyValue[1]));
+                                    break;
+                                case "mobilia":
+                                case "furniture":
+                                    kitnet.setFurniture(keyValue[1].trim());
+                                    break;
+                                case "nomeInquilino":
+                                case "tenantName":
+                                    kitnet.setTenantName(keyValue[1].trim());
+                                    break;
+                                case "estadoUso":
+                                case "stateOfUse":
+                                    kitnet.setState(keyValue[1].trim());
+                                    break;
+                                // Outros atributos que você deseja mapear
+                            }
+                        } else {
+                            System.out.println("Formato inválido: " + attribute); // Mensagem de depuração
+                        }
+                    }
+
+                    kitchenettes.add(kitnet);
+                }
+
+                // Se encontrar outro CPF ou o fim do arquivo, parar de processar
+                if (line.matches("\\d{11}")) {
+                    if (correctCpf) break;
+                    correctCpf = false;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return kitchenettes;
     }
+
 }

@@ -2,6 +2,8 @@ package br.ufrn.imd.Models;
 
 import br.ufrn.imd.Dao.GenericDAO;
 
+import java.util.List;
+
 public class Kitnet {
     public int nKitnet;
     public String furniture;
@@ -23,6 +25,8 @@ public class Kitnet {
         this.address = address;
     }
 
+    public Kitnet(){}
+
     public Number getNKitnet() {
         return nKitnet;
     }
@@ -31,7 +35,7 @@ public class Kitnet {
         this.nKitnet = nKitnet;
     }
 
-    public String getUrniture() {
+    public String getFurniture() {
         return furniture;
     }
 
@@ -92,6 +96,12 @@ public class Kitnet {
         // Esses caminhos podem ser enums!!!
         kitnetGenericDAO.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
         kitnetGenericDAO.registerObj(kitnet);
+    }
+
+    public static List<Kitnet> recoverKitchenettes(String cpf){
+        GenericDAO<Kitnet> kitnetGenericDAO = new GenericDAO<Kitnet>();
+        kitnetGenericDAO.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
+        return kitnetGenericDAO.retrieveObj(cpf);
     }
 
     @Override

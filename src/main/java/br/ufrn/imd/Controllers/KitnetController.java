@@ -2,6 +2,8 @@ package br.ufrn.imd.Controllers;
 
 import br.ufrn.imd.Models.Kitnet;
 
+import java.util.List;
+
 public class KitnetController {
 
     public boolean registerKitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address){
@@ -11,6 +13,11 @@ public class KitnetController {
             return true;
         }
         return false;
+    }
+
+    public List<Kitnet> recoverKitchenettes(String cpf){
+        Kitnet kitnet = new Kitnet();
+        return kitnet.recoverKitchenettes(cpf);
     }
 
     public static boolean isValidCep(String cep) {
