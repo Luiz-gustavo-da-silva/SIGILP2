@@ -177,7 +177,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         registerButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ; //Do nothing
+                //Do nothing
             }
         });
     }
