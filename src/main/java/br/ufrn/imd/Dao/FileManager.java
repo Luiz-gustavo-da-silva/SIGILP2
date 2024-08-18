@@ -63,15 +63,15 @@ public class FileManager {
 
 
 
-    public Owner readOwner(String name) throws IOException {
+    public Owner readOwner(String cpf) throws IOException {
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy, h:mm:ss a").create();
         try (FileReader fileReader = new FileReader(pathFile);
              JsonReader jsonReader = new JsonReader(fileReader)) {
             jsonReader.setLenient(true);
             List<Owner> owners = readAllOwners();
             for (Owner owner : owners) {
-                if (owner.getName() != null) {
-                    if (owner.getName().equals(name) && owner.isLogged()) {
+                if (owner.getCpf() != null) {
+                    if (owner.getCpf().equals(cpf) && owner.isLogged()) {
                         return owner;
                     }
                 }

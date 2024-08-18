@@ -1,7 +1,7 @@
 package br.ufrn.imd.Models;
 
 import br.ufrn.imd.Dao.FileManager;
-import br.ufrn.imd.Dao.FileMenager;
+import br.ufrn.imd.Dao.FileManager;
 
 import java.util.ArrayList;
 import java.util.List;

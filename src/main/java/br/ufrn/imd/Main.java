@@ -55,7 +55,7 @@ public class Main {
 
         // Lendo dados
         try {
-            Owner readOwner = fileManager.readOwner("Luiz");
+            Owner readOwner = fileManager.readOwner("01699171424");
             System.out.println(readOwner.toString());
         } catch (IOException e) {
             e.printStackTrace();
