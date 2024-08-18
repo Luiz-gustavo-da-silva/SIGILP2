@@ -14,9 +14,9 @@ public class FileMenager {
         this.pathFile = pathFile;
     }
 
-    public Owner readFile(){
-
-    }
+    /*public Owner readFile(){
+        // Lógica de leitura aqui!
+    }*/
 
 
 

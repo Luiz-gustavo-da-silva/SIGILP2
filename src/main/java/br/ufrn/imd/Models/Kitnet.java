@@ -1,7 +1,5 @@
 package br.ufrn.imd.Models;
 
-import br.ufrn.imd.Dao.GenericDAO;
-
 import java.util.List;
 
 public class Kitnet {
@@ -91,18 +89,18 @@ public class Kitnet {
         this.address = address;
     }
 
-    public void registerKitnet(Kitnet kitnet){
+    /*public void registerKitnet(Kitnet kitnet){
         GenericDAO<Kitnet> kitnetGenericDAO = new GenericDAO<Kitnet>();
         // Esses caminhos podem ser enums!!!
         kitnetGenericDAO.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
         kitnetGenericDAO.registerObj(kitnet);
-    }
+    }*/
 
-    public static List<Kitnet> recoverKitchenettes(String cpf){
+    /*public static List<Kitnet> recoverKitchenettes(String cpf){
         GenericDAO<Kitnet> kitnetGenericDAO = new GenericDAO<Kitnet>();
         kitnetGenericDAO.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
         return kitnetGenericDAO.retrieveObj(cpf);
-    }
+    }*/
 
     @Override
     public String toString() {

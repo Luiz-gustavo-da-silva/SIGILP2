@@ -198,7 +198,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     }
 
     public void saveKitnet(){
-        int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
+        /*int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
         String furniture = mobiliaField.getText().trim();
         String tenantName = inquilinoAlocadoField.getText().trim();
         String stateOfUse = estadoUsoField.getText().trim();
@@ -218,6 +218,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
             }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
-        }
+        }*/
     }
 }
