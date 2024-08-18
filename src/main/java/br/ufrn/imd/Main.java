@@ -44,7 +44,7 @@ public class Main {
         List<Contract> contracts = new ArrayList<>();
         contracts.add(contract);
 
-        Owner owner = new Owner("Luiz", "01699171424", false, "Luiz", "40028922", "59086-340", "Rua sei lá", "luiz@gmail.com", "123", contracts);
+        Owner owner = new Owner("Luiz", "01699171424", true, "Luiz", "40028922", "59086-340", "Rua sei lá", "luiz@gmail.com", "123", contracts);
 
         // Salvando dados
         try {
@@ -55,7 +55,7 @@ public class Main {
 
         // Lendo dados
         try {
-            Owner readOwner = fileManager.readOwner();
+            Owner readOwner = fileManager.readOwner("Luiz");
             System.out.println(readOwner.toString());
         } catch (IOException e) {
             e.printStackTrace();

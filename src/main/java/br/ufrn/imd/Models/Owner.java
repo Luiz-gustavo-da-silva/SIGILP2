@@ -13,6 +13,9 @@ public class Owner {
     private String password;
     private List<Contract> contracts ;
 
+    public Owner() {
+    }
+
     public Owner(String name, String cpf, boolean logged, String username, String telephone, String cep, String address, String email, String password, List<Contract> contracts) {
         this.name = name;
         this.cpf = cpf;
