@@ -1,5 +1,7 @@
 package br.ufrn.imd.Models;
 
+import br.ufrn.imd.Dao.FileMenager;
+
 import java.util.List;
 
 public class Kitnet {
@@ -96,11 +98,13 @@ public class Kitnet {
         kitnetGenericDAO.registerObj(kitnet);
     }*/
 
-    /*public static List<Kitnet> recoverKitchenettes(String cpf){
-        GenericDAO<Kitnet> kitnetGenericDAO = new GenericDAO<Kitnet>();
-        kitnetGenericDAO.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
-        return kitnetGenericDAO.retrieveObj(cpf);
-    }*/
+    public static List<Kitnet> recoverKitchenettes(){
+        FileMenager fileMenager = new FileMenager();
+        fileMenager.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
+
+
+
+    }
 
     @Override
     public String toString() {

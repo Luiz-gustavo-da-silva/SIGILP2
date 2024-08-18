@@ -64,7 +64,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         String[] columnNames = {"Inquilino Alocado", "N° Kitnet", "Mobília", "Estado de uso",
                 "V. Aluguel", "Visualizar", "Editar", "Deletar"};
 
-        /*List<Kitnet> kitchenettes = recoverKitchenettes();
+        List<Kitnet> kitchenettes = recoverKitchenettes();
         Object[][] data = new Object[kitchenettes.size()][8];
 
         for (int i = 0; i < kitchenettes.size(); i++) {
@@ -108,7 +108,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(contractTable);
         scrollPane.setBounds(140, 100, 1000, 400);
         scrollPane.getViewport().setBackground(Colors.SECONDARY_COLOR);
-        add(scrollPane);*/
+        add(scrollPane);
     }
 
 
@@ -121,12 +121,11 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         }
     }
 
-    /*public List<Kitnet> recoverKitchenettes(){
-        String cpf = "01699171424";
+    public List<Kitnet> recoverKitchenettes(){
         KitnetController kitnetController = new KitnetController();
 
-        return kitnetController.recoverKitchenettes(cpf);
-    }*/
+        return kitnetController.recoverKitchenettes();
+    }
 
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer(String text) {

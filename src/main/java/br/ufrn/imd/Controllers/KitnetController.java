@@ -15,10 +15,10 @@ public class KitnetController {
         return false;
     }
 
-    /*public List<Kitnet> recoverKitchenettes(String cpf){
+    public List<Kitnet> recoverKitchenettes(){
         Kitnet kitnet = new Kitnet();
-        return kitnet.recoverKitchenettes(cpf);
-    }*/
+        return kitnet.recoverKitchenettes();
+    }
 
     public static boolean isValidCep(String cep) {
         String cleanedCep = cep.replaceAll("\\D", "");
