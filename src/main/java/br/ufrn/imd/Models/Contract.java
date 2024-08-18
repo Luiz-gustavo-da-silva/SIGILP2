@@ -106,4 +106,21 @@ public class Contract {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "nContract=" + nContract +
+                ",\ntenantName='" + tenantName + '\'' +
+                ",\ntenantEmail='" + tenantEmail + '\'' +
+                ",\ntenantPhoneNumber='" + tenantPhoneNumber + '\'' +
+                ",\nkitnet=" + kitnet +
+                ",\nstartDate=" + startDate +
+                ",\nendDate=" + endDate +
+                ",\nrentAmount=" + rentAmount +
+                ",\nadjustment=" + adjustment +
+                ",\nstatus='" + status + '\'' +
+                "\n}";
+    }
+
 }

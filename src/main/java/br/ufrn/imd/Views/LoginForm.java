@@ -97,7 +97,7 @@ public class LoginForm extends MyFrame implements ActionListener {
             if(checkUsernameAndPassword(username, password)){
                 JOptionPane.showMessageDialog(LoginForm.this, "Login feito com sucesso!");
                 LoginForm.this.dispose();
-                new OwnerPage().setVisible(true);
+                new ContractsPage().setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(LoginForm.this, "Usuário ou senha incorretos!");
             }
