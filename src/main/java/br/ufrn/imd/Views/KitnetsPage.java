@@ -1,6 +1,8 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+
 
 public class KitnetsPage extends MyFrame implements ActionListener {
 
@@ -57,33 +61,30 @@ public class KitnetsPage extends MyFrame implements ActionListener {
             }
         });
 
-
-
         String[] columnNames = {"Inquilino Alocado", "N° Kitnet", "Mobília", "Estado de uso",
                 "V. Aluguel", "Visualizar", "Editar", "Deletar"};
 
-        Object[][] data = {
-                {"Alisson", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Luiz", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Alisson", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Luiz", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Alisson", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Luiz", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Alisson", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Luiz", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Alisson", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Luiz", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Alisson", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Luiz", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Alisson", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-                {"Luiz", 3, "Mobiliado", "Novo", 500, "Visualizar", "Editar", "Deletar"},
-        };
+        /*List<Kitnet> kitchenettes = recoverKitchenettes();
+        Object[][] data = new Object[kitchenettes.size()][8];
 
+        for (int i = 0; i < kitchenettes.size(); i++) {
+            Kitnet kitnet = kitchenettes.get(i);
+            data[i][0] = kitnet.getTenantName();
+            data[i][1] = kitnet.getNKitnet();
+            data[i][2] = kitnet.getFurniture();
+            data[i][3] = kitnet.getStateOfUse();
+            data[i][4] = "Valor do Aluguel";
+            data[i][5] = "Visualizar";
+            data[i][6] = "Editar";
+            data[i][7] = "Deletar";
+        }
+
+        // Inicialize a tabela
         tableModel = new DefaultTableModel(data, columnNames);
         contractTable = new JTable(tableModel) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column >= 7;
+                return column >= 5;
             }
         };
         contractTable.setRowHeight(30);
@@ -93,22 +94,23 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         contractTable.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 14));
 
         TableColumn viewColumn = contractTable.getColumnModel().getColumn(5);
-        viewColumn.setCellRenderer(new KitnetsPage.ButtonRenderer("Visualizar"));
-        viewColumn.setCellEditor(new KitnetsPage.ButtonEditor(new JCheckBox(), "Visualizar"));
+        viewColumn.setCellRenderer(new ButtonRenderer("Visualizar"));
+        viewColumn.setCellEditor(new ButtonEditor(new JCheckBox(), "Visualizar"));
 
         TableColumn editColumn = contractTable.getColumnModel().getColumn(6);
-        editColumn.setCellRenderer(new KitnetsPage.ButtonRenderer("Editar"));
-        editColumn.setCellEditor(new KitnetsPage.ButtonEditor(new JCheckBox(), "Editar"));
+        editColumn.setCellRenderer(new ButtonRenderer("Editar"));
+        editColumn.setCellEditor(new ButtonEditor(new JCheckBox(), "Editar"));
 
         TableColumn deleteColumn = contractTable.getColumnModel().getColumn(7);
-        deleteColumn.setCellRenderer(new KitnetsPage.ButtonRenderer("Deletar"));
-        deleteColumn.setCellEditor(new KitnetsPage.ButtonEditor(new JCheckBox(), "Deletar"));
+        deleteColumn.setCellRenderer(new ButtonRenderer("Deletar"));
+        deleteColumn.setCellEditor(new ButtonEditor(new JCheckBox(), "Deletar"));
 
         JScrollPane scrollPane = new JScrollPane(contractTable);
         scrollPane.setBounds(140, 100, 1000, 400);
         scrollPane.getViewport().setBackground(Colors.SECONDARY_COLOR);
-        add(scrollPane);
+        add(scrollPane);*/
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -118,6 +120,13 @@ public class KitnetsPage extends MyFrame implements ActionListener {
             new LoginForm().setVisible(true);
         }
     }
+
+    /*public List<Kitnet> recoverKitchenettes(){
+        String cpf = "01699171424";
+        KitnetController kitnetController = new KitnetController();
+
+        return kitnetController.recoverKitchenettes(cpf);
+    }*/
 
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer(String text) {
