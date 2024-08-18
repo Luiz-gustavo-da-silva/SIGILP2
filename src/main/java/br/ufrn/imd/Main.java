@@ -1,18 +1,64 @@
+//package br.ufrn.imd;
+//
+//import br.ufrn.imd.Views.ContractsPage;
+//
+//import javax.swing.*;
+//
+//public class Main {
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable(){
+//            @Override
+//            public void run(){
+//                new LoginPage().setVisible(true);
+//            }
+//        });
+//    }
+//}
+
 package br.ufrn.imd;
 
-import br.ufrn.imd.Views.LoginForm;
-import javax.swing.*;
+import br.ufrn.imd.Dao.FileManager;
+import br.ufrn.imd.Models.Contract;
+import br.ufrn.imd.Models.Kitnet;
+import br.ufrn.imd.Models.Owner;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // Definindo o caminho do arquivo dentro do pacote
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
 
-        //Login.login(); // Chama o método de login!
+        // Usando o caminho do arquivo no FileManager
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
 
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                new LoginForm().setVisible(true);
-            }
-        });
+        // Criando objetos de teste usando construtores
+        Kitnet kitnet = new Kitnet(1, "mobiliado", "Luiz", "novo", "59086-340", "rn", "Natal", "Rua sei lá");
+
+        Contract contract = new Contract(1, "Luiz", "luiz@gmail.com", "40028922", kitnet, new Date(), new Date(), 500.0, 1.0, "ativo");
+
+        List<Contract> contracts = new ArrayList<>();
+        contracts.add(contract);
+
+        Owner owner = new Owner("Luiz", "01699171424", false, "Luiz", "40028922", "59086-340", "Rua sei lá", "luiz@gmail.com", "123", contracts);
+
+        // Salvando dados
+        try {
+            fileManager.saveOwner(owner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Lendo dados
+        try {
+            Owner readOwner = fileManager.readOwner();
+            System.out.println(readOwner.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

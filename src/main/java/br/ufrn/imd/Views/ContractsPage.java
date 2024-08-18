@@ -6,26 +6,37 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
-public class OwnerPage extends MyFrame implements ActionListener {
+public class ContractsPage extends MyFrame implements ActionListener {
 
     JButton exitButton = new JButton("Sair");
+    JButton addContract = new JButton("Adicionar Contrato");
     JTable contractTable;
     DefaultTableModel tableModel;
 
-    public OwnerPage() {
+    public ContractsPage() {
         super("Página de Gestão de Contratos");
         setSize(1280, 680);
         addUIComponents();
     }
 
     private void addUIComponents() {
-        setLayout(null);
+        JLabel loginLabel = new JLabel("Olá, Usuário! Aqui estão os seus contratos:");
+        loginLabel.setBounds(100, 10, 1000, 100);
+        loginLabel.setForeground(Colors.TEXT_COLOR);
+        loginLabel.setFont(new Font("Dialog", Font.BOLD, 28));
+        loginLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        add(loginLabel);
+
+        addContract.setFont(new Font("Dialog", Font.BOLD, 14));
+        addContract.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        addContract.setBackground(Colors.QUATERNARY_COLOR);
+        addContract.setForeground(Colors.SECONDARY_COLOR);
+        addContract.setBounds(925, 10, 200, 30);
+        add(addContract);
 
         exitButton.setFont(new Font("Dialog", Font.BOLD, 14));
         exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -33,14 +44,6 @@ public class OwnerPage extends MyFrame implements ActionListener {
         exitButton.setForeground(Colors.SECONDARY_COLOR);
         exitButton.setBounds(1150, 10, 70, 30);
         add(exitButton);
-        exitButton.addActionListener(this);
-        exitButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                OwnerPage.this.dispose();
-                new LoginForm().setVisible(true);
-            }
-        });
 
         String[] columnNames = {"Inquilino", "Kitnet", "Data Inicial",
                 "Vencimento", "Aluguel",
@@ -89,8 +92,7 @@ public class OwnerPage extends MyFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exitButton) {
-            JOptionPane.showMessageDialog(OwnerPage.this, "Returning!");
-            OwnerPage.this.dispose();
+            ContractsPage.this.dispose();
             new LoginForm().setVisible(true);
         }
     }
@@ -111,9 +113,6 @@ public class OwnerPage extends MyFrame implements ActionListener {
                     break;
                 case "Deletar":
                     setBackground(Colors.TERTIARY_COLOR);
-                    break;
-                default:
-                    setBackground(Colors.PRIMARY_COLOR);
                     break;
             }
         }

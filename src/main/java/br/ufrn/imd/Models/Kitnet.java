@@ -1,7 +1,9 @@
 package br.ufrn.imd.Models;
 
+import br.ufrn.imd.Dao.FileManager;
 import br.ufrn.imd.Dao.FileMenager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Kitnet {
@@ -99,11 +101,10 @@ public class Kitnet {
     }*/
 
     public static List<Kitnet> recoverKitchenettes(){
-        FileMenager fileMenager = new FileMenager();
-        fileMenager.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
-
-
-
+        FileManager fileMenager = new FileManager();
+        fileMenager.setPathFile("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
+        List<Kitnet> k = new ArrayList<>();
+        return k;
     }
 
     @Override
