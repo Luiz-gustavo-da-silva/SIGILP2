@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufrn.imd.Enums.FilePaths;
+import br.ufrn.imd.Enums.FilePath;
 import br.ufrn.imd.Models.Contract;
 import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Models.Owner;

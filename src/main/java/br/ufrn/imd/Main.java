@@ -18,6 +18,7 @@
 package br.ufrn.imd;
 
 import br.ufrn.imd.Dao.FileManager;
+import br.ufrn.imd.Enums.FilePath;
 import br.ufrn.imd.Models.Contract;
 import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Models.Owner;
@@ -34,7 +35,7 @@ public class Main {
 
         // Usando o caminho do arquivo no FileManager
         FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
+        fileManager.setPathFile(String.valueOf(FilePath.OWNERS));
 
         // Criando objetos de teste usando construtores
         Kitnet kitnet = new Kitnet(1, "mobiliado", "Luiz", "novo", "59086-340", "rn", "Natal", "Rua sei lá");
