@@ -35,7 +35,7 @@ public class Main {
 
         // Usando o caminho do arquivo no FileManager
         FileManager fileManager = new FileManager();
-        fileManager.setPathFile(String.valueOf(FilePath.OWNERS));
+        fileManager.setPathFile(filePath);
 
         // Criando objetos de teste usando construtores
         Kitnet kitnet = new Kitnet(1, "mobiliado", "Luiz", "novo", "59086-340", "rn", "Natal", "Rua sei lá");
@@ -46,10 +46,14 @@ public class Main {
         contracts.add(contract);
 
         Owner owner = new Owner("Luiz", "01699171424", true, "Luiz", "40028922", "59086-340", "Rua sei lá", "luiz@gmail.com", "123", contracts);
+        Owner owner2 = new Owner("Luiz", "01699171425", true, "Luiz", "40028922", "59086-340", "Rua sei lá", "luiz@gmail.com", "123", contracts);
+        Owner owner3 = new Owner("Luiz", "01699171426", true, "Luiz", "40028922", "59086-340", "Rua sei lá", "luiz@gmail.com", "123", contracts);
 
         // Salvando dados
         try {
             fileManager.saveOwner(owner);
+            fileManager.saveOwner(owner2);
+            fileManager.saveOwner(owner3);
         } catch (IOException e) {
             e.printStackTrace();
         }
