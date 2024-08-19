@@ -27,6 +27,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JTextField estadoUsoField = new JTextField();
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
+    JTextField nContratoField = new JTextField();
 
 
     /**
@@ -145,6 +146,16 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
+        JLabel nContratoLabel = new JLabel("Número do Contrato:");
+        nContratoLabel.setBounds(460, 545, 200, 25);
+        nContratoLabel.setForeground(Colors.TEXT_COLOR);
+        nContratoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        nContratoField.setBounds(460, 575, 400, 55);
+        nContratoField.setBackground(Colors.SECONDARY_COLOR);
+        nContratoField.setForeground(Colors.TEXT_COLOR);
+        nContratoField.setFont(new Font("Dialog", Font.PLAIN, 24));
+
         salvarButton.setFont(new Font("Dialog", Font.BOLD, 18));
         salvarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         salvarButton.setBackground(Colors.TERTIARY_COLOR);
@@ -171,6 +182,8 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         add(cidadeField);
         add(enderecoLabel);
         add(enderecoField);
+        add(nContratoLabel);
+        add(nContratoField);
         add(salvarButton);
 
         salvarButton.addActionListener(this);
@@ -198,7 +211,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     }
 
     public void saveKitnet(){
-        /*int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
+        int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
         String furniture = mobiliaField.getText().trim();
         String tenantName = inquilinoAlocadoField.getText().trim();
         String stateOfUse = estadoUsoField.getText().trim();
@@ -206,11 +219,12 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         String state = estadoField.getText().trim();
         String city = cidadeField.getText().trim();
         String address = enderecoField.getText().trim();
+        int nContract = Integer.parseInt(nContratoField.getText().trim());
         boolean success;
 
         try {
             KitnetController kitnetController = new KitnetController();
-            success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address);
+            success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
             if(success == true){
                 JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nKitnet + " realizado com sucesso!");
             }else{
@@ -218,6 +232,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
             }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
-        }*/
+        }
     }
 }

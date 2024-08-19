@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Kitnet {
     public int nKitnet;
+
+    public int nContract;
     public String furniture;
     public String tenantName;
     public String stateOfUse;
@@ -18,7 +20,7 @@ public class Kitnet {
     public String city;
     public String address;
 
-    public Kitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address) {
+    public Kitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address, int nContract) {
         this.nKitnet = nKitnet;
         this.furniture = furniture;
         this.tenantName = tenantName;
@@ -27,6 +29,7 @@ public class Kitnet {
         this.state = state;
         this.city = city;
         this.address = address;
+        this.nContract = nContract;
     }
 
     public Kitnet(){}
@@ -91,16 +94,25 @@ public class Kitnet {
         return address;
     }
 
+    public int getnContract() {
+        return nContract;
+    }
+
+    public void setnContract(int nContract) {
+        this.nContract = nContract;
+    }
+
+
     public void setAddress(String address) {
         this.address = address;
     }
 
-    /*public void registerKitnet(Kitnet kitnet){
-        GenericDAO<Kitnet> kitnetGenericDAO = new GenericDAO<Kitnet>();
-        // Esses caminhos podem ser enums!!!
-        kitnetGenericDAO.setFilePath("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
-        kitnetGenericDAO.registerObj(kitnet);
-    }*/
+    public boolean registerKitnet(Kitnet kitnet){
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.saveKitnet(kitnet);
+        return true;
+    }
 
     public static List<Kitnet> recoverKitchenettes() {
         String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";

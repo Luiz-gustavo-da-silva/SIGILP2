@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Models.Owner;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -89,5 +90,17 @@ public class FileManager {
             }
         }
         return null;
+    }
+
+    public boolean saveKitnet(Kitnet kitnet) {
+        Owner o = new Owner();
+        try {
+            o = readOwnerLogged();
+            o.getKitnets().add(kitnet);
+            saveOwner(o);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
 }
