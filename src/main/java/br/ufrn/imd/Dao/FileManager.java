@@ -110,6 +110,9 @@ public class FileManager {
         try {
             owners = readOwnerLogged();
 
+            if(nContract == -1){
+                return 4;
+            }
             for(Contract c: owners.getContracts()){
                 if(c.getnContract() == nContract){
                     if(c.getnKitnet() == nKitnet){
@@ -125,7 +128,7 @@ public class FileManager {
                     }
                 }
             }
-            return 4;
+            return 5;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

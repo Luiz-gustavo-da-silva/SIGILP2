@@ -219,7 +219,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         String state = estadoField.getText().trim();
         String city = cidadeField.getText().trim();
         String address = enderecoField.getText().trim();
-        int nContract = Integer.parseInt(nContratoField.getText().trim());
+        int nContract = nContratoField.getText().trim().isEmpty() ? -1 : Integer.parseInt(nContratoField.getText().trim());
         boolean success;
         int result = -1;
         boolean kitnetExists = false;
@@ -241,10 +241,13 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
                 }else if(result == 3){
                     JOptionPane.showMessageDialog(null, "A kitnet foi atribuída ao contrato" + nContract + " Com sucesso!");
                     success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
-                }else if(result == 4){
+                }else if(result == 5){
                     JOptionPane.showMessageDialog(null, "Não existe um contrato com esse número!");
                     success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
-                }else{
+                }else if(result == 4){
+                    JOptionPane.showMessageDialog(null, "Cadastro de kitnet sem um número de contrato!");
+                    success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
+                } else{
                     JOptionPane.showMessageDialog(null, "Ocorreu um erro na adição da kitnet no contrato!");
                     success = false;
                 }

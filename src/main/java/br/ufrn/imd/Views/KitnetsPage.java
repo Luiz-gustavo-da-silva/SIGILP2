@@ -166,13 +166,17 @@ public class KitnetsPage extends MyFrame implements ActionListener {
                 if (label.equals("Editar")) {
                     JOptionPane.showMessageDialog(button, "Redirecting to Edit: " + row);
                 } else if (label.equals("Deletar")) {
-                    boolean res =  removeKitnet(kitchenettes.get(row).getNKitnet());
-                    if(res){
+                    boolean res = removeKitnet(kitchenettes.get(row).getNKitnet());
+                    if (res) {
                         JOptionPane.showMessageDialog(button, "Kitnet removida com sucesso!");
-                        kitchenettes = recoverKitchenettes();
-                        addUIComponents();
-                    }else{
-                        JOptionPane.showMessageDialog(button, "Erro ao deletar kitnet, essa kitnet pode está associada a um contrato!");
+
+                        kitchenettes.remove(row);
+                        tableModel.removeRow(row);
+
+                        contractTable.revalidate();
+                        contractTable.repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(button, "Erro ao deletar kitnet, essa kitnet pode estar associada a um contrato!");
                     }
                 }
             });
