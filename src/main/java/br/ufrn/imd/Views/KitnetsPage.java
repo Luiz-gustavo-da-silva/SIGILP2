@@ -113,7 +113,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         if (e.getSource() == exitButton) {
             JOptionPane.showMessageDialog(KitnetsPage.this, "Returning!");
             KitnetsPage.this.dispose();
-            new LoginForm().setVisible(true);
+            new ContractsPage().setVisible(true);
         }
     }
 

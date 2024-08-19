@@ -153,16 +153,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel nContratoLabel = new JLabel("Número do Contrato:");
-        nContratoLabel.setBounds(460, 545, 200, 25);
-        nContratoLabel.setForeground(Colors.TEXT_COLOR);
-        nContratoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        nContratoField.setBounds(460, 575, 400, 55);
-        nContratoField.setBackground(Colors.SECONDARY_COLOR);
-        nContratoField.setForeground(Colors.TEXT_COLOR);
-        nContratoField.setFont(new Font("Dialog", Font.PLAIN, 24));
-
         salvarButton.setFont(new Font("Dialog", Font.BOLD, 18));
         salvarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         salvarButton.setBackground(Colors.TERTIARY_COLOR);
@@ -189,10 +179,8 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         add(cidadeField);
         add(enderecoLabel);
         add(enderecoField);
-        add(nContratoLabel);
         add(nContratoField);
         add(salvarButton);
-
         salvarButton.addActionListener(this);
         salvarButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -210,7 +198,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == salvarButton){
-            saveKitnet();
+            //saveKitnet();
             KitnetRegistrationPage.this.dispose();
             new KitnetsPage().setVisible(true);
         }

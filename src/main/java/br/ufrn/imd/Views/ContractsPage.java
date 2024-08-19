@@ -16,6 +16,7 @@ public class ContractsPage extends MyFrame implements ActionListener {
 
     JButton exitButton = new JButton("Sair");
     JButton addContract = new JButton("Adicionar Contrato");
+    JButton kitnetsButton = new JButton("Kitnets");
     JTable contractTable;
     DefaultTableModel tableModel;
 
@@ -27,11 +28,26 @@ public class ContractsPage extends MyFrame implements ActionListener {
 
     private void addUIComponents() {
         JLabel loginLabel = new JLabel("Olá, Usuário! Aqui estão os seus contratos:");
-        loginLabel.setBounds(100, 10, 1000, 100);
+        loginLabel.setBounds(140, 10, 1000, 100);
         loginLabel.setForeground(Colors.TEXT_COLOR);
         loginLabel.setFont(new Font("Dialog", Font.BOLD, 28));
         loginLabel.setHorizontalAlignment(SwingConstants.LEFT);
         add(loginLabel);
+
+        kitnetsButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        kitnetsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        kitnetsButton.setBackground(Colors.QUATERNARY_COLOR);
+        kitnetsButton.setForeground(Colors.SECONDARY_COLOR);
+        kitnetsButton.setBounds(800, 10, 100, 30);
+        add(kitnetsButton);
+        kitnetsButton.addActionListener(this);
+        kitnetsButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ContractsPage.this.dispose();
+                new KitnetsPage().setVisible(true);
+            }
+        });
 
         addContract.setFont(new Font("Dialog", Font.BOLD, 14));
         addContract.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
