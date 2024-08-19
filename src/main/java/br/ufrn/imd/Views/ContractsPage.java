@@ -39,6 +39,14 @@ public class ContractsPage extends MyFrame implements ActionListener {
         addContract.setForeground(Colors.SECONDARY_COLOR);
         addContract.setBounds(925, 10, 200, 30);
         add(addContract);
+        addContract.addActionListener(this);
+        addContract.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ContractsPage.this.dispose();
+                new ContractRegistrationPage().setVisible(true);
+            }
+        });
 
         exitButton.setFont(new Font("Dialog", Font.BOLD, 14));
         exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
