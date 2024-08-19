@@ -12,6 +12,7 @@ public class Owner {
     private String email;
     private String password;
     private List<Contract> contracts ;
+    private List<Kitnet> kitnets;
 
     public Owner() {
     }
@@ -69,6 +70,13 @@ public class Owner {
         return contracts;
     }
 
+    public List<Kitnet> getKitnets() {
+        return kitnets;
+    }
+
+    public void setKitnets(List<Kitnet> kitnets) {
+        this.kitnets = kitnets;
+    }
     @Override
     public String toString() {
         return "Owner{" +
@@ -82,6 +90,7 @@ public class Owner {
                 ",\nemail='" + email + '\'' +
                 ",\npassword='" + password + '\'' +
                 ",\ncontracts=" + contracts +
+                ",\nkitnets=" + kitnets +
                 "\n}";
     }
 }
