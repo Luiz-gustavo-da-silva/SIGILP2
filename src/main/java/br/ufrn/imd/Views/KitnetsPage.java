@@ -169,6 +169,8 @@ public class KitnetsPage extends MyFrame implements ActionListener {
                     boolean res =  removeKitnet(kitchenettes.get(row).getNKitnet());
                     if(res){
                         JOptionPane.showMessageDialog(button, "Kitnet removida com sucesso!");
+                        kitchenettes = recoverKitchenettes();
+                        addUIComponents();
                     }else{
                         JOptionPane.showMessageDialog(button, "Erro ao deletar kitnet, essa kitnet pode está associada a um contrato!");
                     }
