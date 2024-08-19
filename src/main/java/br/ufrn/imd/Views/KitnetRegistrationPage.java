@@ -221,15 +221,43 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         String address = enderecoField.getText().trim();
         int nContract = Integer.parseInt(nContratoField.getText().trim());
         boolean success;
-
+        int result = -1;
+        boolean kitnetExists = false;
         try {
             KitnetController kitnetController = new KitnetController();
-            success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
-            if(success == true){
-                JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nKitnet + " realizado com sucesso!");
+
+            kitnetExists = kitnetController.kitnetExists(nKitnet);
+
+            if(!kitnetExists){
+                result = kitnetController.checkContractNumber(nContract, nKitnet);
+                JOptionPane.showMessageDialog(null, "Result: "+ result);
+
+                if(result == 1){
+                    JOptionPane.showMessageDialog(null, "A kitnet "+ nKitnet+ "já existe e já está atribuída ao contrato. Por favor adicione outro número" + nContract);
+                    success = false;
+                }else if(result == 2){
+                    JOptionPane.showMessageDialog(null, "Já existe outra kitnet associada a esse contrato, o valor foi substituído pela nova kitnet!");
+                    success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
+                }else if(result == 3){
+                    JOptionPane.showMessageDialog(null, "A kitnet foi atribuída ao contrato" + nContract + " Com sucesso!");
+                    success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
+                }else if(result == 4){
+                    JOptionPane.showMessageDialog(null, "Não existe um contrato com esse número!");
+                    success = kitnetController.registerKitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro na adição da kitnet no contrato!");
+                    success = false;
+                }
+
+                if(success == true){
+                    JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nKitnet + " realizado com sucesso!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Ocorreu algum erro no cadastro da kitnet!");
+                }
             }else{
-                JOptionPane.showMessageDialog(null, "Ocorreu algum erro no cadastro da kitnet!");
+                JOptionPane.showMessageDialog(null, "Já existe uma kitnet com esse número, por favor cadastre um número novo!");
             }
+
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         }

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufrn.imd.Models.Contract;
 import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Models.Owner;
 import com.google.gson.*;
@@ -93,14 +94,56 @@ public class FileManager {
     }
 
     public boolean saveKitnet(Kitnet kitnet) {
-        Owner o = new Owner();
+        Owner owners = new Owner();
         try {
-            o = readOwnerLogged();
-            o.getKitnets().add(kitnet);
-            saveOwner(o);
+            owners = readOwnerLogged();
+            owners.getKitnets().add(kitnet);
+            saveOwner(owners);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return true;
+    }
+
+    public int attachesKitnetContract(int nContract, int nKitnet){
+        Owner owners = new Owner();
+        try {
+            owners = readOwnerLogged();
+
+            for(Contract c: owners.getContracts()){
+                if(c.getnContract() == nContract){
+                    if(c.getnKitnet() == nKitnet){
+                        return 1;
+                    }else if(c.getnKitnet() != nKitnet && c.getnKitnet() != -1){
+                        c.setnKitnet(nKitnet);
+                        saveOwner(owners);
+                        return 2;
+                    }else if(c.getnKitnet() == -1){
+                        c.setnKitnet(nKitnet);
+                        saveOwner(owners);
+                        return 3;
+                    }
+                }
+            }
+            return 4;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean kitnetExists(int nKitnet){
+        Owner owners = new Owner();
+
+        try {
+            owners = readOwnerLogged();
+            for(Kitnet k: owners.getKitnets()){
+                if(k.getNKitnet() == nKitnet){
+                    return true;
+                }
+            }
+            return false;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

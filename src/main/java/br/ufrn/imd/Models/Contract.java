@@ -107,6 +107,10 @@ public class Contract {
         this.status = status;
     }
 
+    public void setnKitnet(int nKitnet) {
+        this.nKitnet = nKitnet;
+    }
+
     @Override
     public String toString() {
         return "Contract{" +

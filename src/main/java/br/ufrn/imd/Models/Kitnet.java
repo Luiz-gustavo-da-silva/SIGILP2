@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Kitnet {
     public int nKitnet;
-
     public int nContract;
     public String furniture;
     public String tenantName;
@@ -34,7 +33,7 @@ public class Kitnet {
 
     public Kitnet(){}
 
-    public Number getNKitnet() {
+    public int getNKitnet() {
         return nKitnet;
     }
 
@@ -110,8 +109,16 @@ public class Kitnet {
     public boolean registerKitnet(Kitnet kitnet){
         String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
         FileManager fileManager = new FileManager();
-        fileManager.saveKitnet(kitnet);
-        return true;
+        fileManager.setPathFile(filePath);
+        return fileManager.saveKitnet(kitnet);
+    }
+
+    public int checkContractNumber(int nContract, int nKitnet){
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
+        return fileManager.attachesKitnetContract(nContract, nKitnet);
+
     }
 
     public static List<Kitnet> recoverKitchenettes() {
@@ -132,6 +139,13 @@ public class Kitnet {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean kitnetExists(int nKitnet){
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
+        return fileManager.kitnetExists(nKitnet);
     }
 
     @Override
