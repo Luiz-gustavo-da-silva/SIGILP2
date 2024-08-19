@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -44,6 +46,14 @@ public class ContractsPage extends MyFrame implements ActionListener {
         exitButton.setForeground(Colors.SECONDARY_COLOR);
         exitButton.setBounds(1150, 10, 70, 30);
         add(exitButton);
+        exitButton.addActionListener(this);
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ContractsPage.this.dispose();
+                new LoginForm().setVisible(true);
+            }
+        });
 
         String[] columnNames = {"Inquilino", "Kitnet", "Data Inicial",
                 "Vencimento", "Aluguel",
