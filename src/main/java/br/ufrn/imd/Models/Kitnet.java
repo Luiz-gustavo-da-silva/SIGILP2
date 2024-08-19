@@ -2,7 +2,9 @@ package br.ufrn.imd.Models;
 
 import br.ufrn.imd.Dao.FileManager;
 import br.ufrn.imd.Dao.FileManager;
+import com.sun.tools.jconsole.JConsoleContext;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,11 +102,31 @@ public class Kitnet {
         kitnetGenericDAO.registerObj(kitnet);
     }*/
 
-    public static List<Kitnet> recoverKitchenettes(){
-        FileManager fileMenager = new FileManager();
-        fileMenager.setPathFile("C:\\Users\\luizg\\OneDrive\\Documentos\\SIGILP2\\src\\main\\java\\br\\ufrn\\imd\\Files\\kitnets.txt");
-        List<Kitnet> k = new ArrayList<>();
-        return k;
+    public static List<Kitnet> recoverKitchenettes() {
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
+        List<Contract> contracts = new ArrayList<>();
+        List<Kitnet> kitchenettes = new ArrayList<>();
+
+        try {
+            Owner ownerLogged = fileManager.readOwnerLogged();
+            if (ownerLogged != null) {
+                contracts = ownerLogged.getContracts();
+                if (contracts != null) {
+                    for (Contract c : contracts) {
+                        if (c.getKitnet() != null) {
+                            kitchenettes.add(c.getKitnet());
+                        }
+                    }
+                }
+            }
+            return kitchenettes;
+        } catch (IOException e) {
+            System.out.println("Erro ao extrair lista de kitnets");
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

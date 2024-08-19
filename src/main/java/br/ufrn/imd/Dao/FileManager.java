@@ -77,4 +77,17 @@ public class FileManager {
         }
         return null;
     }
+
+    //Esse método retorno o usuário que está logado no sitema;
+    public Owner readOwnerLogged() throws IOException {
+        List<Owner> owners = readAllOwners();
+        if (owners != null) {
+            for (Owner owner : owners) {
+                if (owner.isLogged()) {
+                    return owner;
+                }
+            }
+        }
+        return null;
+    }
 }

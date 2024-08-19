@@ -123,7 +123,6 @@ public class KitnetsPage extends MyFrame implements ActionListener {
 
     public List<Kitnet> recoverKitchenettes(){
         KitnetController kitnetController = new KitnetController();
-
         return kitnetController.recoverKitchenettes();
     }
 
