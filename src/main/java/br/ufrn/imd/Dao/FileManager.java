@@ -4,9 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufrn.imd.Enums.FilePath;
-import br.ufrn.imd.Models.Contract;
-import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Models.Owner;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -24,9 +21,8 @@ public class FileManager {
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy, h:mm:ss a").create();
         List<Owner> owners = readAllOwners();
 
-        Owner fakeOwner = new Owner();
-        if (owners.isEmpty()) {
-            owners.add(fakeOwner);
+        if (owners == null) {
+            owners = new ArrayList<>();
         }
 
         owners.removeIf(o -> owner.getCpf().equals(o.getCpf()));
@@ -34,6 +30,9 @@ public class FileManager {
 
         try (FileWriter writeFile = new FileWriter(pathFile)) {
             gson.toJson(owners, writeFile);
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar o arquivo: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -43,39 +42,37 @@ public class FileManager {
         pathFile = directoryPath + File.separator + "owners.json";
         File file = new File(pathFile);
 
-
         if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
-            System.out.println("Arquivo criado: " + pathFile);
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                System.out.println("Arquivo criado em: " + pathFile);
+            } catch (IOException e) {
+                System.err.println("Erro ao criar o arquivo: " + e.getMessage());
+                throw e;
+            }
             return new ArrayList<>();
         }
 
-        try (FileReader fileReader = new FileReader(file);
-             JsonReader jsonReader = new JsonReader(fileReader)) {
+        try (FileReader fileReader = new FileReader(file); JsonReader jsonReader = new JsonReader(fileReader)) {
             jsonReader.setLenient(true);
             return gson.fromJson(jsonReader, new TypeToken<List<Owner>>(){}.getType());
         } catch (JsonSyntaxException e) {
-            System.out.println("Erro de sintaxe JSON.");
+            System.err.println("Erro de sintaxe JSON: " + e.getMessage());
             return new ArrayList<>();
+        } catch (IOException e) {
+            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+            throw e;
         }
     }
 
-
-
     public Owner readOwner(String cpf) throws IOException {
-        Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy, h:mm:ss a").create();
-        try (FileReader fileReader = new FileReader(pathFile);
-             JsonReader jsonReader = new JsonReader(fileReader)) {
-            jsonReader.setLenient(true);
-            List<Owner> owners = readAllOwners();
+        List<Owner> owners = readAllOwners();
+        if (owners != null) {
             for (Owner owner : owners) {
-                if (owner.getCpf() != null) {
-                    if (owner.getCpf().equals(cpf) && owner.isLogged()) {
-                        return owner;
-                    }
+                if (owner.getCpf() != null && owner.getCpf().equals(cpf) && owner.isLogged()) {
+                    return owner;
                 }
-
             }
         }
         return null;
