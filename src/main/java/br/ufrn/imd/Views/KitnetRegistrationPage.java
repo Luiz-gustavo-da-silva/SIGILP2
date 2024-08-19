@@ -198,7 +198,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == salvarButton){
-            //saveKitnet();
+            saveKitnet();
             KitnetRegistrationPage.this.dispose();
             new KitnetsPage().setVisible(true);
         }
