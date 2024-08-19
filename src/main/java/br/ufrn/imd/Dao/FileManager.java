@@ -146,4 +146,19 @@ public class FileManager {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean removeKitnet(int nKitnet) {
+        try {
+            Owner owners = readOwnerLogged();
+            boolean removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet && k.getnContract() == -1);
+            if (removed) {
+                saveOwner(owners);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

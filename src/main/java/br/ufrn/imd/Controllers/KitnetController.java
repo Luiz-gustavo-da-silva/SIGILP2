@@ -29,6 +29,11 @@ public class KitnetController {
         return kitnet.recoverKitchenettes();
     }
 
+    public boolean removeKitnet(int nKitnet){
+        Kitnet kitnet = new Kitnet();
+        return kitnet.removeKitnet(nKitnet);
+    }
+
     public static boolean isValidCep(String cep) {
         String cleanedCep = cep.replaceAll("\\D", "");
 

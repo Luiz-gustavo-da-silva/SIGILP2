@@ -148,6 +148,13 @@ public class Kitnet {
         return fileManager.kitnetExists(nKitnet);
     }
 
+    public boolean removeKitnet(int nKitnet){
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
+        return fileManager.removeKitnet(nKitnet);
+    }
+
     @Override
     public String toString() {
         return "nKitnet:" + nKitnet +
