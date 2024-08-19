@@ -15,6 +15,7 @@
     "kitnets": [
       {
         "nKitnet": 1,
+        "nContract": 1,
         "furniture": "mobiliado",
         "tenantName": "Luiz",
         "stateOfUse": "novo",
@@ -25,6 +26,7 @@
       },
       {
         "nKitnet": 2,
+        "nContract": 2,
         "furniture": "mobiliado",
         "tenantName": "Luiz2",
         "stateOfUse": "novo",
@@ -35,8 +37,20 @@
       },
       {
         "nKitnet": 3,
+        "nContract": 3,
         "furniture": "mobiliado",
         "tenantName": "Luiz3",
+        "stateOfUse": "novo",
+        "cep": "59086-340",
+        "state": "rn",
+        "city": "Natal",
+        "address": "Rua sei lá"
+      },
+      {
+        "nKitnet": 4,
+        "nContract": null,
+        "furniture": "mobiliado",
+        "tenantName": "",
         "stateOfUse": "novo",
         "cep": "59086-340",
         "state": "rn",
@@ -50,16 +64,7 @@
         "tenantName": "Luiz",
         "tenantEmail": "luiz@gmail.com",
         "tenantPhoneNumber": "40028922",
-        "kitnet": {
-          "nKitnet": 1,
-          "furniture": "mobiliado",
-          "tenantName": "Luiz",
-          "stateOfUse": "novo",
-          "cep": "59086-340",
-          "state": "rn",
-          "city": "Natal",
-          "address": "Rua sei lá"
-        },
+        "nKitnet": 1,
         "startDate": "Aug 18, 2024, 9:59:15 PM",
         "endDate": "Aug 18, 2024, 9:59:15 PM",
         "rentAmount": 500.0,
@@ -71,16 +76,7 @@
         "tenantName": "Luiz2",
         "tenantEmail": "luiz@gmail.com",
         "tenantPhoneNumber": "40028922",
-        "kitnet": {
-          "nKitnet": 2,
-          "furniture": "mobiliado",
-          "tenantName": "Luiz2",
-          "stateOfUse": "novo",
-          "cep": "59086-340",
-          "state": "rn",
-          "city": "Natal",
-          "address": "Rua sei lá"
-        },
+        "nKitnet": 2,
         "startDate": "Aug 18, 2024, 9:59:15 PM",
         "endDate": "Aug 18, 2024, 9:59:15 PM",
         "rentAmount": 500.0,
@@ -92,16 +88,7 @@
         "tenantName": "Luiz3",
         "tenantEmail": "luiz@gmail.com",
         "tenantPhoneNumber": "40028922",
-        "kitnet": {
-          "nKitnet": 3,
-          "furniture": "mobiliado",
-          "tenantName": "Luiz3",
-          "stateOfUse": "novo",
-          "cep": "59086-340",
-          "state": "rn",
-          "city": "Natal",
-          "address": "Rua sei lá"
-        },
+        "nKitnet": 3,
         "startDate": "Aug 18, 2024, 9:59:15 PM",
         "endDate": "Aug 18, 2024, 9:59:15 PM",
         "rentAmount": 500.0,
@@ -120,23 +107,26 @@
     "address": "Rua sei lá",
     "email": "luiz@gmail.com",
     "password": "123",
-    "kitnets": [],
+    "kitnets": [
+      {
+        "nKitnet": 1,
+        "nContract": 1,
+        "furniture": "mobiliado",
+        "tenantName": "Luiz",
+        "stateOfUse": "novo",
+        "cep": "59086-340",
+        "state": "rn",
+        "city": "Natal",
+        "address": "Rua sei lá"
+      }
+    ],
     "contracts": [
       {
         "nContract": 1,
         "tenantName": "Luiz",
         "tenantEmail": "luiz@gmail.com",
         "tenantPhoneNumber": "40028922",
-        "kitnet": {
-          "nKitnet": 1,
-          "furniture": "mobiliado",
-          "tenantName": "Luiz",
-          "stateOfUse": "novo",
-          "cep": "59086-340",
-          "state": "rn",
-          "city": "Natal",
-          "address": "Rua sei lá"
-        },
+        "nKitnet": 1,
         "startDate": "Aug 18, 2024, 9:59:15 PM",
         "endDate": "Aug 18, 2024, 9:59:15 PM",
         "rentAmount": 500.0,
@@ -155,23 +145,26 @@
     "address": "Rua sei lá",
     "email": "luiz@gmail.com",
     "password": "123",
-    "kitnets": [],
+    "kitnets": [
+      {
+        "nKitnet": 1,
+        "nContract": 1,
+        "furniture": "mobiliado",
+        "tenantName": "Luiz",
+        "stateOfUse": "novo",
+        "cep": "59086-340",
+        "state": "rn",
+        "city": "Natal",
+        "address": "Rua sei lá"
+      }
+    ],
     "contracts": [
       {
         "nContract": 1,
         "tenantName": "Luiz",
         "tenantEmail": "luiz@gmail.com",
         "tenantPhoneNumber": "40028922",
-        "kitnet": {
-          "nKitnet": 1,
-          "furniture": "mobiliado",
-          "tenantName": "Luiz",
-          "stateOfUse": "novo",
-          "cep": "59086-340",
-          "state": "rn",
-          "city": "Natal",
-          "address": "Rua sei lá"
-        },
+        "nKitnet": 1,
         "startDate": "Aug 18, 2024, 9:59:15 PM",
         "endDate": "Aug 18, 2024, 9:59:15 PM",
         "rentAmount": 500.0,

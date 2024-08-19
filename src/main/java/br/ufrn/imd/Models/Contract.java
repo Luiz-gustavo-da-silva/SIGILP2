@@ -7,19 +7,19 @@ public class Contract {
     private String tenantName;
     private String tenantEmail;
     private String tenantPhoneNumber;
-    private Kitnet kitnet;
+    private int nKitnet;
     private Date startDate;
     private Date endDate;
     private double rentAmount;
     private double adjustment;
     private String status;
 
-    public Contract(int nContract, String tenantName, String tenantEmail, String tenantPhoneNumber, Kitnet kitnet, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
+    public Contract(int nContract, String tenantName, String tenantEmail, String tenantPhoneNumber, int nKitnet, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
         this.nContract = nContract;
         this.tenantName = tenantName;
         this.tenantEmail = tenantEmail;
         this.tenantPhoneNumber = tenantPhoneNumber;
-        this.kitnet = kitnet;
+        this.nKitnet = nKitnet;
         this.startDate = startDate;
         this.endDate = endDate;
         this.rentAmount = rentAmount;
@@ -43,8 +43,8 @@ public class Contract {
         return tenantPhoneNumber;
     }
 
-    public Kitnet getKitnet() {
-        return kitnet;
+    public int getnKitnet() {
+        return nKitnet;
     }
 
     public Date getStartDate() {
@@ -83,8 +83,8 @@ public class Contract {
         this.tenantPhoneNumber = tenantPhoneNumber;
     }
 
-    public void setKitnet(Kitnet kitnet) {
-        this.kitnet = kitnet;
+    public void setKitnet(int nKitnet) {
+        this.nKitnet = nKitnet;
     }
 
     public void setStartDate(Date startDate) {
@@ -114,7 +114,7 @@ public class Contract {
                 ",\ntenantName='" + tenantName + '\'' +
                 ",\ntenantEmail='" + tenantEmail + '\'' +
                 ",\ntenantPhoneNumber='" + tenantPhoneNumber + '\'' +
-                ",\nkitnet=" + kitnet +
+                ",\nnKitnet=" + nKitnet +
                 ",\nstartDate=" + startDate +
                 ",\nendDate=" + endDate +
                 ",\nrentAmount=" + rentAmount +

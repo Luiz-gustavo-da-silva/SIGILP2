@@ -106,20 +106,13 @@ public class Kitnet {
         String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
         FileManager fileManager = new FileManager();
         fileManager.setPathFile(filePath);
-        List<Contract> contracts = new ArrayList<>();
+
         List<Kitnet> kitchenettes = new ArrayList<>();
 
         try {
             Owner ownerLogged = fileManager.readOwnerLogged();
             if (ownerLogged != null) {
-                contracts = ownerLogged.getContracts();
-                if (contracts != null) {
-                    for (Contract c : contracts) {
-                        if (c.getKitnet() != null) {
-                            kitchenettes.add(c.getKitnet());
-                        }
-                    }
-                }
+                kitchenettes = ownerLogged.getKitnets();
             }
             return kitchenettes;
         } catch (IOException e) {
