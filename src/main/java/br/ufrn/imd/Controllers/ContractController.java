@@ -7,8 +7,6 @@ import java.util.List;
 
 public class ContractController {
 
-
-
     public List<Kitnet> searchKitchenettes(){
         Contract contract = new Contract();
         return contract.searchKitchenettes();

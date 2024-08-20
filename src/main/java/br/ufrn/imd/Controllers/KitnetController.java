@@ -6,9 +6,8 @@ import java.util.List;
 
 public class KitnetController {
 
-    public boolean registerKitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address, int nContract, String nameKitnet){
-        if (nKitnet >= 0 && furniture.length() > 0 && tenantName.length() >= 0 && stateOfUse.length() > 0 && isValidCep(cep) && state.length() > 0 && city.length() > 0 && address.length() > 0 && nContract >= -1 && nameKitnet.length() >= 0){
-            Kitnet kitnet = new Kitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract, nameKitnet);
+    public boolean registerKitnet(Kitnet kitnet){
+        if(validationKitnet(kitnet)){
             return kitnet.registerKitnet(kitnet);
         }
         return false;
@@ -35,18 +34,24 @@ public class KitnetController {
     }
 
     public boolean editKitnet(Kitnet kit){
-        Kitnet kitnet = new Kitnet();
-        return kitnet.editKitnet(kit);
+        if (validationKitnet(kit)){
+            return kit.editKitnet(kit);
+        }
+        return false;
+    }
+
+    public boolean validationKitnet(Kitnet kitnet){
+        if (kitnet.nKitnet >= 0 && kitnet.furniture.length() > 0 && kitnet.tenantName.length() >= 0 && kitnet.stateOfUse.length() > 0 && isValidCep(kitnet.cep) && kitnet.state.length() > 0 && kitnet.city.length() > 0 && kitnet.address.length() > 0 && kitnet.nContract >= -1 && kitnet.nameKitnet.length() >= 0){
+            return true;
+        }
+        return false;
     }
 
     public static boolean isValidCep(String cep) {
         String cleanedCep = cep.replaceAll("\\D", "");
-
         if (cleanedCep.length() != 8) {
             return false;
         }
-
         return cleanedCep.matches("\\d{8}");
     }
-
 }
