@@ -1,6 +1,8 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Controllers.ContractController;
+import br.ufrn.imd.Models.Kitnet;
 //import br.ufrn.imd.Controllers.KitnetController;
 
 import javax.swing.*;
@@ -9,19 +11,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContractRegistrationPage extends MyFrame implements ActionListener {
     JTextField nameField = new JTextField();
     JTextField mailField = new JTextField();
     JTextField phoneField = new JTextField();
-    JTextField kitnetField = new JTextField();
+    JComboBox<String> kitnetComboBox = new JComboBox<>();
     JTextField rentField = new JTextField();
     JTextField startDateField = new JTextField();
     JTextField endDateField = new JTextField();
     JButton registerButton = new JButton("Cadastrar");
+
+    public List<Kitnet> listKitnet = new ArrayList<>();
     public ContractRegistrationPage() {
         super("Página de Registro");
         setSize(1280, 680);
+        searchKitchenettes();
         addUIcomponents();
     }
 
@@ -77,13 +84,18 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         kitnetLabel.setForeground(Colors.TEXT_COLOR);
         kitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        kitnetField.setBounds(640, 295, 220, 25);
-        kitnetField.setBackground(Colors.SECONDARY_COLOR);
-        kitnetField.setForeground(Colors.TEXT_COLOR);
-        kitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        kitnetComboBox.setBounds(640, 295, 220, 25);
+        kitnetComboBox.setBackground(Colors.SECONDARY_COLOR);
+        kitnetComboBox.setForeground(Colors.TEXT_COLOR);
+        kitnetComboBox.setFont(new Font("Dialog", Font.PLAIN, 24));
+
+        // Popula o JComboBox com os nomes das Kitnets
+        for (Kitnet kitnet : listKitnet) {
+            kitnetComboBox.addItem(kitnet.getNameKitnet());
+        }
 
         add(kitnetLabel);
-        add(kitnetField);
+        add(kitnetComboBox);
 
         JLabel rentLabel = new JLabel("V. Aluguel:");
         rentLabel.setBounds(410, 325, 400, 25);
@@ -139,7 +151,6 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         });
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registerButton){
@@ -147,5 +158,10 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
             ContractRegistrationPage.this.dispose();
             new ContractsPage().setVisible(true);
         }
+    }
+
+    public void searchKitchenettes(){
+        ContractController contractController = new ContractController();
+        listKitnet = contractController.searchKitchenettes();
     }
 }

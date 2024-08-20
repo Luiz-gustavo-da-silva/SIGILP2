@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -238,27 +239,32 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     }
 
     public void saveKitnet(){
-        int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
-        String furniture = mobiliaField.getText().trim();
-        /*String tenantName = inquilinoAlocadoField.getText().trim();*/
-        String stateOfUse = estadoUsoField.getText().trim();
-        String cep = cepField.getText().trim();
-        String state = estadoField.getText().trim();
-        String city = cidadeField.getText().trim();
-        String address = enderecoField.getText().trim();
-        /*int nContract = nContratoField.getText().trim().isEmpty() ? -1 : Integer.parseInt(nContratoField.getText().trim());*/
-        String nameKitnet = nameKitnetField.getText().trim();
+
+        Kitnet kitnet = new Kitnet();
+
+        kitnet.setNKitnet(Integer.parseInt(nKitnetField.getText().trim()));
+        kitnet.setFurniture(mobiliaField.getText().trim());
+        /*kitnet.setTenantName(inquilinoAlocadoField.getText().trim());*/
+        kitnet.setTenantName("");
+        kitnet.setStateOfUse(estadoUsoField.getText().trim());
+        kitnet.setCep(cepField.getText().trim());
+        kitnet.setState(estadoField.getText().trim());
+        kitnet.setCity(cidadeField.getText().trim());
+        kitnet.setAddress(enderecoField.getText().trim());
+        /*kitnet.setnContract(nContratoField.getText().trim().isEmpty() ? -1 : Integer.parseInt(nContratoField.getText().trim()));*/
+        kitnet.setnContract(-1);
+        kitnet.setNameKitnet(nameKitnetField.getText().trim());
         boolean success;
         boolean kitnetExists = false;
 
         KitnetController kitnetController = new KitnetController();
 
-        kitnetExists = kitnetController.kitnetExists(nKitnet);
+        kitnetExists = kitnetController.kitnetExists(kitnet.nKitnet);
 
         if(!kitnetExists){
-            success = kitnetController.registerKitnet(nKitnet, furniture, "", stateOfUse, cep, state, city, address, -1, nameKitnet);
+            success = kitnetController.registerKitnet(kitnet);
             if(success){
-                JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nameKitnet + " realizado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + kitnet.nameKitnet + " realizado com sucesso!");
             }else{
                 JOptionPane.showMessageDialog(null, "Ocorreu algum erro no cadastro da kitnet!");
             }
