@@ -26,6 +26,10 @@ public class ContractsPage extends MyFrame implements ActionListener {
         addUIComponents();
     }
 
+    private void loadData() {
+
+    }
+
     private void addUIComponents() {
         JLabel loginLabel = new JLabel("Olá, Usuário! Aqui estão os seus contratos:");
         loginLabel.setBounds(140, 10, 1000, 100);
@@ -82,6 +86,7 @@ public class ContractsPage extends MyFrame implements ActionListener {
         String[] columnNames = {"Inquilino", "Kitnet", "Data Inicial",
                 "Vencimento", "Aluguel",
                 "Reajuste", "Status", "Editar", "Deletar"};
+
 
         Object[][] data = {
                 {"Alisson", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Editar", "Deletar"},
