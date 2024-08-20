@@ -81,15 +81,15 @@ public class ContractsPage extends MyFrame implements ActionListener {
 
         String[] columnNames = {"Inquilino", "Kitnet", "Data Inicial",
                 "Vencimento", "Aluguel",
-                "Reajuste", "Status", "Visualizar", "Editar", "Deletar"};
+                "Reajuste", "Status", "Editar", "Deletar"};
 
         Object[][] data = {
-                {"Alisson", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Visualizar", "Editar", "Deletar"},
-                {"Beatriz", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Visualizar", "Editar", "Deletar"},
-                {"Marcelo", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Visualizar", "Editar", "Deletar"},
-                {"Pedro", 3, "20/02/2020", "20/02/2021", 500, 10, "Vencido", "Visualizar", "Editar", "Deletar"},
-                {"Alberto", 3, "20/02/2020", "20/02/2021", 500, 10, "Fechado", "Visualizar", "Editar", "Deletar"},
-                {"Marjorie", 3, "20/02/2020", "20/02/2021", 500, 10, "Fechado", "Visualizar", "Editar", "Deletar"}
+                {"Alisson", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Editar", "Deletar"},
+                {"Beatriz", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Editar", "Deletar"},
+                {"Marcelo", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Editar", "Deletar"},
+                {"Pedro", 3, "20/02/2020", "20/02/2021", 500, 10, "Vencido", "Editar", "Deletar"},
+                {"Alberto", 3, "20/02/2020", "20/02/2021", 500, 10, "Fechado", "Editar", "Deletar"},
+                {"Marjorie", 3, "20/02/2020", "20/02/2021", 500, 10, "Fechado", "Editar", "Deletar"}
         };
 
         tableModel = new DefaultTableModel(data, columnNames);
@@ -105,15 +105,12 @@ public class ContractsPage extends MyFrame implements ActionListener {
         contractTable.getTableHeader().setBackground(Colors.SECONDARY_COLOR);
         contractTable.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 14));
 
-        TableColumn viewColumn = contractTable.getColumnModel().getColumn(7);
-        viewColumn.setCellRenderer(new ButtonRenderer("Visualizar"));
-        viewColumn.setCellEditor(new ButtonEditor(new JCheckBox(), "Visualizar"));
 
-        TableColumn editColumn = contractTable.getColumnModel().getColumn(8);
+        TableColumn editColumn = contractTable.getColumnModel().getColumn(7);
         editColumn.setCellRenderer(new ButtonRenderer("Editar"));
         editColumn.setCellEditor(new ButtonEditor(new JCheckBox(), "Editar"));
 
-        TableColumn deleteColumn = contractTable.getColumnModel().getColumn(9);
+        TableColumn deleteColumn = contractTable.getColumnModel().getColumn(8);
         deleteColumn.setCellRenderer(new ButtonRenderer("Deletar"));
         deleteColumn.setCellEditor(new ButtonEditor(new JCheckBox(), "Deletar"));
 
@@ -139,9 +136,6 @@ public class ContractsPage extends MyFrame implements ActionListener {
             setForeground(Colors.SECONDARY_COLOR);
 
             switch (text) {
-                case "Visualizar":
-                    setBackground(Colors.QUATERNARY_COLOR);
-                    break;
                 case "Editar":
                     setBackground(Colors.QUATERNARY_COLOR);
                     break;
@@ -172,9 +166,7 @@ public class ContractsPage extends MyFrame implements ActionListener {
             button.addActionListener(e -> {
                 fireEditingStopped();
                 int row = contractTable.getSelectedRow();
-                if (label.equals("Visualizar")) {
-                    JOptionPane.showMessageDialog(button, "Redirecting to View: " + row);
-                } else if (label.equals("Editar")) {
+                if (label.equals("Editar")) {
                     JOptionPane.showMessageDialog(button, "Redirecting to Edit: " + row);
                 } else if (label.equals("Deletar")) {
                     JOptionPane.showMessageDialog(button, "Redirecting to Delete: " + row);
