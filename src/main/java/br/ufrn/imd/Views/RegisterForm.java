@@ -36,11 +36,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(loginLabel);
 
         JLabel nameLabel = new JLabel("Nome Completo");
-        nameLabel.setBounds(400, 130, 400, 25);
+        nameLabel.setBounds(410, 130, 400, 25);
         nameLabel.setForeground(Colors.TEXT_COLOR);
         nameLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        nameField.setBounds(400, 165, 450, 25);
+        nameField.setBounds(410, 165, 450, 25);
         nameField.setBackground(Colors.SECONDARY_COLOR);
         nameField.setForeground(Colors.TEXT_COLOR);
         nameField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -50,11 +50,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
 
         //Interface para inserir o nome do novo usuário no registro
         JLabel usernameLabel = new JLabel("Nome de usuário");
-        usernameLabel.setBounds(400, 200, 400, 25);
+        usernameLabel.setBounds(410, 200, 400, 25);
         usernameLabel.setForeground(Colors.TEXT_COLOR);
         usernameLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        usernameField.setBounds(400, 235, 220, 25);
+        usernameField.setBounds(410, 235, 220, 25);
         usernameField.setBackground(Colors.SECONDARY_COLOR);
         usernameField.setForeground(Colors.TEXT_COLOR);
         usernameField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -64,11 +64,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
 
         //Interface para inserir o usuário no registro
         JLabel cpfLabel = new JLabel("CPF");
-        cpfLabel.setBounds(630, 200, 400, 25);
+        cpfLabel.setBounds(640, 200, 400, 25);
         cpfLabel.setForeground(Colors.TEXT_COLOR);
         cpfLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cpfField.setBounds(630, 235, 220, 25);
+        cpfField.setBounds(640, 235, 220, 25);
         cpfField.setBackground(Colors.SECONDARY_COLOR);
         cpfField.setForeground(Colors.TEXT_COLOR);
         cpfField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -77,11 +77,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(cpfField);
 
         JLabel phoneLabel = new JLabel("Nº de telefone");
-        phoneLabel.setBounds(400, 265, 400, 25);
+        phoneLabel.setBounds(410, 265, 400, 25);
         phoneLabel.setForeground(Colors.TEXT_COLOR);
         phoneLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        phoneField.setBounds(400, 295, 220, 25);
+        phoneField.setBounds(410, 295, 220, 25);
         phoneField.setBackground(Colors.SECONDARY_COLOR);
         phoneField.setForeground(Colors.TEXT_COLOR);
         phoneField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -90,11 +90,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(phoneField);
 
         JLabel cepLabel = new JLabel("CEP");
-        cepLabel.setBounds(630, 265, 400, 25);
+        cepLabel.setBounds(640, 265, 400, 25);
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cepField.setBounds(630, 295, 220, 25);
+        cepField.setBounds(640, 295, 220, 25);
         cepField.setBackground(Colors.SECONDARY_COLOR);
         cepField.setForeground(Colors.TEXT_COLOR);
         cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -103,11 +103,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(cepField);
 
         JLabel stateLabel = new JLabel("Estado:");
-        stateLabel.setBounds(400, 325, 400, 25);
+        stateLabel.setBounds(410, 325, 400, 25);
         stateLabel.setForeground(Colors.TEXT_COLOR);
         stateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        stateField.setBounds(400, 355, 220, 25);
+        stateField.setBounds(410, 355, 220, 25);
         stateField.setBackground(Colors.SECONDARY_COLOR);
         stateField.setForeground(Colors.TEXT_COLOR);
         stateField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -116,11 +116,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(stateField);
 
         JLabel cityLabel = new JLabel("Cidade");
-        cityLabel.setBounds(630, 325, 400, 25);
+        cityLabel.setBounds(640, 325, 400, 25);
         cityLabel.setForeground(Colors.TEXT_COLOR);
         cityLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cityField.setBounds(630, 355, 220, 25);
+        cityField.setBounds(640, 355, 220, 25);
         cityField.setBackground(Colors.SECONDARY_COLOR);
         cityField.setForeground(Colors.TEXT_COLOR);
         cityField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -129,11 +129,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(cityField);
 
         JLabel addressLabel = new JLabel("Endereço");
-        addressLabel.setBounds(400, 385, 400, 25);
+        addressLabel.setBounds(410, 385, 400, 25);
         addressLabel.setForeground(Colors.TEXT_COLOR);
         addressLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        addressField.setBounds(400, 415, 450, 25);
+        addressField.setBounds(410, 415, 450, 25);
         addressField.setBackground(Colors.SECONDARY_COLOR);
         addressField.setForeground(Colors.TEXT_COLOR);
         addressField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -142,11 +142,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(addressField);
 
         JLabel mailLabel = new JLabel("Seu e-mail");
-        mailLabel.setBounds(400, (445), 400, 25);
+        mailLabel.setBounds(410, (445), 400, 25);
         mailLabel.setForeground(Colors.TEXT_COLOR);
         mailLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        mailField.setBounds(400, (475), 450, 25);
+        mailField.setBounds(410, (475), 450, 25);
         mailField.setBackground(Colors.SECONDARY_COLOR);
         mailField.setForeground(Colors.TEXT_COLOR);
         mailField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -155,11 +155,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(mailField);
 
         JLabel passwordLabel = new JLabel("Senha");
-        passwordLabel.setBounds(400, 505, 400, 25);
+        passwordLabel.setBounds(410, 505, 400, 25);
         passwordLabel.setForeground(Colors.TEXT_COLOR);
         passwordLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        passwordField.setBounds(400, 535, 450, 25);
+        passwordField.setBounds(410, 535, 450, 25);
         passwordField.setBackground(Colors.SECONDARY_COLOR);
         passwordField.setForeground(Colors.TEXT_COLOR);
         passwordField.setFont(new Font("Dialog", Font.PLAIN, 24));
