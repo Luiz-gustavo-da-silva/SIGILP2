@@ -150,7 +150,7 @@ public class FileManager {
             owners = readOwnerLogged();
             owners.getKitnets().add(kitnet);
             saveOwner(owners);
-        } catch (IOException e) {
+        } catch (IOException | OwnerNotLoggedException e) {
             throw new RuntimeException(e);
         }
         return true;
@@ -207,7 +207,7 @@ public class FileManager {
                 }
             }
             return false;
-        } catch (IOException e) {
+        } catch (IOException | OwnerNotLoggedException e) {
             throw new RuntimeException(e);
         }
     }
@@ -241,7 +241,7 @@ public class FileManager {
             } else {
                 return false;
             }
-        } catch (IOException e) {
+        } catch (IOException | OwnerNotLoggedException e) {
             throw new RuntimeException(e);
         }
     }
@@ -270,7 +270,7 @@ public class FileManager {
                 }
             }
             return null;
-        } catch (IOException e) {
+        } catch (IOException | OwnerNotLoggedException e) {
             throw new RuntimeException(e);
         }
     }
@@ -307,7 +307,7 @@ public class FileManager {
                 kitchenettes = ownerLogged.getKitnets();
             }
             return kitchenettes;
-        } catch (IOException e) {
+        } catch (IOException | OwnerNotLoggedException e) {
             System.out.println("Erro ao extrair lista de kitnets");
             e.printStackTrace();
             throw new RuntimeException(e);
