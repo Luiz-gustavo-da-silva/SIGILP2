@@ -18,7 +18,6 @@ public class Kitnet {
     public String state;
     public String city;
     public String address;
-
     public String nameKitnet;
 
     public Kitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address, int nContract, String nameKitnet) {
