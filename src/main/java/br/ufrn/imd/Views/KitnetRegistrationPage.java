@@ -104,41 +104,41 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         estadoUsoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         JLabel cepLabel = new JLabel("CEP:");
-        cepLabel.setBounds(410, 325, 400, 25);
+        cepLabel.setBounds(410, 200, 220, 25);
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cepField.setBounds(410, 355, 220, 25);
+        cepField.setBounds(410, 235, 220, 25);
         cepField.setBackground(Colors.SECONDARY_COLOR);
         cepField.setForeground(Colors.TEXT_COLOR);
         cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         JLabel estadoLabel = new JLabel("Estado:");
-        estadoLabel.setBounds(640, 325, 400, 25);
+        estadoLabel.setBounds(640, 265, 400, 25);
         estadoLabel.setForeground(Colors.TEXT_COLOR);
         estadoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        estadoField.setBounds(640, 355, 220, 25);
+        estadoField.setBounds(640, 295, 220, 25);
         estadoField.setBackground(Colors.SECONDARY_COLOR);
         estadoField.setForeground(Colors.TEXT_COLOR);
         estadoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         JLabel cidadeLabel = new JLabel("Cidade:");
-        cidadeLabel.setBounds(410, 385, 400, 25);
+        cidadeLabel.setBounds(410, 265, 400, 25);
         cidadeLabel.setForeground(Colors.TEXT_COLOR);
         cidadeLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cidadeField.setBounds(410, 415, 220, 25);
+        cidadeField.setBounds(410, 295, 220, 25);
         cidadeField.setBackground(Colors.SECONDARY_COLOR);
         cidadeField.setForeground(Colors.TEXT_COLOR);
         cidadeField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         JLabel enderecoLabel = new JLabel("Endereço:");
-        enderecoLabel.setBounds(640, 385, 200, 25);
+        enderecoLabel.setBounds(640, 330, 200, 25);
         enderecoLabel.setForeground(Colors.TEXT_COLOR);
         enderecoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        enderecoField.setBounds(640, 415, 220, 25);
+        enderecoField.setBounds(640, 360, 220, 25);
         enderecoField.setBackground(Colors.SECONDARY_COLOR);
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
