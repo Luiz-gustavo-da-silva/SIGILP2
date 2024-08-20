@@ -19,7 +19,9 @@ public class Kitnet {
     public String city;
     public String address;
 
-    public Kitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address, int nContract) {
+    public String nameKitnet;
+
+    public Kitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address, int nContract, String nameKitnet) {
         this.nKitnet = nKitnet;
         this.furniture = furniture;
         this.tenantName = tenantName;
@@ -29,6 +31,7 @@ public class Kitnet {
         this.city = city;
         this.address = address;
         this.nContract = nContract;
+        this.nameKitnet = nameKitnet;
     }
 
     public Kitnet(){}
@@ -104,6 +107,14 @@ public class Kitnet {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getNameKitnet() {
+        return nameKitnet;
+    }
+
+    public void setNameKitnet(String nameKitnet) {
+        this.nameKitnet = nameKitnet;
     }
 
     public boolean registerKitnet(Kitnet kitnet){

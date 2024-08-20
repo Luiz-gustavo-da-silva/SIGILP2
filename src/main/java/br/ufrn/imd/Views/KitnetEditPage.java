@@ -23,6 +23,8 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
     JTextField nContratoField = new JTextField();
+    JTextField nameKitnetField = new JTextField();
+    
     int nKitnet;
     Kitnet kitnetEdit = new Kitnet();
 
@@ -172,6 +174,16 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
+        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:");
+        nameKitnetLabel.setBounds(640, 330, 200, 25);
+        nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
+        nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        nameKitnetField.setBounds(640, 360, 220, 25);
+        nameKitnetField.setBackground(Colors.SECONDARY_COLOR);
+        nameKitnetField.setForeground(Colors.TEXT_COLOR);
+        nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
+
         updateButton.setFont(new Font("Dialog", Font.BOLD, 18));
         updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         updateButton.setBackground(Colors.TERTIARY_COLOR);
@@ -194,6 +206,8 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         add(cidadeField);
         add(enderecoLabel);
         add(enderecoField);
+        add(nameKitnetLabel);
+        add(nameKitnetField);
         /*add(nContratoLabel);
         add(nContratoField);*/
         add(updateButton);
@@ -226,9 +240,10 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         String city = cidadeField.getText().trim();
         String address = enderecoField.getText().trim();
         int nContract = kitnetEdit.getnContract();
+        String nameKitnet = kitnetEdit.getNameKitnet();
         boolean success = false;
 
-        Kitnet kitnet = new Kitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
+        Kitnet kitnet = new Kitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract, nameKitnet);
 
         KitnetController kitnetController = new KitnetController();
 
@@ -256,6 +271,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
             cidadeField.setText(kitnetEdit.getCity());
             enderecoField.setText(kitnetEdit.getAddress());
             nContratoField.setText(String.valueOf(kitnetEdit.getnContract() == -1 ? "" : kitnetEdit.getnContract()));
+            nameKitnetField.setText(kitnetEdit.getNameKitnet());
         } else {
             JOptionPane.showMessageDialog(this, "Kitnet não encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
         }

@@ -26,8 +26,9 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
     JTextField nContratoField = new JTextField();
-    JButton exitButton = new JButton("Sair");
+    JTextField nameKitnetField = new JTextField();
 
+    JButton exitButton = new JButton("Sair");
     JButton kitnetsPageButton = new JButton("Kitnets");
 
     /**
@@ -167,14 +168,24 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         cidadeField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         JLabel enderecoLabel = new JLabel("Endereço:");
-        enderecoLabel.setBounds(640, 330, 200, 25);
+        enderecoLabel.setBounds(410, 330, 200, 25);
         enderecoLabel.setForeground(Colors.TEXT_COLOR);
         enderecoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        enderecoField.setBounds(640, 360, 220, 25);
+        enderecoField.setBounds(410, 360, 220, 25);
         enderecoField.setBackground(Colors.SECONDARY_COLOR);
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
+
+        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:");
+        nameKitnetLabel.setBounds(640, 330, 200, 25);
+        nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
+        nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        nameKitnetField.setBounds(640, 360, 220, 25);
+        nameKitnetField.setBackground(Colors.SECONDARY_COLOR);
+        nameKitnetField.setForeground(Colors.TEXT_COLOR);
+        nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         salvarButton.setFont(new Font("Dialog", Font.BOLD, 18));
         salvarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -198,6 +209,8 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         add(cidadeField);
         add(enderecoLabel);
         add(enderecoField);
+        add(nameKitnetLabel);
+        add(nameKitnetField);
         /*add(nContratoLabel);
         add(nContratoField);*/
         add(salvarButton);
@@ -234,6 +247,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         String city = cidadeField.getText().trim();
         String address = enderecoField.getText().trim();
         /*int nContract = nContratoField.getText().trim().isEmpty() ? -1 : Integer.parseInt(nContratoField.getText().trim());*/
+        String nameKitnet = nameKitnetField.getText().trim();
         boolean success;
         boolean kitnetExists = false;
 
@@ -242,9 +256,9 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         kitnetExists = kitnetController.kitnetExists(nKitnet);
 
         if(!kitnetExists){
-            success = kitnetController.registerKitnet(nKitnet, furniture, "", stateOfUse, cep, state, city, address, -1);
+            success = kitnetController.registerKitnet(nKitnet, furniture, "", stateOfUse, cep, state, city, address, -1, nameKitnet);
             if(success){
-                JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nKitnet + " realizado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nameKitnet + " realizado com sucesso!");
             }else{
                 JOptionPane.showMessageDialog(null, "Ocorreu algum erro no cadastro da kitnet!");
             }
