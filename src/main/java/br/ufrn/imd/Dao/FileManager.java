@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufrn.imd.Exceptions.OwnerNotLoggedException;
 import br.ufrn.imd.Models.Contract;
 import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Models.Owner;
@@ -13,7 +14,7 @@ import com.google.gson.stream.JsonReader;
 
 public class FileManager {
 
-    private String pathFile;
+    private String pathFile = "src/main/java/br/ufrn/imd/Files/owners.json";
 
     public void setPathFile(String pathFile) {
         this.pathFile = pathFile;
@@ -120,7 +121,7 @@ public class FileManager {
      * @return A instância de `Owner` correspondente ao proprietário logado, ou `null` se nenhum proprietário estiver logado.
      * @throws IOException Se ocorrer um erro ao ler a lista de todos os proprietários.
      */
-    public Owner readOwnerLogged() throws IOException {
+    public Owner readOwnerLogged() throws IOException, OwnerNotLoggedException {
         List<Owner> owners = readAllOwners();
         if (owners != null) {
             for (Owner owner : owners) {
@@ -129,8 +130,9 @@ public class FileManager {
                 }
             }
         }
-        return null;
+        throw new OwnerNotLoggedException("Nenhum proprietário está logado.");
     }
+
 
     /**
      * Salva uma nova kitnet na lista de kitnets associadas ao proprietário logado.
