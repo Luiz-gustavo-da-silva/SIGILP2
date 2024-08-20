@@ -113,14 +113,6 @@ public class Kitnet {
         return fileManager.saveKitnet(kitnet);
     }
 
-    public int checkContractNumber(int nContract, int nKitnet){
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.attachesKitnetContract(nContract, nKitnet);
-
-    }
-
     public static List<Kitnet> recoverKitchenettes() {
         String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
         FileManager fileManager = new FileManager();
@@ -152,7 +144,21 @@ public class Kitnet {
         String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
         FileManager fileManager = new FileManager();
         fileManager.setPathFile(filePath);
-        return fileManager.removeKitnet(nKitnet);
+        return fileManager.removeKitnet(nKitnet, false);
+    }
+
+    public Kitnet searchKitnet(int nKitnet){
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
+        return fileManager.searchKitnet(nKitnet);
+    }
+
+    public boolean editKitnet(Kitnet kitnet){
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
+        return fileManager.editKitnet(kitnet);
     }
 
     @Override

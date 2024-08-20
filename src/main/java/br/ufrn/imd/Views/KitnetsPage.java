@@ -3,7 +3,7 @@ package br.ufrn.imd.Views;
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.KitnetController;
 import br.ufrn.imd.Models.Kitnet;
-
+import br.ufrn.imd.Views.KitnetEditPage;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class KitnetsPage extends MyFrame implements ActionListener {
@@ -65,25 +66,28 @@ public class KitnetsPage extends MyFrame implements ActionListener {
             }
         });
 
-        String[] columnNames = {"Inquilino Alocado", "N° Kitnet", "Mobília", "Estado de uso", "Editar", "Deletar"};
+        String[] columnNames = {"N° Kitnet", "Mobília", "Estado de uso", "Cep", "Estado", "Cidade", "Endereço", "Editar", "Deletar"};
 
-        Object[][] data = new Object[kitchenettes.size()][8];
+        Object[][] data = new Object[kitchenettes.size()][9];
 
         for (int i = 0; i < kitchenettes.size(); i++) {
             Kitnet kitnet = kitchenettes.get(i);
-            data[i][0] = kitnet.getTenantName();
-            data[i][1] = kitnet.getNKitnet();
-            data[i][2] = kitnet.getFurniture();
-            data[i][3] = kitnet.getStateOfUse();
-            data[i][4] = "Editar";
-            data[i][5] = "Deletar";
+            data[i][0] = kitnet.getNKitnet();
+            data[i][1] = kitnet.getFurniture();
+            data[i][2] = kitnet.getStateOfUse();
+            data[i][3] = kitnet.getCep();
+            data[i][4] = kitnet.getState();
+            data[i][5] = kitnet.getCity();
+            data[i][6] = kitnet.getAddress();
+            data[i][7] = "Editar";
+            data[i][8] = "Deletar";
         }
 
         tableModel = new DefaultTableModel(data, columnNames);
         contractTable = new JTable(tableModel) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column >= 5;
+                return column >= 7;
             }
         };
 
@@ -93,11 +97,11 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         contractTable.getTableHeader().setBackground(Colors.SECONDARY_COLOR);
         contractTable.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 14));
 
-        TableColumn editColumn = contractTable.getColumnModel().getColumn(4);
+        TableColumn editColumn = contractTable.getColumnModel().getColumn(7);
         editColumn.setCellRenderer(new ButtonRenderer("Editar"));
         editColumn.setCellEditor(new ButtonAction(new JCheckBox(), "Editar"));
 
-        TableColumn deleteColumn = contractTable.getColumnModel().getColumn(5);
+        TableColumn deleteColumn = contractTable.getColumnModel().getColumn(8);
         deleteColumn.setCellRenderer(new ButtonRenderer("Deletar"));
         deleteColumn.setCellEditor(new ButtonAction(new JCheckBox(), "Deletar"));
 
@@ -164,15 +168,15 @@ public class KitnetsPage extends MyFrame implements ActionListener {
                 fireEditingStopped();
                 int row = contractTable.getSelectedRow();
                 if (label.equals("Editar")) {
-                    JOptionPane.showMessageDialog(button, "Redirecting to Edit: " + row);
+                    KitnetsPage.this.dispose();
+                    new KitnetEditPage(kitchenettes.get(row).getNKitnet()).setVisible(true);
+
                 } else if (label.equals("Deletar")) {
                     boolean res = removeKitnet(kitchenettes.get(row).getNKitnet());
                     if (res) {
                         JOptionPane.showMessageDialog(button, "Kitnet removida com sucesso!");
-
                         kitchenettes.remove(row);
                         tableModel.removeRow(row);
-
                         contractTable.revalidate();
                         contractTable.repaint();
                     } else {
@@ -200,6 +204,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
             super.fireEditingStopped();
         }
     }
+
 
     public boolean removeKitnet(int nKitnet){
         KitnetController kitnetController = new KitnetController();

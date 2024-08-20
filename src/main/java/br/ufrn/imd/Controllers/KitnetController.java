@@ -14,11 +14,6 @@ public class KitnetController {
         return false;
     }
 
-    public int checkContractNumber(int nConstract, int nKitnet){
-        Kitnet kitnet = new Kitnet();
-        return kitnet.checkContractNumber(nConstract, nKitnet);
-    }
-
     public boolean kitnetExists(int nKitnet){
         Kitnet kitnet = new Kitnet();
         return kitnet.kitnetExists(nKitnet);
@@ -32,6 +27,16 @@ public class KitnetController {
     public boolean removeKitnet(int nKitnet){
         Kitnet kitnet = new Kitnet();
         return kitnet.removeKitnet(nKitnet);
+    }
+
+    public Kitnet searchKitnet(int nKitnet){
+        Kitnet kitnet = new Kitnet();
+        return kitnet.searchKitnet(nKitnet);
+    }
+
+    public boolean editKitnet(Kitnet kit){
+        Kitnet kitnet = new Kitnet();
+        return kitnet.editKitnet(kit);
     }
 
     public static boolean isValidCep(String cep) {

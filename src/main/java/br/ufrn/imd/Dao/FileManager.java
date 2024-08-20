@@ -19,6 +19,16 @@ public class FileManager {
         this.pathFile = pathFile;
     }
 
+    /**
+     * Salva ou atualiza um proprietário (Owner) no arquivo "owners.json".
+     *
+     * Este método adiciona um proprietário à lista de proprietários no arquivo JSON ou atualiza as informações de um
+     * proprietário existente com o mesmo CPF. Se o arquivo não existir, ele será criado. Em caso de falha na gravação,
+     * uma exceção será lançada.
+     *
+     * @param owner O objeto `Owner` a ser salvo ou atualizado no arquivo.
+     * @throws IOException Se ocorrer um erro ao tentar salvar o arquivo.
+     */
     public void saveOwner(Owner owner) throws IOException {
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy, h:mm:ss a").create();
         List<Owner> owners = readAllOwners();
@@ -38,6 +48,16 @@ public class FileManager {
         }
     }
 
+    /**
+     * Lê e retorna a lista de todos os proprietários (Owners) do arquivo "owners.json".
+     *
+     * Este método lê um arquivo JSON contendo uma lista de proprietários e retorna essa lista como uma `List<Owner>`.
+     * Se o arquivo não existir, ele será criado e uma lista vazia será retornada. Em caso de erro de leitura ou sintaxe,
+     * uma lista vazia será retornada e a exceção será tratada.
+     *
+     * @return Uma `List<Owner>` contendo todos os proprietários lidos do arquivo JSON, ou uma lista vazia se o arquivo não existir ou houver erros na leitura.
+     * @throws IOException Se ocorrer um erro ao tentar ler o arquivo.
+     */
     public List<Owner> readAllOwners() throws IOException {
         Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy, h:mm:ss a").create();
         String directoryPath = new File(pathFile).getParent();
@@ -68,6 +88,16 @@ public class FileManager {
         }
     }
 
+    /**
+     * Retorna o proprietário correspondente ao CPF fornecido, se estiver logado.
+     *
+     * Este método percorre a lista de todos os proprietários e retorna o proprietário cujo CPF corresponde ao CPF fornecido,
+     * desde que o proprietário esteja logado. Se nenhum proprietário com o CPF fornecido estiver logado, o método retorna `null`.
+     *
+     * @param cpf O CPF do proprietário que se deseja buscar.
+     * @return A instância de `Owner` correspondente ao CPF fornecido e que está logado, ou `null` se não houver correspondência ou se o proprietário não estiver logado.
+     * @throws IOException Se ocorrer um erro ao ler a lista de todos os proprietários.
+     */
     public Owner readOwner(String cpf) throws IOException {
         List<Owner> owners = readAllOwners();
         if (owners != null) {
@@ -80,7 +110,16 @@ public class FileManager {
         return null;
     }
 
-    //Esse método retorno o usuário que está logado no sitema;
+
+    /**
+     * Retorna o proprietário que está atualmente logado.
+     *
+     * Este método percorre a lista de todos os proprietários e retorna o primeiro que estiver marcado como logado.
+     * Se nenhum proprietário estiver logado, o método retorna `null`.
+     *
+     * @return A instância de `Owner` correspondente ao proprietário logado, ou `null` se nenhum proprietário estiver logado.
+     * @throws IOException Se ocorrer um erro ao ler a lista de todos os proprietários.
+     */
     public Owner readOwnerLogged() throws IOException {
         List<Owner> owners = readAllOwners();
         if (owners != null) {
@@ -93,6 +132,16 @@ public class FileManager {
         return null;
     }
 
+    /**
+     * Salva uma nova kitnet na lista de kitnets associadas ao proprietário logado.
+     *
+     * Este método adiciona uma nova instância de `Kitnet` à lista de kitnets do proprietário logado
+     * e, em seguida, salva o estado atualizado do proprietário.
+     *
+     * @param kitnet A instância de `Kitnet` a ser salva.
+     * @return `true` se a kitnet for salva com sucesso.
+     * @throws RuntimeException Se ocorrer um erro durante a leitura dos dados do proprietário logado ou ao salvar o proprietário.
+     */
     public boolean saveKitnet(Kitnet kitnet) {
         Owner owners = new Owner();
         try {
@@ -105,7 +154,7 @@ public class FileManager {
         return true;
     }
 
-    public int attachesKitnetContract(int nContract, int nKitnet){
+    /*public int attachesKitnetContract(int nContract, int nKitnet){
         Owner owners = new Owner();
         try {
             owners = readOwnerLogged();
@@ -132,8 +181,19 @@ public class FileManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
+
+    /**
+     * Verifica se uma kitnet específica existe na lista de kitnets associadas ao proprietário logado.
+     *
+     * Este método percorre a lista de kitnets do proprietário logado para verificar se uma kitnet
+     * com o número especificado (`nKitnet`) está presente. Se encontrar, retorna `true`; caso contrário, retorna `false`.
+     *
+     * @param nKitnet O número da kitnet a ser verificado.
+     * @return `true` se a kitnet com o número especificado existir; `false` caso contrário.
+     * @throws RuntimeException Se ocorrer um erro de leitura dos dados do proprietário logado.
+     */
     public boolean kitnetExists(int nKitnet){
         Owner owners = new Owner();
 
@@ -150,10 +210,29 @@ public class FileManager {
         }
     }
 
-    public boolean removeKitnet(int nKitnet) {
+    /**
+     * Remove uma kitnet específica da lista de kitnets associadas ao proprietário logado.
+     *
+     * Este método remove uma kitnet com base no número da kitnet (`nKitnet`). Dependendo do valor de `edit`,
+     * ele removerá a kitnet independentemente do número do contrato ou apenas removerá aquelas
+     * que não têm um contrato associado (`nContract == -1`). Após a remoção, as alterações são salvas.
+     *
+     * @param nKitnet O número da kitnet a ser removida.
+     * @param edit Um booleano que determina se a remoção deve ignorar a existência de um contrato associado.
+     *             Se `true`, remove a kitnet independentemente do contrato; se `false`, remove apenas se o contrato não existir.
+     * @return `true` se a kitnet foi removida com sucesso; `false` caso contrário.
+     * @throws RuntimeException Se ocorrer um erro de leitura ou gravação dos dados do proprietário logado.
+     */
+    public boolean removeKitnet(int nKitnet, boolean edit) {
+
+        boolean removed = false;
         try {
             Owner owners = readOwnerLogged();
-            boolean removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet && k.getnContract() == -1);
+            if(edit){
+                removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet);
+            }else{
+                removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet && k.getnContract() == -1);
+            }
             if (removed) {
                 saveOwner(owners);
                 return true;
@@ -162,6 +241,57 @@ public class FileManager {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Busca uma kitnet específica associada ao proprietário atualmente logado.
+     *
+     * Este método busca uma kitnet no sistema com base no número da kitnet (`nKitnet`).
+     * Ele primeiro carrega o proprietário logado e, em seguida, percorre a lista de kitnets
+     * associadas a esse proprietário para encontrar a kitnet correspondente ao número fornecido.
+     * Se a kitnet for encontrada, ela é retornada; caso contrário, o método retorna `null`.
+     *
+     * @param nKitnet O número da kitnet a ser buscado.
+     * @return A instância da classe `Kitnet` correspondente ao número da kitnet, se encontrada;
+     *         `null` se a kitnet não for encontrada.
+     * @throws RuntimeException Se ocorrer um erro de leitura do proprietário logado.
+     */
+    public Kitnet searchKitnet(int nKitnet){
+        Owner owners = new Owner();
+
+        try {
+            owners = readOwnerLogged();
+            for(Kitnet k: owners.getKitnets()){
+                if(k.getNKitnet() == nKitnet){
+                    return k;
+                }
+            }
+            return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Edita uma kitnet existente no sistema.
+     *
+     * Este método tenta remover a kitnet existente, identificada pelo número da kitnet (nKitnet),
+     * e então salva a nova versão da kitnet fornecida como argumento. Se ambos os passos forem bem-sucedidos,
+     * a edição é considerada bem-sucedida e o método retorna `true`. Caso contrário, o método retorna `false`.
+     *
+     * @param kitnet A instância da classe `Kitnet` que contém os dados atualizados da kitnet a ser editada.
+     * @return `true` se a kitnet foi editada e salva com sucesso; `false` caso contrário.
+     */
+    public boolean editKitnet(Kitnet kitnet){
+        if(removeKitnet(kitnet.getNKitnet(), true)){
+            if (saveKitnet(kitnet)){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
         }
     }
 }

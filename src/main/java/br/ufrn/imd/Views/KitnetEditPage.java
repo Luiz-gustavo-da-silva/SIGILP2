@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * A classe `kitnetRegistrationPage` representa a página de cadastro de kitnets.
- * Esta classe herda de `MyFrame` e implementa a interface `ActionListener` para
- * tratar eventos de ação, como cliques de botão.
- */
-public class KitnetRegistrationPage extends MyFrame implements ActionListener {
-    JButton salvarButton = new JButton("Adicionar");
+public class KitnetEditPage extends MyFrame implements ActionListener {
+
+    JButton updateButton = new JButton("Atualizar");
     JTextField nKitnetField = new JTextField();
     JTextField mobiliaField = new JTextField();
     JTextField inquilinoAlocadoField = new JTextField();
@@ -26,15 +23,14 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
     JTextField nContratoField = new JTextField();
+    int nKitnet;
+    Kitnet kitnetEdit = new Kitnet();
 
-
-    /**
-     * Construtor da classe `kitnetRegistrationPage`.
-     * Inicializa a interface de usuário e configura a janela.
-     */
-    public KitnetRegistrationPage() {
-        super("Cadatrar kitnet");
+    public KitnetEditPage(int nKitnet) {
+        super("Editar Kitnet");
         setSize(1280, 680);
+        this.nKitnet = nKitnet;
+        searchKitnet();
         addUIComponents();
     }
 
@@ -65,16 +61,16 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         mobiliaField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         /*JLabel nContratoLabel = new JLabel("Número do Contrato:");
-        nContratoLabel.setBounds(30, 145, 200, 25);
+        nContratoLabel.setBounds(30, 245, 200, 25);
         nContratoLabel.setForeground(Colors.TEXT_COLOR);
         nContratoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        nContratoField.setBounds(30, 175, 400, 55);
+        nContratoField.setBounds(30, 275, 400, 55);
         nContratoField.setBackground(Colors.SECONDARY_COLOR);
         nContratoField.setForeground(Colors.TEXT_COLOR);
-        nContratoField.setFont(new Font("Dialog", Font.PLAIN, 24));*/
+        nContratoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        /*JLabel inquilinoAlocadoLabel = new JLabel("Inquilino Alocado:");
+        JLabel inquilinoAlocadoLabel = new JLabel("Inquilino Alocado:");
         inquilinoAlocadoLabel.setBounds(30, 145, 200, 25);
         inquilinoAlocadoLabel.setForeground(Colors.TEXT_COLOR);
         inquilinoAlocadoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -134,11 +130,11 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        salvarButton.setFont(new Font("Dialog", Font.BOLD, 18));
-        salvarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        salvarButton.setBackground(Colors.TERTIARY_COLOR);
-        salvarButton.setForeground(Colors.SECONDARY_COLOR);
-        salvarButton.setBounds(350, 550, 250, 50);
+        updateButton.setFont(new Font("Dialog", Font.BOLD, 18));
+        updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        updateButton.setBackground(Colors.TERTIARY_COLOR);
+        updateButton.setForeground(Colors.SECONDARY_COLOR);
+        updateButton.setBounds(350, 550, 250, 50);
 
         add(nKitnetLabel);
         add(nKitnetField);
@@ -158,10 +154,10 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         add(enderecoField);
         /*add(nContratoLabel);
         add(nContratoField);*/
-        add(salvarButton);
+        add(updateButton);
 
-        salvarButton.addActionListener(this);
-        salvarButton.addMouseListener(new MouseAdapter() {
+        updateButton.addActionListener(this);
+        updateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int a = 0;
@@ -169,47 +165,58 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         });
     }
 
-    /**
-     * Método de tratamento de eventos de ação.
-     * Este método é chamado quando o botão de salvar é clicado.
-     *
-     * @param e O evento de ação.
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == salvarButton){
-            saveKitnet();
-            KitnetRegistrationPage.this.dispose();
+        if (e.getSource() == updateButton){
+            updateKitnet();
+            KitnetEditPage.this.dispose();
             new KitnetsPage().setVisible(true);
         }
     }
 
-    public void saveKitnet(){
+    public void updateKitnet(){
         int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
         String furniture = mobiliaField.getText().trim();
-        /*String tenantName = inquilinoAlocadoField.getText().trim();*/
+        String tenantName = kitnetEdit.getTenantName();
         String stateOfUse = estadoUsoField.getText().trim();
         String cep = cepField.getText().trim();
         String state = estadoField.getText().trim();
         String city = cidadeField.getText().trim();
         String address = enderecoField.getText().trim();
-        /*int nContract = nContratoField.getText().trim().isEmpty() ? -1 : Integer.parseInt(nContratoField.getText().trim());*/
-        boolean success;
-        boolean kitnetExists = false;
+        int nContract = kitnetEdit.getnContract();
+        boolean success = false;
+
+        Kitnet kitnet = new Kitnet(nKitnet, furniture, tenantName, stateOfUse, cep, state, city, address, nContract);
 
         KitnetController kitnetController = new KitnetController();
 
-        kitnetExists = kitnetController.kitnetExists(nKitnet);
+        success = kitnetController.editKitnet(kitnet);
 
-        if(!kitnetExists){
-            success = kitnetController.registerKitnet(nKitnet, furniture, "", stateOfUse, cep, state, city, address, -1);
-            if(success){
-                JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + nKitnet + " realizado com sucesso!");
-            }else{
-                JOptionPane.showMessageDialog(null, "Ocorreu algum erro no cadastro da kitnet!");
-            }
+        if(success){
+            JOptionPane.showMessageDialog(null, "A kitnet foi atualizada os valores de inquilino e número do contrato permanecem os mesmo do registrado no contrato!");
         }else{
-            JOptionPane.showMessageDialog(null, "Já existe uma kitnet com esse número, por favor cadastre um número novo!");
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar kitnet, por favor tente outra vez!");
+        }
+    }
+
+    public void searchKitnet(){
+        KitnetController kitnetController = new KitnetController();
+        kitnetEdit = kitnetController.searchKitnet(nKitnet);
+
+        if (kitnetEdit != null) {
+            nKitnetField.setText(String.valueOf(kitnetEdit.getNKitnet()));
+            nKitnetField.setEnabled(false);
+            mobiliaField.setText(kitnetEdit.getFurniture());
+            inquilinoAlocadoField.setText(kitnetEdit.getTenantName());
+            cepField.setText(kitnetEdit.getCep());
+            estadoField.setText(kitnetEdit.getState());
+            estadoUsoField.setText(kitnetEdit.getStateOfUse());
+            cidadeField.setText(kitnetEdit.getCity());
+            enderecoField.setText(kitnetEdit.getAddress());
+            nContratoField.setText(String.valueOf(kitnetEdit.getnContract() == -1 ? "" : kitnetEdit.getnContract()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Kitnet não encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
+
