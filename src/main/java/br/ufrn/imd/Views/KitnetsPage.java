@@ -25,6 +25,8 @@ public class KitnetsPage extends MyFrame implements ActionListener {
     JButton exitButton = new JButton("Sair");
     JButton addKitnet = new JButton("+ Kitnet");
 
+    JButton contractButton = new JButton("Contratos");
+
     JTable contractTable;
     DefaultTableModel tableModel;
 
@@ -43,6 +45,8 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         exitButton.setFont(new Font("Dialog", Font.BOLD, 14));
         exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         exitButton.setBounds(1150, 10, 70, 30);
+        exitButton.setBackground(Colors.QUATERNARY_COLOR);
+        exitButton.setForeground(Colors.SECONDARY_COLOR);
         add(exitButton);
         exitButton.addActionListener(this);
         exitButton.addMouseListener(new MouseAdapter() {
@@ -53,9 +57,26 @@ public class KitnetsPage extends MyFrame implements ActionListener {
             }
         });
 
+        contractButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        contractButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        contractButton.setBackground(Colors.QUATERNARY_COLOR);
+        contractButton.setForeground(Colors.SECONDARY_COLOR);
+        contractButton.setBounds(850, 10, 150, 30);
+        add(contractButton);
+        contractButton.addActionListener(this);
+        contractButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                KitnetsPage.this.dispose();
+                new ContractsPage().setVisible(true);
+            }
+        });
+
         addKitnet.setFont(new Font("Dialog", Font.BOLD, 14));
         addKitnet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         addKitnet.setBounds(1030, 10, 100, 30);
+        addKitnet.setBackground(Colors.QUATERNARY_COLOR);
+        addKitnet.setForeground(Colors.SECONDARY_COLOR);
         add(addKitnet);
         addKitnet.addActionListener(this);
         addKitnet.addMouseListener(new MouseAdapter() {

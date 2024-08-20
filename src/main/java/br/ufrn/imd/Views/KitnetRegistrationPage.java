@@ -26,7 +26,9 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
     JTextField nContratoField = new JTextField();
+    JButton exitButton = new JButton("Sair");
 
+    JButton kitnetsPageButton = new JButton("Kitnets");
 
     /**
      * Construtor da classe `kitnetRegistrationPage`.
@@ -44,6 +46,37 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
      * configura o botão de registro.
      */
     private void addUIComponents() {
+
+        exitButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        exitButton.setBounds(1150, 10, 70, 30);
+        exitButton.setBackground(Colors.QUATERNARY_COLOR);
+        exitButton.setForeground(Colors.SECONDARY_COLOR);
+        add(exitButton);
+        exitButton.addActionListener(this);
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                KitnetRegistrationPage.this.dispose();
+                new LoginForm().setVisible(true);
+            }
+        });
+
+        kitnetsPageButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        kitnetsPageButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        kitnetsPageButton.setBounds(1030, 10, 100, 30);
+        kitnetsPageButton.setBackground(Colors.QUATERNARY_COLOR);
+        kitnetsPageButton.setForeground(Colors.SECONDARY_COLOR);
+        add(kitnetsPageButton);
+        kitnetsPageButton.addActionListener(this);
+        kitnetsPageButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                KitnetRegistrationPage.this.dispose();
+                new KitnetsPage().setVisible(true);
+            }
+        });
+
         JLabel loginLabel = new JLabel("Cadastro de Kitnet");
         loginLabel.setBounds(360, 25, 520, 100);
         loginLabel.setForeground(Colors.TEXT_COLOR);

@@ -26,6 +26,10 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     int nKitnet;
     Kitnet kitnetEdit = new Kitnet();
 
+    JButton exitButton = new JButton("Sair");
+
+    JButton kitnetsPageButton = new JButton("Kitnets");
+
     public KitnetEditPage(int nKitnet) {
         super("Editar Kitnet");
         setSize(1280, 680);
@@ -40,6 +44,38 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
      * configura o botão de registro.
      */
     private void addUIComponents() {
+
+        exitButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        exitButton.setBounds(1150, 10, 70, 30);
+        exitButton.setBackground(Colors.QUATERNARY_COLOR);
+        exitButton.setForeground(Colors.SECONDARY_COLOR);
+        add(exitButton);
+        exitButton.addActionListener(this);
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                KitnetEditPage.this.dispose();
+                new LoginForm().setVisible(true);
+            }
+        });
+
+        kitnetsPageButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        kitnetsPageButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        kitnetsPageButton.setBounds(1030, 10, 100, 30);
+        kitnetsPageButton.setBackground(Colors.QUATERNARY_COLOR);
+        kitnetsPageButton.setForeground(Colors.SECONDARY_COLOR);
+        add(kitnetsPageButton);
+        kitnetsPageButton.addActionListener(this);
+        kitnetsPageButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                KitnetEditPage.this.dispose();
+                new KitnetsPage().setVisible(true);
+            }
+        });
+
+
         JLabel nKitnetLabel = new JLabel("N° Kitnet:");
         nKitnetLabel.setBounds(30, 45, 200, 25);
         nKitnetLabel.setForeground(Colors.TEXT_COLOR);
