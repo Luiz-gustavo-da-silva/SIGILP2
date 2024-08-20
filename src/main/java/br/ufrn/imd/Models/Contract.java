@@ -1,6 +1,9 @@
 package br.ufrn.imd.Models;
 
+import br.ufrn.imd.Dao.FileManager;
+
 import java.util.Date;
+import java.util.List;
 
 public class Contract {
     private int nContract;
@@ -26,6 +29,8 @@ public class Contract {
         this.adjustment = adjustment;
         this.status = status;
     }
+
+    public Contract(){}
 
     public int getnContract() {
         return nContract;
@@ -110,6 +115,14 @@ public class Contract {
     public void setnKitnet(int nKitnet) {
         this.nKitnet = nKitnet;
     }
+
+    public List<Kitnet> searchKitchenettes(){
+        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
+        FileManager fileManager = new FileManager();
+        fileManager.setPathFile(filePath);
+        return fileManager.searchKitchenettes();
+    }
+
 
     @Override
     public String toString() {

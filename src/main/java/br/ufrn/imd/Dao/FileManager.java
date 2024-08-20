@@ -294,4 +294,21 @@ public class FileManager {
             return false;
         }
     }
+
+    public List<Kitnet> searchKitchenettes(){
+        Owner owners = new Owner();
+        List<Kitnet> kitchenettes = new ArrayList<>();
+
+        try {
+            Owner ownerLogged = readOwnerLogged();
+            if (ownerLogged != null) {
+                kitchenettes = ownerLogged.getKitnets();
+            }
+            return kitchenettes;
+        } catch (IOException e) {
+            System.out.println("Erro ao extrair lista de kitnets");
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

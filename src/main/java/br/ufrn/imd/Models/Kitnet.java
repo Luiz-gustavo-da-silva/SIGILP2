@@ -127,20 +127,7 @@ public class Kitnet {
         String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
         FileManager fileManager = new FileManager();
         fileManager.setPathFile(filePath);
-
-        List<Kitnet> kitchenettes = new ArrayList<>();
-
-        try {
-            Owner ownerLogged = fileManager.readOwnerLogged();
-            if (ownerLogged != null) {
-                kitchenettes = ownerLogged.getKitnets();
-            }
-            return kitchenettes;
-        } catch (IOException e) {
-            System.out.println("Erro ao extrair lista de kitnets");
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        return fileManager.searchKitchenettes();
     }
 
     public boolean kitnetExists(int nKitnet){
