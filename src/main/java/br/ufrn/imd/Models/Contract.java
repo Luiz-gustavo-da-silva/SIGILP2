@@ -116,14 +116,6 @@ public class Contract {
         this.nKitnet = nKitnet;
     }
 
-    public List<Kitnet> searchKitchenettes(){
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.searchKitchenettes();
-    }
-
-
     @Override
     public String toString() {
         return "Contract{" +

@@ -116,48 +116,6 @@ public class Kitnet {
         this.nameKitnet = nameKitnet;
     }
 
-    public boolean registerKitnet(Kitnet kitnet){
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.saveKitnet(kitnet);
-    }
-
-    public static List<Kitnet> recoverKitchenettes() {
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.searchKitchenettes();
-    }
-
-    public boolean kitnetExists(int nKitnet){
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.kitnetExists(nKitnet);
-    }
-
-    public boolean removeKitnet(int nKitnet){
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.removeKitnet(nKitnet, false);
-    }
-
-    public Kitnet searchKitnet(int nKitnet){
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.searchKitnet(nKitnet);
-    }
-
-    public boolean editKitnet(Kitnet kitnet){
-        String filePath = "src/main/java/br/ufrn/imd/Files/owners.json";
-        FileManager fileManager = new FileManager();
-        fileManager.setPathFile(filePath);
-        return fileManager.editKitnet(kitnet);
-    }
-
     @Override
     public String toString() {
         return "nKitnet:" + nKitnet +
