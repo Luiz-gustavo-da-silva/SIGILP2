@@ -14,9 +14,7 @@ import java.awt.event.MouseEvent;
 public class KitnetEditPage extends MyFrame implements ActionListener {
 
     JButton updateButton = new JButton("Atualizar");
-    JTextField nKitnetField = new JTextField();
     JTextField mobiliaField = new JTextField();
-    JTextField inquilinoAlocadoField = new JTextField();
     JTextField cepField = new JTextField();
     JTextField estadoField = new JTextField();
     JTextField estadoUsoField = new JTextField();
@@ -82,16 +80,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         loginLabel.setFont(new Font("Dialog", Font.BOLD, 40));
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(loginLabel);
-
-        /*JLabel nKitnetLabel = new JLabel("N° Kitnet:");
-        nKitnetLabel.setBounds(410, 135, 400, 25);
-        nKitnetLabel.setForeground(Colors.TEXT_COLOR);
-        nKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        nKitnetField.setBounds(410, 175, 220, 25);
-        nKitnetField.setBackground(Colors.SECONDARY_COLOR);
-        nKitnetField.setForeground(Colors.TEXT_COLOR);
-        nKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));*/
 
         JLabel mobiliaLabel = new JLabel("Mobília:");
         mobiliaLabel.setBounds(640, 135, 220, 25);
@@ -204,9 +192,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     }
 
     public void updateKitnet(){
-        int nKitnet = Integer.parseInt(nKitnetField.getText().trim());
         String furniture = mobiliaField.getText().trim();
-        /*String tenantName = kitnetEdit.getTenantName();*/
         String stateOfUse = estadoUsoField.getText().trim();
         String cep = cepField.getText().trim();
         String state = estadoField.getText().trim();
@@ -233,10 +219,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         kitnetEdit = kitnetController.searchKitnet(nKitnet);
 
         if (kitnetEdit != null) {
-            nKitnetField.setText(String.valueOf(kitnetEdit.getNKitnet()));
-            nKitnetField.setEnabled(false);
             mobiliaField.setText(kitnetEdit.getFurniture());
-            inquilinoAlocadoField.setText(kitnetEdit.getTenantName());
             cepField.setText(kitnetEdit.getCep());
             estadoField.setText(kitnetEdit.getState());
             estadoUsoField.setText(kitnetEdit.getStateOfUse());

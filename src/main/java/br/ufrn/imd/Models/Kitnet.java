@@ -11,7 +11,6 @@ import java.util.List;
 public class Kitnet {
     public int nKitnet;
     public String furniture;
-    public String tenantName;
     public String stateOfUse;
     public String cep;
     public String state;
@@ -46,14 +45,6 @@ public class Kitnet {
 
     public void setFurniture(String furniture) {
         this.furniture = furniture;
-    }
-
-    public String getTenantName() {
-        return tenantName;
-    }
-
-    public void setTenantName(String tenantName) {
-        this.tenantName = tenantName;
     }
 
     public String getStateOfUse() {
@@ -108,7 +99,6 @@ public class Kitnet {
     public String toString() {
         return "nKitnet:" + nKitnet +
                 ", furniture:" + furniture +
-                ", tenantName:" + tenantName +
                 ", stateOfUse:" + stateOfUse +
                 ", cep:" + cep +
                 ", state:" + state +

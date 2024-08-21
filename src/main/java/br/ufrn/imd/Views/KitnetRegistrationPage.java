@@ -24,7 +24,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JTextField estadoUsoField = new JTextField();
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
-
     JTextField nameKitnetField = new JTextField();
 
     JButton exitButton = new JButton("Sair");
@@ -203,7 +202,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         Kitnet kitnet = new Kitnet();
 
         kitnet.setFurniture(mobiliaField.getText().trim());
-        kitnet.setTenantName("");
         kitnet.setStateOfUse(estadoUsoField.getText().trim());
         kitnet.setCep(cepField.getText().trim());
         kitnet.setState(estadoField.getText().trim());
