@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Enums.SystemMessage;
 import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
@@ -210,9 +211,9 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         success = kitnetController.editKitnet(kitnet);
 
         if(success){
-            JOptionPane.showMessageDialog(null, "A kitnet foi atualizada os valores de inquilino e número do contrato permanecem os mesmo do registrado no contrato!");
+            JOptionPane.showMessageDialog(null, SystemMessage.KITNET_UPDATE_SUCCESS.getMessage());
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar kitnet, por favor tente outra vez!");
+            JOptionPane.showMessageDialog(null, SystemMessage.KITNET_UPDATE_ERROR.getMessage());
         }
     }
 
@@ -229,7 +230,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
             enderecoField.setText(kitnetEdit.getAddress());
             nameKitnetField.setText(kitnetEdit.getNameKitnet());
         } else {
-            JOptionPane.showMessageDialog(this, "Kitnet não encontrada", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, SystemMessage.KITNET_NOT_FOUND.getMessage(), "Erro: ", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

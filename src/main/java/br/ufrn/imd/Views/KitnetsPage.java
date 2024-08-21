@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Enums.SystemMessage;
 import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Views.KitnetEditPage;
 import javax.swing.*;
@@ -194,13 +195,13 @@ public class KitnetsPage extends MyFrame implements ActionListener {
                 } else if (label.equals("Deletar")) {
                     boolean res = removeKitnet(kitchenettes.get(row).getnKitnetUUID());
                     if (res) {
-                        JOptionPane.showMessageDialog(button, "Kitnet removida com sucesso!");
+                        JOptionPane.showMessageDialog(button, SystemMessage.KITNET_REMOVED_SUCCESS.getMessage());
                         kitchenettes.remove(row);
                         tableModel.removeRow(row);
                         contractTable.revalidate();
                         contractTable.repaint();
                     } else {
-                        JOptionPane.showMessageDialog(button, "Erro ao deletar kitnet, essa kitnet pode estar associada a um contrato!");
+                        JOptionPane.showMessageDialog(button, SystemMessage.KITNET_REMOVE_ERROR.getMessage());
                     }
                 }
             });

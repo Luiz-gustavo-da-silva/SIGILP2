@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Enums.SystemMessage;
 import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
@@ -218,12 +219,12 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         if(!kitnetExists){
             success = kitnetController.registerKitnet(kitnet);
             if(success){
-                JOptionPane.showMessageDialog(null, "Cadastro da kitnet " + kitnet.nameKitnet + " realizado com sucesso!");
+                JOptionPane.showMessageDialog(null, SystemMessage.KITNET_REGISTER_SUCCESS.getMessage());
             }else{
-                JOptionPane.showMessageDialog(null, "Ocorreu algum erro no cadastro da kitnet!");
+                JOptionPane.showMessageDialog(null, SystemMessage.KITNET_REGISTER_ERROR.getMessage());
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Já existe uma kitnet com esse número, por favor cadastre um número novo!");
+            JOptionPane.showMessageDialog(null, SystemMessage.KITNET_EXISTS.getMessage());
         }
     }
 }
