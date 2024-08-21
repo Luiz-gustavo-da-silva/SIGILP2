@@ -14,6 +14,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.UUID;
 
+/**
+ * Representa a página de edição de uma kitnet.
+ * Extende a classe {@link MyFrame} e implementa a interface {@link ActionListener}.
+ * Esta classe fornece uma interface gráfica para editar os detalhes de uma kitnet existente.
+ */
 public class KitnetEditPage extends MyFrame implements ActionListener {
 
     JButton updateButton = new JButton("Atualizar");
@@ -35,6 +40,11 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
 
     JButton kitnetsPageButton = new JButton("Kitnets");
 
+    /**
+     * Construtor da classe {@code KitnetEditPage}.
+     *
+     * @param nKitnetUUID O identificador único da kitnet a ser editada.
+     */
     public KitnetEditPage(UUID nKitnetUUID) {
         super("Editar Kitnet");
         setSize(1280, 680);
@@ -189,6 +199,12 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         });
     }
 
+    /**
+     * Trata eventos de ação para os botões.
+     * Atualiza a kitnet se o botão "Atualizar" for clicado e fecha a página atual.
+     *
+     * @param e O evento de ação gerado.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == updateButton){
@@ -197,6 +213,11 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
             new KitnetsPage().setVisible(true);
         }
     }
+
+    /**
+     * Atualiza os detalhes da kitnet com os valores dos campos de entrada.
+     * Mostra uma mensagem de sucesso ou erro dependendo do resultado da atualização.
+     */
     public void updateKitnet(){
         String furniture = mobiliaField.getText().trim();
         String stateOfUse = estadoUsoField.getText().trim();
@@ -219,6 +240,11 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         }
     }
 
+    /**
+     * Busca os detalhes da kitnet a ser editada usando o UUID fornecido.
+     * Preenche os campos da interface com os dados da kitnet.
+     * Mostra uma mensagem de erro se a kitnet não for encontrada.
+     */
     public void searchKitnet(){
         kitnetEdit = kitnetController.searchKitnet(nKitnetUUID);
 

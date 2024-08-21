@@ -185,6 +185,22 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         }
     }
 
+    /**
+     * O método `saveKitnet` é responsável por salvar os dados de uma nova kitnet.
+     * Ele coleta informações dos campos de entrada da interface de usuário,
+     * cria um objeto `Kitnet`, e então utiliza o `KitnetController` para registrar a kitnet no sistema.
+     *
+     * O método realiza as seguintes ações:
+     *
+     * 1. Cria uma nova instância de `Kitnet`.
+     * 2. Define os atributos da kitnet usando os valores dos campos de entrada da interface.
+     * 3. Verifica se a kitnet já existe no sistema usando o método `kitnetExists` do `KitnetController`.
+     * 4. Se a kitnet não existir, tenta registrá-la usando o método `registerKitnet` do `KitnetController`.
+     *    - Se o registro for bem-sucedido, exibe uma mensagem de sucesso.
+     *    - Caso contrário, exibe uma mensagem de erro.
+     * 5. Se a kitnet já existir, exibe uma mensagem informando que a kitnet já está registrada.
+     *
+     */
     public void saveKitnet(){
 
         Kitnet kitnet = new Kitnet();
