@@ -82,16 +82,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         nameKitnetField.setForeground(Colors.TEXT_COLOR);
         nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        /*JLabel nKitnetLabel = new JLabel("N° Kitnet:");
-        nKitnetLabel.setBounds(410, 135, 400, 25);
-        nKitnetLabel.setForeground(Colors.TEXT_COLOR);
-        nKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        nKitnetField.setBounds(410, 170, 220, 25);
-        nKitnetField.setBackground(Colors.SECONDARY_COLOR);
-        nKitnetField.setForeground(Colors.TEXT_COLOR);
-        nKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));*/
-
         JLabel mobiliaLabel = new JLabel("Mobília:");
         mobiliaLabel.setBounds(640, 135, 400, 25);
         mobiliaLabel.setForeground(Colors.TEXT_COLOR);
@@ -117,20 +107,10 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        try {
-            MaskFormatter cepFormatter = new MaskFormatter("#####-###");
-            cepFormatter.setPlaceholderCharacter('_');
-            JFormattedTextField cepField = new JFormattedTextField(cepFormatter);
-            cepField.setBounds(410, 235, 220, 25);
-            cepField.setBackground(Colors.SECONDARY_COLOR);
-            cepField.setForeground(Colors.TEXT_COLOR);
-            cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-            add(cepLabel);
-            add(cepField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        cepField.setBounds(410, 235, 220, 25);
+        cepField.setBackground(Colors.SECONDARY_COLOR);
+        cepField.setForeground(Colors.TEXT_COLOR);
+        cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         JLabel estadoLabel = new JLabel("Estado:");
         estadoLabel.setBounds(410, 265, 400, 25);
