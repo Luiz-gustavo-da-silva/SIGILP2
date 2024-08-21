@@ -3,7 +3,8 @@ package br.ufrn.imd.Views;
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Constants.CountryStates;
 import br.ufrn.imd.Models.Kitnet;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
@@ -11,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 
 
@@ -72,63 +76,21 @@ public class RegisterForm extends MyFrame implements ActionListener {
         cpfLabel.setBounds(640, 200, 400, 25);
         cpfLabel.setForeground(Colors.TEXT_COLOR);
         cpfLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        try {
-            MaskFormatter cpfFormatter = new MaskFormatter("###.###.###-##"); //Formata o campo de CPF.
-            cpfFormatter.setPlaceholderCharacter('_'); //Enquanto não há nada digitado esse caractere é colocado.
-            JFormattedTextField cpfField = new JFormattedTextField(cpfFormatter);
-            cpfField.setBounds(640, 235, 220, 25);
-            cpfField.setBackground(Colors.SECONDARY_COLOR);
-            cpfField.setForeground(Colors.TEXT_COLOR);
-            cpfField.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-            add(cpfLabel);
-            add(cpfField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        add(cpfLabel);
 
         JLabel phoneLabel = new JLabel("Nº de telefone");
         phoneLabel.setBounds(410, 265, 400, 25);
         phoneLabel.setForeground(Colors.TEXT_COLOR);
         phoneLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        try{
-            MaskFormatter phoneFieldFormatter = new MaskFormatter("(##)#####-####"); //Formata o campo de data.
-            phoneFieldFormatter.setPlaceholderCharacter('_'); //Enquanto não há nada digitado esse caractere é colocado.
-            JFormattedTextField phoneField = new JFormattedTextField(phoneFieldFormatter);
-            phoneField.setBounds(410, 295, 220, 25);
-            phoneField.setBackground(Colors.SECONDARY_COLOR);
-            phoneField.setForeground(Colors.TEXT_COLOR);
-            phoneField.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-            add(phoneLabel);
-            add(phoneField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         add(phoneLabel);
-        add(phoneField);
 
         JLabel cepLabel = new JLabel("CEP");
         cepLabel.setBounds(640, 265, 400, 25);
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        try {
-            MaskFormatter cepFormatter = new MaskFormatter("#####-###");
-            cepFormatter.setPlaceholderCharacter('_');
-            JFormattedTextField cepField = new JFormattedTextField(cepFormatter);
-            cepField.setBounds(640, 295, 220, 25);
-            cepField.setBackground(Colors.SECONDARY_COLOR);
-            cepField.setForeground(Colors.TEXT_COLOR);
-            cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-            add(cepLabel);
-            add(cepField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        add(cepLabel);
 
         JLabel stateLabel = new JLabel("Estado:");
         stateLabel.setBounds(410, 325, 400, 25);
@@ -195,6 +157,38 @@ public class RegisterForm extends MyFrame implements ActionListener {
         add(passwordLabel);
         add(passwordField);
 
+        try {
+            MaskFormatter cpfFormatter = new MaskFormatter("###.###.###-##");
+            cpfFormatter.setPlaceholderCharacter('_');
+            cpfField = new JFormattedTextField(cpfFormatter);
+            cpfField.setBounds(640, 235, 220, 25);
+            cpfField.setBackground(Colors.SECONDARY_COLOR);
+            cpfField.setForeground(Colors.TEXT_COLOR);
+            cpfField.setFont(new Font("Dialog", Font.PLAIN, 18));
+            add(cpfField);
+
+            MaskFormatter phoneFieldFormatter = new MaskFormatter("(##)#####-####");
+            phoneFieldFormatter.setPlaceholderCharacter('_');
+            phoneField = new JFormattedTextField(phoneFieldFormatter);
+            phoneField.setBounds(410, 295, 220, 25);
+            phoneField.setBackground(Colors.SECONDARY_COLOR);
+            phoneField.setForeground(Colors.TEXT_COLOR);
+            phoneField.setFont(new Font("Dialog", Font.PLAIN, 18));
+            add(phoneField);
+
+            MaskFormatter cepFormatter = new MaskFormatter("#####-###");
+            cepFormatter.setPlaceholderCharacter('_');
+            cepField = new JFormattedTextField(cepFormatter);
+            cepField.setBounds(640, 295, 220, 25);
+            cepField.setBackground(Colors.SECONDARY_COLOR);
+            cepField.setForeground(Colors.TEXT_COLOR);
+            cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
+            add(cepField);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         registerButton.setFont(new Font("Dialog", Font.BOLD, 18));
         registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerButton.setBackground(Colors.TERTIARY_COLOR);
@@ -210,10 +204,54 @@ public class RegisterForm extends MyFrame implements ActionListener {
         });
     }
 
+    private JSONArray loadJsonFile() {
+        try (FileReader reader = new FileReader("src/main/java/br/ufrn/imd/Files/owners.json")) {
+            StringBuilder jsonContent = new StringBuilder();
+            int i;
+            while ((i = reader.read()) != -1) {
+                jsonContent.append((char) i);
+            }
+            return new JSONArray(jsonContent.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new JSONArray();
+        }
+    }
 
+    // Método para salvar o arquivo JSON
+    private void saveJsonFile(JSONArray jsonArray) {
+        try (FileWriter file = new FileWriter("src/main/java/br/ufrn/imd/Files/owners.json")) {
+            file.write(jsonArray.toString(4)); // Formatação com indentação
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para registrar um novo usuário
+    private void registerNewUser() {
+        JSONArray jsonArray = loadJsonFile();
+
+        JSONObject newUser = new JSONObject();
+        newUser.put("name", nameField.getText());
+        newUser.put("cpf", cpfField.getText().replace(".", "").replace("-", ""));
+        newUser.put("logged", false);
+        newUser.put("username", usernameField.getText());
+        newUser.put("telephone", phoneField.getText().replace("(", "").replace(")", "").replace("-", ""));
+        newUser.put("cep", cepField.getText().replace("-", ""));
+        newUser.put("address", addressField.getText());
+        newUser.put("email", mailField.getText());
+        newUser.put("password", new String(passwordField.getPassword()));
+        newUser.put("contracts", new JSONArray());
+        newUser.put("kitnets", new JSONArray());
+
+        jsonArray.put(newUser);
+
+        saveJsonFile(jsonArray);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registerButton){
+            registerNewUser();
             JOptionPane.showMessageDialog(RegisterForm.this, "Cadastro realizado com sucesso!");
             RegisterForm.this.dispose();
             new LoginForm().setVisible(true);
