@@ -18,7 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
+/**
+ * A classe `KitnetsPage` representa a página que exibe a lista de kitnets registradas.
+ * Esta classe herda de `MyFrame` e implementa a interface `ActionListener` para
+ * lidar com eventos de ação, como cliques de botões.
+ */
 public class KitnetsPage extends MyFrame implements ActionListener {
 
     private JTable table;
@@ -31,6 +35,12 @@ public class KitnetsPage extends MyFrame implements ActionListener {
 
     List<Kitnet> kitchenettes = new ArrayList<>();
 
+    private KitnetController kitnetController = new KitnetController();
+
+    /**
+     * Construtor da classe `KitnetsPage`.
+     * Inicializa a interface de usuário e configura a janela.
+     */
     public KitnetsPage() {
         super("Lista de Kitnets");
         setSize(1280, 680);
@@ -38,6 +48,10 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         addUIComponents();
     }
 
+    /**
+     * Adiciona e configura os componentes da interface de usuário.
+     * Cria os botões, a tabela de kitnets e configura as colunas de ação para editar e deletar.
+     */
     private void addUIComponents() {
         setLayout(null);
 
@@ -87,22 +101,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         });
 
         String[] columnNames = {"Nome da Kitnet", "Mobília", "Estado de uso", "Cep", "Estado", "Cidade", "Endereço", "Editar", "Deletar"};
-
-        Object[][] data = new Object[kitchenettes.size()][10];
-
-        for (int i = 0; i < kitchenettes.size(); i++) {
-            Kitnet kitnet = kitchenettes.get(i);
-
-            data[i][0] = kitnet.getNameKitnet();
-            data[i][1] = kitnet.getFurniture();
-            data[i][2] = kitnet.getStateOfUse();
-            data[i][3] = kitnet.getCep();
-            data[i][4] = kitnet.getState();
-            data[i][5] = kitnet.getCity();
-            data[i][6] = kitnet.getAddress();
-            data[i][7] = "Editar";
-            data[i][8] = "Deletar";
-        }
+        Object[][] data = kitnetController.convertListToArray(kitchenettes);
 
         tableModel = new DefaultTableModel(data, columnNames);
         contractTable = new JTable(tableModel) {
@@ -142,8 +141,12 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         }
     }
 
+    /**
+     * Recupera a lista de kitnets do controlador.
+     *
+     * @return Uma lista de objetos `Kitnet`.
+     */
     public List<Kitnet> recoverKitchenettes(){
-        KitnetController kitnetController = new KitnetController();
         return kitnetController.recoverKitchenettes();
     }
 
@@ -227,8 +230,13 @@ public class KitnetsPage extends MyFrame implements ActionListener {
     }
 
 
+    /**
+     * Remove uma kitnet da lista e do controlador.
+     *
+     * @param nKitnetUUID O UUID da kitnet a ser removida.
+     * @return `true` se a kitnet foi removida com sucesso, `false` caso contrário.
+     */
     public boolean removeKitnet(UUID nKitnetUUID){
-        KitnetController kitnetController = new KitnetController();
         return kitnetController.removeKitnet(nKitnetUUID);
     }
 }

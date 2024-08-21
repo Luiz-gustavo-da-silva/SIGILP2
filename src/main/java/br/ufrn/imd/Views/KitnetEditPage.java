@@ -1,6 +1,7 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Constants.CountryStates;
 import br.ufrn.imd.Controllers.KitnetController;
 import br.ufrn.imd.Enums.SystemMessage;
 import br.ufrn.imd.Models.Kitnet;
@@ -13,6 +14,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.UUID;
 
+/**
+ * Representa a página de edição de uma kitnet.
+ * Extende a classe {@link MyFrame} e implementa a interface {@link ActionListener}.
+ * Esta classe fornece uma interface gráfica para editar os detalhes de uma kitnet existente.
+ */
 public class KitnetEditPage extends MyFrame implements ActionListener {
 
     JButton updateButton = new JButton("Atualizar");
@@ -23,6 +29,9 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
     JTextField nameKitnetField = new JTextField();
+
+    private KitnetController kitnetController = new KitnetController();
+    JComboBox<String> stateComboBox = new JComboBox<>(CountryStates.states);
     
     UUID nKitnetUUID;
     Kitnet kitnetEdit = new Kitnet();
@@ -31,6 +40,11 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
 
     JButton kitnetsPageButton = new JButton("Kitnets");
 
+    /**
+     * Construtor da classe {@code KitnetEditPage}.
+     *
+     * @param nKitnetUUID O identificador único da kitnet a ser editada.
+     */
     public KitnetEditPage(UUID nKitnetUUID) {
         super("Editar Kitnet");
         setSize(1280, 680);
@@ -83,17 +97,27 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(loginLabel);
 
-        JLabel mobiliaLabel = new JLabel("Mobília:");
-        mobiliaLabel.setBounds(640, 135, 220, 25);
+        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:*");
+        nameKitnetLabel.setBounds(410, 135, 400, 25);
+        nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
+        nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        nameKitnetField.setBounds(410, 170, 220, 25);
+        nameKitnetField.setBackground(Colors.SECONDARY_COLOR);
+        nameKitnetField.setForeground(Colors.TEXT_COLOR);
+        nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
+
+        JLabel mobiliaLabel = new JLabel("Mobília:*");
+        mobiliaLabel.setBounds(640, 135, 400, 25);
         mobiliaLabel.setForeground(Colors.TEXT_COLOR);
         mobiliaLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        mobiliaField.setBounds(640, 175, 220, 25);
+        mobiliaField.setBounds(640, 170, 220, 25);
         mobiliaField.setBackground(Colors.SECONDARY_COLOR);
         mobiliaField.setForeground(Colors.TEXT_COLOR);
         mobiliaField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel estadoUsoLabel = new JLabel("Estado de Uso:");
+        JLabel estadoUsoLabel = new JLabel("Estado de Uso:*");
         estadoUsoLabel.setBounds(640, 200, 400, 25);
         estadoUsoLabel.setForeground(Colors.TEXT_COLOR);
         estadoUsoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -103,7 +127,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         estadoUsoField.setForeground(Colors.TEXT_COLOR);
         estadoUsoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel cepLabel = new JLabel("CEP:");
+        JLabel cepLabel = new JLabel("CEP:*");
         cepLabel.setBounds(410, 200, 220, 25);
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -113,45 +137,35 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         cepField.setForeground(Colors.TEXT_COLOR);
         cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel estadoLabel = new JLabel("Estado:");
-        estadoLabel.setBounds(640, 265, 400, 25);
+        JLabel estadoLabel = new JLabel("Estado:*");
+        estadoLabel.setBounds(410, 265, 400, 25);
         estadoLabel.setForeground(Colors.TEXT_COLOR);
         estadoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        estadoField.setBounds(640, 295, 220, 25);
-        estadoField.setBackground(Colors.SECONDARY_COLOR);
-        estadoField.setForeground(Colors.TEXT_COLOR);
-        estadoField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        stateComboBox.setBounds(410, 295, 220, 25);
+        stateComboBox.setBackground(Colors.SECONDARY_COLOR);
+        stateComboBox.setForeground(Colors.TEXT_COLOR);
+        stateComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        JLabel cidadeLabel = new JLabel("Cidade:");
-        cidadeLabel.setBounds(410, 265, 400, 25);
+        JLabel cidadeLabel = new JLabel("Cidade:*");
+        cidadeLabel.setBounds(640, 265, 400, 25);
         cidadeLabel.setForeground(Colors.TEXT_COLOR);
         cidadeLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cidadeField.setBounds(410, 295, 220, 25);
+        cidadeField.setBounds(640, 295, 220, 25);
         cidadeField.setBackground(Colors.SECONDARY_COLOR);
         cidadeField.setForeground(Colors.TEXT_COLOR);
         cidadeField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel enderecoLabel = new JLabel("Endereço:");
+        JLabel enderecoLabel = new JLabel("Endereço:*");
         enderecoLabel.setBounds(410, 330, 220, 25);
         enderecoLabel.setForeground(Colors.TEXT_COLOR);
         enderecoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        enderecoField.setBounds(410, 360, 220, 25);
+        enderecoField.setBounds(410, 360, 450, 25);
         enderecoField.setBackground(Colors.SECONDARY_COLOR);
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
-
-        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:");
-        nameKitnetLabel.setBounds(640, 330, 200, 25);
-        nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
-        nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        nameKitnetField.setBounds(640, 360, 220, 25);
-        nameKitnetField.setBackground(Colors.SECONDARY_COLOR);
-        nameKitnetField.setForeground(Colors.TEXT_COLOR);
-        nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         updateButton.setFont(new Font("Dialog", Font.BOLD, 18));
         updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -166,6 +180,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         add(cepLabel);
         add(cepField);
         add(estadoLabel);
+        add(stateComboBox);
         add(estadoField);
         add(cidadeLabel);
         add(cidadeField);
@@ -184,6 +199,12 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         });
     }
 
+    /**
+     * Trata eventos de ação para os botões.
+     * Atualiza a kitnet se o botão "Atualizar" for clicado e fecha a página atual.
+     *
+     * @param e O evento de ação gerado.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == updateButton){
@@ -193,11 +214,15 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         }
     }
 
+    /**
+     * Atualiza os detalhes da kitnet com os valores dos campos de entrada.
+     * Mostra uma mensagem de sucesso ou erro dependendo do resultado da atualização.
+     */
     public void updateKitnet(){
         String furniture = mobiliaField.getText().trim();
         String stateOfUse = estadoUsoField.getText().trim();
         String cep = cepField.getText().trim();
-        String state = estadoField.getText().trim();
+        String state = (String) stateComboBox.getSelectedItem();
         String city = cidadeField.getText().trim();
         String address = enderecoField.getText().trim();
         String nameKitnet = nameKitnetField.getText().trim();
@@ -205,8 +230,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         boolean success = false;
 
         Kitnet kitnet = new Kitnet(nKitnetUUID, furniture, stateOfUse, cep, state, city, address, nameKitnet);
-
-        KitnetController kitnetController = new KitnetController();
 
         success = kitnetController.editKitnet(kitnet);
 
@@ -217,18 +240,23 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         }
     }
 
+    /**
+     * Busca os detalhes da kitnet a ser editada usando o UUID fornecido.
+     * Preenche os campos da interface com os dados da kitnet.
+     * Mostra uma mensagem de erro se a kitnet não for encontrada.
+     */
     public void searchKitnet(){
-        KitnetController kitnetController = new KitnetController();
         kitnetEdit = kitnetController.searchKitnet(nKitnetUUID);
 
         if (kitnetEdit != null) {
             mobiliaField.setText(kitnetEdit.getFurniture());
             cepField.setText(kitnetEdit.getCep());
-            estadoField.setText(kitnetEdit.getState());
             estadoUsoField.setText(kitnetEdit.getStateOfUse());
             cidadeField.setText(kitnetEdit.getCity());
             enderecoField.setText(kitnetEdit.getAddress());
             nameKitnetField.setText(kitnetEdit.getNameKitnet());
+            String state = kitnetEdit.getState();
+            stateComboBox.setSelectedItem(state);
         } else {
             JOptionPane.showMessageDialog(this, SystemMessage.KITNET_NOT_FOUND.getMessage(), "Erro: ", JOptionPane.ERROR_MESSAGE);
         }

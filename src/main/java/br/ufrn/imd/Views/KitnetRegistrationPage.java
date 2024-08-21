@@ -24,7 +24,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JButton salvarButton = new JButton("Adicionar");
     JTextField mobiliaField = new JTextField();
     JTextField cepField = new JTextField();
-    JTextField estadoField = new JTextField();
     JComboBox<String> stateComboBox = new JComboBox<>(CountryStates.states);
     JTextField estadoUsoField = new JTextField();
     JTextField cidadeField = new JTextField();
@@ -72,7 +71,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(loginLabel);
 
-        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:");
+        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:*");
         nameKitnetLabel.setBounds(410, 135, 400, 25);
         nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
         nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -82,17 +81,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         nameKitnetField.setForeground(Colors.TEXT_COLOR);
         nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        /*JLabel nKitnetLabel = new JLabel("N° Kitnet:");
-        nKitnetLabel.setBounds(410, 135, 400, 25);
-        nKitnetLabel.setForeground(Colors.TEXT_COLOR);
-        nKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        nKitnetField.setBounds(410, 170, 220, 25);
-        nKitnetField.setBackground(Colors.SECONDARY_COLOR);
-        nKitnetField.setForeground(Colors.TEXT_COLOR);
-        nKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));*/
-
-        JLabel mobiliaLabel = new JLabel("Mobília:");
+        JLabel mobiliaLabel = new JLabel("Mobília:*");
         mobiliaLabel.setBounds(640, 135, 400, 25);
         mobiliaLabel.setForeground(Colors.TEXT_COLOR);
         mobiliaLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -102,7 +91,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         mobiliaField.setForeground(Colors.TEXT_COLOR);
         mobiliaField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel estadoUsoLabel = new JLabel("Estado de Uso:");
+        JLabel estadoUsoLabel = new JLabel("Estado de Uso:*");
         estadoUsoLabel.setBounds(640, 200, 400, 25);
         estadoUsoLabel.setForeground(Colors.TEXT_COLOR);
         estadoUsoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -112,27 +101,17 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         estadoUsoField.setForeground(Colors.TEXT_COLOR);
         estadoUsoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel cepLabel = new JLabel("CEP:");
+        JLabel cepLabel = new JLabel("CEP:*");
         cepLabel.setBounds(410, 200, 220, 25);
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        try {
-            MaskFormatter cepFormatter = new MaskFormatter("#####-###");
-            cepFormatter.setPlaceholderCharacter('_');
-            JFormattedTextField cepField = new JFormattedTextField(cepFormatter);
-            cepField.setBounds(410, 235, 220, 25);
-            cepField.setBackground(Colors.SECONDARY_COLOR);
-            cepField.setForeground(Colors.TEXT_COLOR);
-            cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
+        cepField.setBounds(410, 235, 220, 25);
+        cepField.setBackground(Colors.SECONDARY_COLOR);
+        cepField.setForeground(Colors.TEXT_COLOR);
+        cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-            add(cepLabel);
-            add(cepField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        JLabel estadoLabel = new JLabel("Estado:");
+        JLabel estadoLabel = new JLabel("Estado:*");
         estadoLabel.setBounds(410, 265, 400, 25);
         estadoLabel.setForeground(Colors.TEXT_COLOR);
         estadoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -142,7 +121,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         stateComboBox.setForeground(Colors.TEXT_COLOR);
         stateComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        JLabel cidadeLabel = new JLabel("Cidade:");
+        JLabel cidadeLabel = new JLabel("Cidade:*");
         cidadeLabel.setBounds(640, 265, 400, 25);
         cidadeLabel.setForeground(Colors.TEXT_COLOR);
         cidadeLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -152,7 +131,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         cidadeField.setForeground(Colors.TEXT_COLOR);
         cidadeField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel enderecoLabel = new JLabel("Endereço:");
+        JLabel enderecoLabel = new JLabel("Endereço:*");
         enderecoLabel.setBounds(410, 330, 200, 25);
         enderecoLabel.setForeground(Colors.TEXT_COLOR);
         enderecoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -206,6 +185,22 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         }
     }
 
+    /**
+     * O método `saveKitnet` é responsável por salvar os dados de uma nova kitnet.
+     * Ele coleta informações dos campos de entrada da interface de usuário,
+     * cria um objeto `Kitnet`, e então utiliza o `KitnetController` para registrar a kitnet no sistema.
+     *
+     * O método realiza as seguintes ações:
+     *
+     * 1. Cria uma nova instância de `Kitnet`.
+     * 2. Define os atributos da kitnet usando os valores dos campos de entrada da interface.
+     * 3. Verifica se a kitnet já existe no sistema usando o método `kitnetExists` do `KitnetController`.
+     * 4. Se a kitnet não existir, tenta registrá-la usando o método `registerKitnet` do `KitnetController`.
+     *    - Se o registro for bem-sucedido, exibe uma mensagem de sucesso.
+     *    - Caso contrário, exibe uma mensagem de erro.
+     * 5. Se a kitnet já existir, exibe uma mensagem informando que a kitnet já está registrada.
+     *
+     */
     public void saveKitnet(){
 
         Kitnet kitnet = new Kitnet();
