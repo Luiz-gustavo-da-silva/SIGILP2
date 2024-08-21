@@ -5,11 +5,14 @@ import br.ufrn.imd.Constants.CountryStates;
 import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+
 
 public class RegisterForm extends MyFrame implements ActionListener {
     JTextField usernameField = new JTextField();
@@ -70,24 +73,40 @@ public class RegisterForm extends MyFrame implements ActionListener {
         cpfLabel.setForeground(Colors.TEXT_COLOR);
         cpfLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cpfField.setBounds(640, 235, 220, 25);
-        cpfField.setBackground(Colors.SECONDARY_COLOR);
-        cpfField.setForeground(Colors.TEXT_COLOR);
-        cpfField.setFont(new Font("Dialog", Font.PLAIN, 18));
+        try {
+            MaskFormatter cpfFormatter = new MaskFormatter("###.###.###-##"); //Formata o campo de CPF.
+            cpfFormatter.setPlaceholderCharacter('_'); //Enquanto não há nada digitado esse caractere é colocado.
+            JFormattedTextField cpfField = new JFormattedTextField(cpfFormatter);
+            cpfField.setBounds(640, 235, 220, 25);
+            cpfField.setBackground(Colors.SECONDARY_COLOR);
+            cpfField.setForeground(Colors.TEXT_COLOR);
+            cpfField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        add(cpfLabel);
-        add(cpfField);
+            add(cpfLabel);
+            add(cpfField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         JLabel phoneLabel = new JLabel("Nº de telefone");
         phoneLabel.setBounds(410, 265, 400, 25);
         phoneLabel.setForeground(Colors.TEXT_COLOR);
         phoneLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        phoneField.setBounds(410, 295, 220, 25);
-        phoneField.setBackground(Colors.SECONDARY_COLOR);
-        phoneField.setForeground(Colors.TEXT_COLOR);
-        phoneField.setFont(new Font("Dialog", Font.PLAIN, 18));
+        try{
+            MaskFormatter phoneFieldFormatter = new MaskFormatter("(##)#####-####"); //Formata o campo de data.
+            phoneFieldFormatter.setPlaceholderCharacter('_'); //Enquanto não há nada digitado esse caractere é colocado.
+            JFormattedTextField phoneField = new JFormattedTextField(phoneFieldFormatter);
+            phoneField.setBounds(410, 295, 220, 25);
+            phoneField.setBackground(Colors.SECONDARY_COLOR);
+            phoneField.setForeground(Colors.TEXT_COLOR);
+            phoneField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
+            add(phoneLabel);
+            add(phoneField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         add(phoneLabel);
         add(phoneField);
 
@@ -96,13 +115,20 @@ public class RegisterForm extends MyFrame implements ActionListener {
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cepField.setBounds(640, 295, 220, 25);
-        cepField.setBackground(Colors.SECONDARY_COLOR);
-        cepField.setForeground(Colors.TEXT_COLOR);
-        cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
+        try {
+            MaskFormatter cepFormatter = new MaskFormatter("#####-###");
+            cepFormatter.setPlaceholderCharacter('_');
+            JFormattedTextField cepField = new JFormattedTextField(cepFormatter);
+            cepField.setBounds(640, 295, 220, 25);
+            cepField.setBackground(Colors.SECONDARY_COLOR);
+            cepField.setForeground(Colors.TEXT_COLOR);
+            cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        add(cepLabel);
-        add(cepField);
+            add(cepLabel);
+            add(cepField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         JLabel stateLabel = new JLabel("Estado:");
         stateLabel.setBounds(410, 325, 400, 25);

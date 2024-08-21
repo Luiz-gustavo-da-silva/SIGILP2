@@ -24,11 +24,11 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     JTextField enderecoField = new JTextField();
     JTextField nContratoField = new JTextField();
     JTextField nameKitnetField = new JTextField();
-    
+
     int nKitnet;
     Kitnet kitnetEdit = new Kitnet();
 
-    JButton exitButton = new JButton("Sair");
+    JButton goBackButton = new JButton("Voltar");
 
     JButton kitnetsPageButton = new JButton("Kitnets");
 
@@ -47,18 +47,18 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
      */
     private void addUIComponents() {
 
-        exitButton.setFont(new Font("Dialog", Font.BOLD, 14));
-        exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        exitButton.setBounds(1150, 10, 70, 30);
-        exitButton.setBackground(Colors.QUATERNARY_COLOR);
-        exitButton.setForeground(Colors.SECONDARY_COLOR);
-        add(exitButton);
-        exitButton.addActionListener(this);
-        exitButton.addMouseListener(new MouseAdapter() {
+        goBackButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        goBackButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        goBackButton.setBounds(1030, 10, 100, 30);
+        goBackButton.setBackground(Colors.QUATERNARY_COLOR);
+        goBackButton.setForeground(Colors.SECONDARY_COLOR);
+        add(goBackButton);
+        goBackButton.addActionListener(this);
+        goBackButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 KitnetEditPage.this.dispose();
-                new LoginForm().setVisible(true);
+                new KitnetsPage().setVisible(true);
             }
         });
 
@@ -277,4 +277,3 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         }
     }
 }
-
