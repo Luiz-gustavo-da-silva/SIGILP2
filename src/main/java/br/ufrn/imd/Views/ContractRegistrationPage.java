@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.ContractController;
+import br.ufrn.imd.Controllers.KitnetController;
 import br.ufrn.imd.Models.Kitnet;
 //import br.ufrn.imd.Controllers.KitnetController;
 
@@ -161,7 +162,7 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
     }
 
     public void searchKitchenettes(){
-        ContractController contractController = new ContractController();
-        listKitnet = contractController.searchKitchenettes();
+        KitnetController kitnetController = new KitnetController();
+        listKitnet = kitnetController.recoverKitchenettes();
     }
 }

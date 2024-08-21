@@ -1,6 +1,8 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Constants.CountryStates;
+import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +18,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
     JTextField cpfField = new JTextField();
     JTextField phoneField = new JTextField();
     JTextField cepField = new JTextField();
-    JTextField stateField = new JTextField();
+    JComboBox<String> stateComboBox = new JComboBox<>(CountryStates.states);
     JTextField cityField = new JTextField();
     JTextField addressField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
@@ -43,7 +45,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         nameField.setBounds(410, 165, 450, 25);
         nameField.setBackground(Colors.SECONDARY_COLOR);
         nameField.setForeground(Colors.TEXT_COLOR);
-        nameField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        nameField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(nameLabel);
         add(nameField);
@@ -57,7 +59,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         usernameField.setBounds(410, 235, 220, 25);
         usernameField.setBackground(Colors.SECONDARY_COLOR);
         usernameField.setForeground(Colors.TEXT_COLOR);
-        usernameField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        usernameField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(usernameLabel);
         add(usernameField);
@@ -71,7 +73,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         cpfField.setBounds(640, 235, 220, 25);
         cpfField.setBackground(Colors.SECONDARY_COLOR);
         cpfField.setForeground(Colors.TEXT_COLOR);
-        cpfField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        cpfField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(cpfLabel);
         add(cpfField);
@@ -84,7 +86,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         phoneField.setBounds(410, 295, 220, 25);
         phoneField.setBackground(Colors.SECONDARY_COLOR);
         phoneField.setForeground(Colors.TEXT_COLOR);
-        phoneField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        phoneField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(phoneLabel);
         add(phoneField);
@@ -97,7 +99,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         cepField.setBounds(640, 295, 220, 25);
         cepField.setBackground(Colors.SECONDARY_COLOR);
         cepField.setForeground(Colors.TEXT_COLOR);
-        cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(cepLabel);
         add(cepField);
@@ -107,13 +109,13 @@ public class RegisterForm extends MyFrame implements ActionListener {
         stateLabel.setForeground(Colors.TEXT_COLOR);
         stateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        stateField.setBounds(410, 355, 220, 25);
-        stateField.setBackground(Colors.SECONDARY_COLOR);
-        stateField.setForeground(Colors.TEXT_COLOR);
-        stateField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        stateComboBox.setBounds(410, 355, 220, 25);
+        stateComboBox.setBackground(Colors.SECONDARY_COLOR);
+        stateComboBox.setForeground(Colors.TEXT_COLOR);
+        stateComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(stateLabel);
-        add(stateField);
+        add(stateComboBox);
 
         JLabel cityLabel = new JLabel("Cidade");
         cityLabel.setBounds(640, 325, 400, 25);
@@ -123,7 +125,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         cityField.setBounds(640, 355, 220, 25);
         cityField.setBackground(Colors.SECONDARY_COLOR);
         cityField.setForeground(Colors.TEXT_COLOR);
-        cityField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        cityField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(cityLabel);
         add(cityField);
@@ -136,7 +138,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         addressField.setBounds(410, 415, 450, 25);
         addressField.setBackground(Colors.SECONDARY_COLOR);
         addressField.setForeground(Colors.TEXT_COLOR);
-        addressField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        addressField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(addressLabel);
         add(addressField);
@@ -149,7 +151,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         mailField.setBounds(410, (475), 450, 25);
         mailField.setBackground(Colors.SECONDARY_COLOR);
         mailField.setForeground(Colors.TEXT_COLOR);
-        mailField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        mailField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(mailLabel);
         add(mailField);
@@ -162,7 +164,7 @@ public class RegisterForm extends MyFrame implements ActionListener {
         passwordField.setBounds(410, 535, 450, 25);
         passwordField.setBackground(Colors.SECONDARY_COLOR);
         passwordField.setForeground(Colors.TEXT_COLOR);
-        passwordField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        passwordField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(passwordLabel);
         add(passwordField);

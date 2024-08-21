@@ -1,41 +1,40 @@
 package br.ufrn.imd.Controllers;
 
+import br.ufrn.imd.Dao.FileManager;
 import br.ufrn.imd.Models.Kitnet;
 
 import java.util.List;
 
 public class KitnetController {
 
+    FileManager fm = new FileManager();
+
     public boolean registerKitnet(Kitnet kitnet){
         if(validationKitnet(kitnet)){
-            return kitnet.registerKitnet(kitnet);
+            return fm.saveKitnet(kitnet);
         }
         return false;
     }
 
     public boolean kitnetExists(int nKitnet){
-        Kitnet kitnet = new Kitnet();
-        return kitnet.kitnetExists(nKitnet);
+        return fm.kitnetExists(nKitnet);
     }
 
     public List<Kitnet> recoverKitchenettes(){
-        Kitnet kitnet = new Kitnet();
-        return kitnet.recoverKitchenettes();
+        return fm.searchKitchenettes();
     }
 
     public boolean removeKitnet(int nKitnet){
-        Kitnet kitnet = new Kitnet();
-        return kitnet.removeKitnet(nKitnet);
+        return fm.removeKitnet(nKitnet, false);
     }
 
     public Kitnet searchKitnet(int nKitnet){
-        Kitnet kitnet = new Kitnet();
-        return kitnet.searchKitnet(nKitnet);
+        return fm.searchKitnet(nKitnet);
     }
 
-    public boolean editKitnet(Kitnet kit){
-        if (validationKitnet(kit)){
-            return kit.editKitnet(kit);
+    public boolean editKitnet(Kitnet kitnet){
+        if (validationKitnet(kitnet)){
+            return fm.editKitnet(kitnet);
         }
         return false;
     }

@@ -86,7 +86,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(loginLabel);
 
-        JLabel nKitnetLabel = new JLabel("N° Kitnet:");
+        /*JLabel nKitnetLabel = new JLabel("N° Kitnet:");
         nKitnetLabel.setBounds(410, 135, 400, 25);
         nKitnetLabel.setForeground(Colors.TEXT_COLOR);
         nKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -94,7 +94,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         nKitnetField.setBounds(410, 170, 220, 25);
         nKitnetField.setBackground(Colors.SECONDARY_COLOR);
         nKitnetField.setForeground(Colors.TEXT_COLOR);
-        nKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        nKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));*/
 
         JLabel mobiliaLabel = new JLabel("Mobília:");
         mobiliaLabel.setBounds(640, 135, 400, 25);
@@ -194,8 +194,8 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         salvarButton.setForeground(Colors.SECONDARY_COLOR);
         salvarButton.setBounds(500, 470, 250, 50);
 
-        add(nKitnetLabel);
-        add(nKitnetField);
+        /*add(nKitnetLabel);
+        add(nKitnetField);*/
         add(mobiliaLabel);
         add(mobiliaField);
         /*add(inquilinoAlocadoLabel);
