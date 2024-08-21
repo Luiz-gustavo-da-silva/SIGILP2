@@ -25,6 +25,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     JTextField enderecoField = new JTextField();
     JTextField nameKitnetField = new JTextField();
 
+    private KitnetController kitnetController = new KitnetController();
     JComboBox<String> stateComboBox = new JComboBox<>(CountryStates.states);
     
     UUID nKitnetUUID;
@@ -86,7 +87,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(loginLabel);
 
-        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:");
+        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:*");
         nameKitnetLabel.setBounds(410, 135, 400, 25);
         nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
         nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -96,7 +97,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         nameKitnetField.setForeground(Colors.TEXT_COLOR);
         nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel mobiliaLabel = new JLabel("Mobília:");
+        JLabel mobiliaLabel = new JLabel("Mobília:*");
         mobiliaLabel.setBounds(640, 135, 400, 25);
         mobiliaLabel.setForeground(Colors.TEXT_COLOR);
         mobiliaLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -106,7 +107,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         mobiliaField.setForeground(Colors.TEXT_COLOR);
         mobiliaField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel estadoUsoLabel = new JLabel("Estado de Uso:");
+        JLabel estadoUsoLabel = new JLabel("Estado de Uso:*");
         estadoUsoLabel.setBounds(640, 200, 400, 25);
         estadoUsoLabel.setForeground(Colors.TEXT_COLOR);
         estadoUsoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -116,7 +117,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         estadoUsoField.setForeground(Colors.TEXT_COLOR);
         estadoUsoField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel cepLabel = new JLabel("CEP:");
+        JLabel cepLabel = new JLabel("CEP:*");
         cepLabel.setBounds(410, 200, 220, 25);
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -126,7 +127,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         cepField.setForeground(Colors.TEXT_COLOR);
         cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel estadoLabel = new JLabel("Estado:");
+        JLabel estadoLabel = new JLabel("Estado:*");
         estadoLabel.setBounds(410, 265, 400, 25);
         estadoLabel.setForeground(Colors.TEXT_COLOR);
         estadoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -136,7 +137,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         stateComboBox.setForeground(Colors.TEXT_COLOR);
         stateComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        JLabel cidadeLabel = new JLabel("Cidade:");
+        JLabel cidadeLabel = new JLabel("Cidade:*");
         cidadeLabel.setBounds(640, 265, 400, 25);
         cidadeLabel.setForeground(Colors.TEXT_COLOR);
         cidadeLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -146,7 +147,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         cidadeField.setForeground(Colors.TEXT_COLOR);
         cidadeField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
-        JLabel enderecoLabel = new JLabel("Endereço:");
+        JLabel enderecoLabel = new JLabel("Endereço:*");
         enderecoLabel.setBounds(410, 330, 220, 25);
         enderecoLabel.setForeground(Colors.TEXT_COLOR);
         enderecoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -196,7 +197,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
             new KitnetsPage().setVisible(true);
         }
     }
-
     public void updateKitnet(){
         String furniture = mobiliaField.getText().trim();
         String stateOfUse = estadoUsoField.getText().trim();
@@ -210,8 +210,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
 
         Kitnet kitnet = new Kitnet(nKitnetUUID, furniture, stateOfUse, cep, state, city, address, nameKitnet);
 
-        KitnetController kitnetController = new KitnetController();
-
         success = kitnetController.editKitnet(kitnet);
 
         if(success){
@@ -222,7 +220,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     }
 
     public void searchKitnet(){
-        KitnetController kitnetController = new KitnetController();
         kitnetEdit = kitnetController.searchKitnet(nKitnetUUID);
 
         if (kitnetEdit != null) {

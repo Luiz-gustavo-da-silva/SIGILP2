@@ -41,10 +41,10 @@ public class KitnetController {
     }
 
     public boolean validationKitnet(Kitnet kitnet){
-        /*if (kitnet.furniture.length() > 0 && kitnet.stateOfUse.length() > 0 && isValidCep(kitnet.cep) && kitnet.state.length() > 0 && kitnet.city.length() > 0 && kitnet.address.length() > 0 && kitnet.nameKitnet.length() >= 0){*/
+        if (kitnet.getFurniture().length() > 0 && kitnet.getStateOfUse().length() > 0 && kitnet.getCep().length() > 0 && kitnet.getState().length() > 0 && kitnet.getCity().length() > 0 && kitnet.getAddress().length() > 0 && kitnet.getNameKitnet().length() > 0 && kitnet.getnKitnetUUID() != null){
             return true;
-        /*}
-        return false;*/
+        }
+        return false;
     }
 
     public static boolean isValidCep(String cep) {
