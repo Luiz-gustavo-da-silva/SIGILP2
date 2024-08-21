@@ -21,20 +21,11 @@ public class ContractController implements ControllerUtils<Contract> {
         }
     }
     public void saveContract(Contract contract)  {
-        List<Contract> contracts;
-        try {
-            Owner loggedOwner = fm.readOwnerLogged();
-            contracts = getAllContracts();
-            if (!contracts.contains(contract)) {
-                contracts.add(contract);
-            } else {
-                contracts.remove(contract);
-                contracts.add(contract);
-            }
-            fm.saveOwner(loggedOwner);
-        } catch (OwnerNotLoggedException | IOException e) {
-            throw new RuntimeException(e);
-        }
+        fm.saveContract(contract);
+    }
+
+    public boolean editContract(UUID nContract, Contract contract) throws IOException  {
+        return fm.editContract(nContract, contract);
     }
 
     public boolean deleteContract(UUID nContract) {
@@ -49,12 +40,12 @@ public class ContractController implements ControllerUtils<Contract> {
             for (int i = 0; i < contracts.size(); i++) {
                 Contract contract = contracts.get(i);
                 data[i][0] = contract.getTenantName();
-                data[i][1] = contract.getnKitnet();
+                data[i][1] = contract.getnKitnetUUID();
                 data[i][2] = dateFormat.format(contract.getStartDate());
                 data[i][3] = dateFormat.format(contract.getEndDate());
                 data[i][4] = contract.getRentAmount();
                 data[i][5] = contract.getAdjustment();
-                data[i][6] = contract.getStatus();
+                data[i][6] = contract.getStatus().getText();
                 data[i][7] = "Editar";
                 data[i][8] = "Deletar";
             }
