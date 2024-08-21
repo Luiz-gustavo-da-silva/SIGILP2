@@ -29,15 +29,11 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
     JTextField nameKitnetField = new JTextField();
-
     private KitnetController kitnetController = new KitnetController();
     JComboBox<String> stateComboBox = new JComboBox<>(CountryStates.states);
-    
     UUID nKitnetUUID;
     Kitnet kitnetEdit = new Kitnet();
-
     JButton goBackButton = new JButton("Voltar");
-
     JButton kitnetsPageButton = new JButton("Kitnets");
 
     /**
@@ -191,12 +187,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         add(updateButton);
 
         updateButton.addActionListener(this);
-        updateButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int a = 0;
-            }
-        });
     }
 
     /**

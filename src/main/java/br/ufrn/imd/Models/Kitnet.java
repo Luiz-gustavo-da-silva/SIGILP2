@@ -3,13 +3,13 @@ package br.ufrn.imd.Models;
 import java.util.UUID;
 
 public class Kitnet {
-    public String furniture;
-    public String stateOfUse;
-    public String cep;
-    public String state;
-    public String city;
-    public String address;
-    public String nameKitnet;
+    private String furniture;
+    private String stateOfUse;
+    private String cep;
+    private String state;
+    private String city;
+    private String address;
+    private String nameKitnet;
     private UUID nKitnetUUID = UUID.randomUUID();
 
     public Kitnet(UUID nKitnetUUID, String furniture, String stateOfUse, String cep, String state, String city, String address, String nameKitnet) {
