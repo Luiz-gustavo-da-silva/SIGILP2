@@ -25,6 +25,9 @@ public class ContractsPage extends MyFrame implements ActionListener {
     JTable contractTable;
     DefaultTableModel tableModel;
 
+    ContractController cc = new ContractController();
+    List<Contract> contracts = cc.getAllContracts();
+
     public ContractsPage() {
         super("Página de Gestão de Contratos");
         setSize(1280, 680);
@@ -50,7 +53,7 @@ public class ContractsPage extends MyFrame implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ContractsPage.this.dispose();
-                //new KitnetsPage().setVisible(true);
+                new KitnetsPage().setVisible(true);
             }
         });
 
@@ -65,7 +68,7 @@ public class ContractsPage extends MyFrame implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ContractsPage.this.dispose();
-                //new ContractRegistrationPage().setVisible(true);
+                new ContractRegistrationPage().setVisible(true);
             }
         });
 
@@ -88,13 +91,7 @@ public class ContractsPage extends MyFrame implements ActionListener {
                 "Vencimento", "Aluguel",
                 "Reajuste", "Status", "Editar", "Deletar"};
 
-        ContractController cc = new ContractController();
-        List<Contract> contracts;
-        try {
-            contracts = cc.getAllContracts();
-        } catch (OwnerNotLoggedException | IOException e) {
-            throw new RuntimeException(e);
-        }
+
         Object[][] data = cc.convertListToArray(contracts);
 
         tableModel = new DefaultTableModel(data, columnNames);
@@ -165,13 +162,6 @@ public class ContractsPage extends MyFrame implements ActionListener {
 
         public ButtonEditor(JCheckBox checkBox, String label) {
             super(checkBox);
-            ContractController cc = new ContractController();
-            List<Contract> contracts;
-            try {
-                contracts = cc.getAllContracts();
-            } catch (OwnerNotLoggedException | IOException e) {
-                throw new RuntimeException(e);
-            }
             this.label = label;
             button = new JButton(label);
             button.setOpaque(true);
@@ -181,8 +171,16 @@ public class ContractsPage extends MyFrame implements ActionListener {
                 if (label.equals("Editar")) {
                     JOptionPane.showMessageDialog(button, "Redirecting to Edit: " + row);
                 } else if (label.equals("Deletar")) {
-                    cc.deleteContract(contracts.get(row));
-                    JOptionPane.showMessageDialog(button, "Contrato de ID nº " + contracts.get(row).getnContract() + " deletado com sucesso.");
+                    boolean res = cc.deleteContract(contracts.get(row).getnContract());
+                    if(res) {
+                        JOptionPane.showMessageDialog(button, "Contrato de ID nº " + contracts.get(row).getnContract() + " deletado com sucesso.");
+                        contracts.remove(row);
+                        tableModel.removeRow(row);
+                        contractTable.revalidate();
+                        contractTable.repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(button, "Erro ao deletar contrato.");
+                    }
 
                 }
             });

@@ -3,6 +3,7 @@ package br.ufrn.imd.Dao;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import br.ufrn.imd.Exceptions.OwnerNotLoggedException;
 import br.ufrn.imd.Models.Contract;
@@ -310,6 +311,22 @@ public class FileManager {
         } catch (IOException | OwnerNotLoggedException e) {
             System.out.println("Erro ao extrair lista de kitnets");
             e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public boolean deleteContract(UUID nContract) {
+        boolean removed = false;
+        try {
+            Owner owner = readOwnerLogged();
+            removed = owner.getContracts().removeIf(c -> c.getnContract().compareTo(nContract) == 0);
+            if (removed) {
+                saveOwner(owner);
+                return true;
+            }
+            return false;
+        } catch (OwnerNotLoggedException | IOException e) {
             throw new RuntimeException(e);
         }
     }
