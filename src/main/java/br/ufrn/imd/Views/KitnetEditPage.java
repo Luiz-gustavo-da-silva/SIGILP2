@@ -131,11 +131,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         estadoLabel.setForeground(Colors.TEXT_COLOR);
         estadoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        /*estadoField.setBounds(640, 295, 220, 25);
-        estadoField.setBackground(Colors.SECONDARY_COLOR);
-        estadoField.setForeground(Colors.TEXT_COLOR);
-        estadoField.setFont(new Font("Dialog", Font.PLAIN, 24));*/
-
         stateComboBox.setBounds(410, 295, 220, 25);
         stateComboBox.setBackground(Colors.SECONDARY_COLOR);
         stateComboBox.setForeground(Colors.TEXT_COLOR);
@@ -233,7 +228,6 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         if (kitnetEdit != null) {
             mobiliaField.setText(kitnetEdit.getFurniture());
             cepField.setText(kitnetEdit.getCep());
-            /*estadoField.setText(kitnetEdit.getState());*/
             estadoUsoField.setText(kitnetEdit.getStateOfUse());
             cidadeField.setText(kitnetEdit.getCity());
             enderecoField.setText(kitnetEdit.getAddress());

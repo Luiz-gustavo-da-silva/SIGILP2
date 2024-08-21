@@ -24,7 +24,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JButton salvarButton = new JButton("Adicionar");
     JTextField mobiliaField = new JTextField();
     JTextField cepField = new JTextField();
-    JTextField estadoField = new JTextField();
     JComboBox<String> stateComboBox = new JComboBox<>(CountryStates.states);
     JTextField estadoUsoField = new JTextField();
     JTextField cidadeField = new JTextField();
