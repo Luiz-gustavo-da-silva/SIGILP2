@@ -1,21 +1,22 @@
-//package br.ufrn.imd;
-//
-//import br.ufrn.imd.Views.ContractsPage;
-//
-//import javax.swing.*;
-//
-//public class Main {
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable(){
-//            @Override
-//            public void run(){
-//                new LoginPage().setVisible(true);
-//            }
-//        });
-//    }
-//}
-
 package br.ufrn.imd;
+
+import br.ufrn.imd.Views.ContractsPage;
+
+import javax.swing.*;
+import br.ufrn.imd.Views.LoginForm;
+
+public class Main {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                new LoginForm().setVisible(true);
+            }
+        });
+    }
+}
+
+/*package br.ufrn.imd;
 
 import br.ufrn.imd.Dao.FileManager;
 import br.ufrn.imd.Enums.FilePath;
@@ -66,4 +67,4 @@ public class Main {
             e.printStackTrace();
         }
     }
-}
+}*/
