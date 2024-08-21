@@ -87,22 +87,22 @@ public class KitnetsPage extends MyFrame implements ActionListener {
             }
         });
 
-        String[] columnNames = {"N° Kitnet", "Nome da Kitnet", "Mobília", "Estado de uso", "Cep", "Estado", "Cidade", "Endereço", "Editar", "Deletar"};
+        String[] columnNames = {"Nome da Kitnet", "Mobília", "Estado de uso", "Cep", "Estado", "Cidade", "Endereço", "Editar", "Deletar"};
 
         Object[][] data = new Object[kitchenettes.size()][10];
 
         for (int i = 0; i < kitchenettes.size(); i++) {
             Kitnet kitnet = kitchenettes.get(i);
-            data[i][0] = kitnet.getNKitnet();
-            data[i][1] = kitnet.getNameKitnet();
-            data[i][2] = kitnet.getFurniture();
-            data[i][3] = kitnet.getStateOfUse();
-            data[i][4] = kitnet.getCep();
-            data[i][5] = kitnet.getState();
-            data[i][6] = kitnet.getCity();
-            data[i][7] = kitnet.getAddress();
-            data[i][8] = "Editar";
-            data[i][9] = "Deletar";
+
+            data[i][0] = kitnet.getNameKitnet();
+            data[i][1] = kitnet.getFurniture();
+            data[i][2] = kitnet.getStateOfUse();
+            data[i][3] = kitnet.getCep();
+            data[i][4] = kitnet.getState();
+            data[i][5] = kitnet.getCity();
+            data[i][6] = kitnet.getAddress();
+            data[i][7] = "Editar";
+            data[i][8] = "Deletar";
         }
 
         tableModel = new DefaultTableModel(data, columnNames);
@@ -119,11 +119,11 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         contractTable.getTableHeader().setBackground(Colors.SECONDARY_COLOR);
         contractTable.getTableHeader().setFont(new Font("Dialog", Font.BOLD, 14));
 
-        TableColumn editColumn = contractTable.getColumnModel().getColumn(8);
+        TableColumn editColumn = contractTable.getColumnModel().getColumn(7);
         editColumn.setCellRenderer(new ButtonRenderer("Editar"));
         editColumn.setCellEditor(new ButtonAction(new JCheckBox(), "Editar"));
 
-        TableColumn deleteColumn = contractTable.getColumnModel().getColumn(9);
+        TableColumn deleteColumn = contractTable.getColumnModel().getColumn(8);
         deleteColumn.setCellRenderer(new ButtonRenderer("Deletar"));
         deleteColumn.setCellEditor(new ButtonAction(new JCheckBox(), "Deletar"));
 
