@@ -4,9 +4,10 @@ import br.ufrn.imd.Dao.FileManager;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Contract {
-    private int nContract;
+    private UUID nContract;
     private String tenantName;
     private String tenantEmail;
     private String tenantPhoneNumber;
@@ -17,8 +18,8 @@ public class Contract {
     private double adjustment;
     private String status;
 
-    public Contract(int nContract, String tenantName, String tenantEmail, String tenantPhoneNumber, int nKitnet, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
-        this.nContract = nContract;
+    public Contract(String tenantName, String tenantEmail, String tenantPhoneNumber, int nKitnet, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
+        this.nContract = UUID.randomUUID();
         this.tenantName = tenantName;
         this.tenantEmail = tenantEmail;
         this.tenantPhoneNumber = tenantPhoneNumber;
@@ -30,9 +31,7 @@ public class Contract {
         this.status = status;
     }
 
-    public Contract(){}
-
-    public int getnContract() {
+    public UUID getnContract() {
         return nContract;
     }
 
@@ -70,10 +69,6 @@ public class Contract {
 
     public String getStatus() {
         return status;
-    }
-
-    public void setnContract(int nContract) {
-        this.nContract = nContract;
     }
 
     public void setTenantName(String tenantName) {
