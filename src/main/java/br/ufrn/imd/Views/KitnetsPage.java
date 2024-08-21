@@ -15,7 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.UUID;
 
 
 public class KitnetsPage extends MyFrame implements ActionListener {
@@ -194,7 +194,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
                     new KitnetEditPage(kitchenettes.get(row).getNKitnet()).setVisible(true);
 
                 } else if (label.equals("Deletar")) {
-                    boolean res = removeKitnet(kitchenettes.get(row).getNKitnet());
+                    boolean res = removeKitnet(kitchenettes.get(row).getnKitnetUUID());
                     if (res) {
                         JOptionPane.showMessageDialog(button, "Kitnet removida com sucesso!");
                         kitchenettes.remove(row);
@@ -228,7 +228,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
     }
 
 
-    public boolean removeKitnet(int nKitnet){
+    public boolean removeKitnet(UUID nKitnet){
         KitnetController kitnetController = new KitnetController();
         return kitnetController.removeKitnet(nKitnet);
     }

@@ -224,13 +224,13 @@ public class FileManager {
      * @return `true` se a kitnet foi removida com sucesso; `false` caso contrário.
      * @throws RuntimeException Se ocorrer um erro de leitura ou gravação dos dados do proprietário logado.
      */
-    public boolean removeKitnet(int nKitnet) {
+    public boolean removeKitnet(UUID nKitnet) {
 
         boolean removed = false;
         try {
             Owner owners = readOwnerLogged();
 
-            removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet);
+            removed = owners.getKitnets().removeIf(k -> k.getnKitnetUUID().compareTo(nKitnet) == 0);
 
             if (removed) {
                 saveOwner(owners);
@@ -283,7 +283,7 @@ public class FileManager {
      * @return `true` se a kitnet foi editada e salva com sucesso; `false` caso contrário.
      */
     public boolean editKitnet(Kitnet kitnet){
-        if(removeKitnet(kitnet.getNKitnet())){
+        if(removeKitnet(kitnet.getnKitnetUUID())){
             if (saveKitnet(kitnet)){
                 return true;
             }else{

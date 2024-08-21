@@ -25,7 +25,7 @@ public class KitnetController {
         return fm.searchKitchenettes();
     }
 
-    public boolean removeKitnet(int nKitnet){
+    public boolean removeKitnet(UUID nKitnet){
         return fm.removeKitnet(nKitnet);
     }
 
