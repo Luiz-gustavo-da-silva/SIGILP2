@@ -7,6 +7,7 @@ import com.sun.tools.jconsole.JConsoleContext;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Kitnet {
     public int nKitnet;
@@ -17,6 +18,7 @@ public class Kitnet {
     public String city;
     public String address;
     public String nameKitnet;
+    private UUID nKitnetUUID = UUID.randomUUID();;
 
     public Kitnet(int nKitnet, String furniture, String stateOfUse, String cep, String state, String city, String address, String nameKitnet) {
         this.nKitnet = nKitnet;
@@ -93,6 +95,14 @@ public class Kitnet {
 
     public void setNameKitnet(String nameKitnet) {
         this.nameKitnet = nameKitnet;
+    }
+
+    public UUID getnKitnetUUID() {
+        return nKitnetUUID;
+    }
+
+    public void setnKitnetUUID(UUID nKitnetUUID) {
+        this.nKitnetUUID = nKitnetUUID;
     }
 
     @Override

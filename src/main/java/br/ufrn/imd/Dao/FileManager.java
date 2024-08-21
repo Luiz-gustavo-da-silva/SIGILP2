@@ -3,6 +3,7 @@ package br.ufrn.imd.Dao;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import br.ufrn.imd.Exceptions.OwnerNotLoggedException;
 import br.ufrn.imd.Models.Contract;
@@ -196,13 +197,13 @@ public class FileManager {
      * @return `true` se a kitnet com o número especificado existir; `false` caso contrário.
      * @throws RuntimeException Se ocorrer um erro de leitura dos dados do proprietário logado.
      */
-    public boolean kitnetExists(int nKitnet){
+    public boolean kitnetExists(UUID nKitnet){
         Owner owners = new Owner();
 
         try {
             owners = readOwnerLogged();
             for(Kitnet k: owners.getKitnets()){
-                if(k.getNKitnet() == nKitnet){
+                if(k.getnKitnetUUID().compareTo(nKitnet) == 0){
                     return true;
                 }
             }

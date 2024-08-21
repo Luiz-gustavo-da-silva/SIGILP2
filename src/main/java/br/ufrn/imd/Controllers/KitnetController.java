@@ -4,6 +4,7 @@ import br.ufrn.imd.Dao.FileManager;
 import br.ufrn.imd.Models.Kitnet;
 
 import java.util.List;
+import java.util.UUID;
 
 public class KitnetController {
 
@@ -16,7 +17,7 @@ public class KitnetController {
         return false;
     }
 
-    public boolean kitnetExists(int nKitnet){
+    public boolean kitnetExists(UUID nKitnet){
         return fm.kitnetExists(nKitnet);
     }
 
@@ -40,10 +41,10 @@ public class KitnetController {
     }
 
     public boolean validationKitnet(Kitnet kitnet){
-        if (kitnet.furniture.length() > 0 && kitnet.stateOfUse.length() > 0 && isValidCep(kitnet.cep) && kitnet.state.length() > 0 && kitnet.city.length() > 0 && kitnet.address.length() > 0 && kitnet.nameKitnet.length() >= 0){
+        /*if (kitnet.furniture.length() > 0 && kitnet.stateOfUse.length() > 0 && isValidCep(kitnet.cep) && kitnet.state.length() > 0 && kitnet.city.length() > 0 && kitnet.address.length() > 0 && kitnet.nameKitnet.length() >= 0){*/
             return true;
-        }
-        return false;
+        /*}
+        return false;*/
     }
 
     public static boolean isValidCep(String cep) {

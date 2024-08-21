@@ -213,7 +213,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
 
         KitnetController kitnetController = new KitnetController();
 
-        kitnetExists = kitnetController.kitnetExists(kitnet.nKitnet);
+        kitnetExists = kitnetController.kitnetExists(kitnet.getnKitnetUUID());
 
         if(!kitnetExists){
             success = kitnetController.registerKitnet(kitnet);
