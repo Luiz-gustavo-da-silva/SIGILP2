@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.UUID;
 
 public class KitnetEditPage extends MyFrame implements ActionListener {
 
@@ -22,14 +23,14 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     JTextField enderecoField = new JTextField();
     JTextField nameKitnetField = new JTextField();
     
-    int nKitnet;
+    UUID nKitnet;
     Kitnet kitnetEdit = new Kitnet();
 
     JButton exitButton = new JButton("Sair");
 
     JButton kitnetsPageButton = new JButton("Kitnets");
 
-    public KitnetEditPage(int nKitnet) {
+    public KitnetEditPage(UUID nKitnet) {
         super("Editar Kitnet");
         setSize(1280, 680);
         this.nKitnet = nKitnet;
@@ -199,9 +200,10 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
         String city = cidadeField.getText().trim();
         String address = enderecoField.getText().trim();
         String nameKitnet = nameKitnetField.getText().trim();
+        UUID nKitnetUUID = kitnetEdit.getnKitnetUUID();
         boolean success = false;
 
-        Kitnet kitnet = new Kitnet(nKitnet, furniture, stateOfUse, cep, state, city, address, nameKitnet);
+        Kitnet kitnet = new Kitnet(nKitnetUUID, furniture, stateOfUse, cep, state, city, address, nameKitnet);
 
         KitnetController kitnetController = new KitnetController();
 

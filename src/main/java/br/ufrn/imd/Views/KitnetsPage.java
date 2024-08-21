@@ -191,7 +191,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
                 int row = contractTable.getSelectedRow();
                 if (label.equals("Editar")) {
                     KitnetsPage.this.dispose();
-                    new KitnetEditPage(kitchenettes.get(row).getNKitnet()).setVisible(true);
+                    new KitnetEditPage(kitchenettes.get(row).getnKitnetUUID()).setVisible(true);
 
                 } else if (label.equals("Deletar")) {
                     boolean res = removeKitnet(kitchenettes.get(row).getnKitnetUUID());

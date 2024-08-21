@@ -256,13 +256,13 @@ public class FileManager {
      *         `null` se a kitnet não for encontrada.
      * @throws RuntimeException Se ocorrer um erro de leitura do proprietário logado.
      */
-    public Kitnet searchKitnet(int nKitnet){
+    public Kitnet searchKitnet(UUID nKitnet){
         Owner owners = new Owner();
 
         try {
             owners = readOwnerLogged();
             for(Kitnet k: owners.getKitnets()){
-                if(k.getNKitnet() == nKitnet){
+                if(k.getnKitnetUUID().compareTo(nKitnet) == 0){
                     return k;
                 }
             }

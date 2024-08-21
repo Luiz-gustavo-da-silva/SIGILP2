@@ -29,7 +29,7 @@ public class KitnetController {
         return fm.removeKitnet(nKitnet);
     }
 
-    public Kitnet searchKitnet(int nKitnet){
+    public Kitnet searchKitnet(UUID nKitnet){
         return fm.searchKitnet(nKitnet);
     }
 

@@ -13,8 +13,8 @@ public class Kitnet {
     public String nameKitnet;
     private UUID nKitnetUUID = UUID.randomUUID();;
 
-    public Kitnet(int nKitnet, String furniture, String stateOfUse, String cep, String state, String city, String address, String nameKitnet) {
-        this.nKitnet = nKitnet;
+    public Kitnet(UUID nKitnet, String furniture, String stateOfUse, String cep, String state, String city, String address, String nameKitnet) {
+        this.nKitnetUUID = nKitnet;
         this.furniture = furniture;
         this.stateOfUse = stateOfUse;
         this.cep = cep;
