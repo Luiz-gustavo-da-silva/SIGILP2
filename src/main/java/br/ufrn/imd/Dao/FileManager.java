@@ -157,53 +157,23 @@ public class FileManager {
         return true;
     }
 
-    /*public int attachesKitnetContract(int nContract, int nKitnet){
-        Owner owners = new Owner();
-        try {
-            owners = readOwnerLogged();
-
-            if(nContract == -1){
-                return 4;
-            }
-            for(Contract c: owners.getContracts()){
-                if(c.getnContract() == nContract){
-                    if(c.getnKitnet() == nKitnet){
-                        return 1;
-                    }else if(c.getnKitnet() != nKitnet && c.getnKitnet() != -1){
-                        c.setnKitnet(nKitnet);
-                        saveOwner(owners);
-                        return 2;
-                    }else if(c.getnKitnet() == -1){
-                        c.setnKitnet(nKitnet);
-                        saveOwner(owners);
-                        return 3;
-                    }
-                }
-            }
-            return 5;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
-
     /**
      * Verifica se uma kitnet específica existe na lista de kitnets associadas ao proprietário logado.
      *
      * Este método percorre a lista de kitnets do proprietário logado para verificar se uma kitnet
      * com o número especificado (`nKitnet`) está presente. Se encontrar, retorna `true`; caso contrário, retorna `false`.
      *
-     * @param nKitnet O número da kitnet a ser verificado.
+     * @param nKitnetUUID O número da kitnet a ser verificado.
      * @return `true` se a kitnet com o número especificado existir; `false` caso contrário.
      * @throws RuntimeException Se ocorrer um erro de leitura dos dados do proprietário logado.
      */
-    public boolean kitnetExists(UUID nKitnet){
+    public boolean kitnetExists(UUID nKitnetUUID){
         Owner owners = new Owner();
 
         try {
             owners = readOwnerLogged();
             for(Kitnet k: owners.getKitnets()){
-                if(k.getnKitnetUUID().compareTo(nKitnet) == 0){
+                if(k.getnKitnetUUID().compareTo(nKitnetUUID) == 0){
                     return true;
                 }
             }
@@ -220,17 +190,17 @@ public class FileManager {
      * ele removerá a kitnet independentemente do número do contrato ou apenas removerá aquelas
      * que não têm um contrato associado (`nContract == -1`). Após a remoção, as alterações são salvas.
      *
-     * @param nKitnet O número da kitnet a ser removida.
+     * @param nKitnetUUID O número da kitnet a ser removida.
      * @return `true` se a kitnet foi removida com sucesso; `false` caso contrário.
      * @throws RuntimeException Se ocorrer um erro de leitura ou gravação dos dados do proprietário logado.
      */
-    public boolean removeKitnet(UUID nKitnet) {
+    public boolean removeKitnet(UUID nKitnetUUID) {
 
         boolean removed = false;
         try {
             Owner owners = readOwnerLogged();
 
-            removed = owners.getKitnets().removeIf(k -> k.getnKitnetUUID().compareTo(nKitnet) == 0);
+            removed = owners.getKitnets().removeIf(k -> k.getnKitnetUUID().compareTo(nKitnetUUID) == 0);
 
             if (removed) {
                 saveOwner(owners);
@@ -251,18 +221,18 @@ public class FileManager {
      * associadas a esse proprietário para encontrar a kitnet correspondente ao número fornecido.
      * Se a kitnet for encontrada, ela é retornada; caso contrário, o método retorna `null`.
      *
-     * @param nKitnet O número da kitnet a ser buscado.
+     * @param nKitnetUUID O número da kitnet a ser buscado.
      * @return A instância da classe `Kitnet` correspondente ao número da kitnet, se encontrada;
      *         `null` se a kitnet não for encontrada.
      * @throws RuntimeException Se ocorrer um erro de leitura do proprietário logado.
      */
-    public Kitnet searchKitnet(UUID nKitnet){
+    public Kitnet searchKitnet(UUID nKitnetUUID){
         Owner owners = new Owner();
 
         try {
             owners = readOwnerLogged();
             for(Kitnet k: owners.getKitnets()){
-                if(k.getnKitnetUUID().compareTo(nKitnet) == 0){
+                if(k.getnKitnetUUID().compareTo(nKitnetUUID) == 0){
                     return k;
                 }
             }

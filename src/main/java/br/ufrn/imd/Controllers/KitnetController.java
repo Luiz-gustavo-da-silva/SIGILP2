@@ -17,20 +17,20 @@ public class KitnetController {
         return false;
     }
 
-    public boolean kitnetExists(UUID nKitnet){
-        return fm.kitnetExists(nKitnet);
+    public boolean kitnetExists(UUID nKitnetUUID){
+        return fm.kitnetExists(nKitnetUUID);
     }
 
     public List<Kitnet> recoverKitchenettes(){
         return fm.searchKitchenettes();
     }
 
-    public boolean removeKitnet(UUID nKitnet){
-        return fm.removeKitnet(nKitnet);
+    public boolean removeKitnet(UUID nKitnetUUID){
+        return fm.removeKitnet(nKitnetUUID);
     }
 
-    public Kitnet searchKitnet(UUID nKitnet){
-        return fm.searchKitnet(nKitnet);
+    public Kitnet searchKitnet(UUID nKitnetUUID){
+        return fm.searchKitnet(nKitnetUUID);
     }
 
     public boolean editKitnet(Kitnet kitnet){

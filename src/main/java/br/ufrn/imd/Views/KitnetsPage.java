@@ -24,9 +24,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
 
     JButton exitButton = new JButton("Sair");
     JButton addKitnet = new JButton("+ Kitnet");
-
     JButton contractButton = new JButton("Contratos");
-
     JTable contractTable;
     DefaultTableModel tableModel;
 
@@ -228,8 +226,8 @@ public class KitnetsPage extends MyFrame implements ActionListener {
     }
 
 
-    public boolean removeKitnet(UUID nKitnet){
+    public boolean removeKitnet(UUID nKitnetUUID){
         KitnetController kitnetController = new KitnetController();
-        return kitnetController.removeKitnet(nKitnet);
+        return kitnetController.removeKitnet(nKitnetUUID);
     }
 }

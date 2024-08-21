@@ -3,7 +3,6 @@ package br.ufrn.imd.Models;
 import java.util.UUID;
 
 public class Kitnet {
-    public int nKitnet;
     public String furniture;
     public String stateOfUse;
     public String cep;
@@ -11,10 +10,10 @@ public class Kitnet {
     public String city;
     public String address;
     public String nameKitnet;
-    private UUID nKitnetUUID = UUID.randomUUID();;
+    private UUID nKitnetUUID = UUID.randomUUID();
 
-    public Kitnet(UUID nKitnet, String furniture, String stateOfUse, String cep, String state, String city, String address, String nameKitnet) {
-        this.nKitnetUUID = nKitnet;
+    public Kitnet(UUID nKitnetUUID, String furniture, String stateOfUse, String cep, String state, String city, String address, String nameKitnet) {
+        this.nKitnetUUID = nKitnetUUID;
         this.furniture = furniture;
         this.stateOfUse = stateOfUse;
         this.cep = cep;
@@ -25,14 +24,6 @@ public class Kitnet {
     }
 
     public Kitnet(){}
-
-    public int getNKitnet() {
-        return nKitnet;
-    }
-
-    public void setNKitnet(int nKitnet) {
-        this.nKitnet = nKitnet;
-    }
 
     public String getFurniture() {
         return furniture;
@@ -100,7 +91,7 @@ public class Kitnet {
 
     @Override
     public String toString() {
-        return "nKitnet:" + nKitnet +
+        return "nKitnetUUID:" + nKitnetUUID +
                 ", furniture:" + furniture +
                 ", stateOfUse:" + stateOfUse +
                 ", cep:" + cep +

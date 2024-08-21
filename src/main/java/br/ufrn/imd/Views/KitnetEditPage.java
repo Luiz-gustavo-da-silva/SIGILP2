@@ -23,17 +23,17 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
     JTextField enderecoField = new JTextField();
     JTextField nameKitnetField = new JTextField();
     
-    UUID nKitnet;
+    UUID nKitnetUUID;
     Kitnet kitnetEdit = new Kitnet();
 
     JButton exitButton = new JButton("Sair");
 
     JButton kitnetsPageButton = new JButton("Kitnets");
 
-    public KitnetEditPage(UUID nKitnet) {
+    public KitnetEditPage(UUID nKitnetUUID) {
         super("Editar Kitnet");
         setSize(1280, 680);
-        this.nKitnet = nKitnet;
+        this.nKitnetUUID = nKitnetUUID;
         searchKitnet();
         addUIComponents();
     }
@@ -218,7 +218,7 @@ public class KitnetEditPage extends MyFrame implements ActionListener {
 
     public void searchKitnet(){
         KitnetController kitnetController = new KitnetController();
-        kitnetEdit = kitnetController.searchKitnet(nKitnet);
+        kitnetEdit = kitnetController.searchKitnet(nKitnetUUID);
 
         if (kitnetEdit != null) {
             mobiliaField.setText(kitnetEdit.getFurniture());
