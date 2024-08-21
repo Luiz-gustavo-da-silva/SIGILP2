@@ -1,16 +1,19 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Constants.CountryStates;
 import br.ufrn.imd.Controllers.KitnetController;
 import br.ufrn.imd.Enums.SystemMessage;
 import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
 /**
  * A classe `kitnetRegistrationPage` representa a página de cadastro de kitnets.
@@ -22,13 +25,13 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
     JTextField mobiliaField = new JTextField();
     JTextField cepField = new JTextField();
     JTextField estadoField = new JTextField();
+    JComboBox<String> stateComboBox = new JComboBox<>(CountryStates.states);
     JTextField estadoUsoField = new JTextField();
     JTextField cidadeField = new JTextField();
     JTextField enderecoField = new JTextField();
     JTextField nameKitnetField = new JTextField();
 
-    JButton exitButton = new JButton("Sair");
-    JButton kitnetsPageButton = new JButton("Kitnets");
+    JButton goBackButton = new JButton("Voltar");
 
     /**
      * Construtor da classe `kitnetRegistrationPage`.
@@ -47,29 +50,14 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
      */
     private void addUIComponents() {
 
-        exitButton.setFont(new Font("Dialog", Font.BOLD, 14));
-        exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        exitButton.setBounds(1150, 10, 70, 30);
-        exitButton.setBackground(Colors.QUATERNARY_COLOR);
-        exitButton.setForeground(Colors.SECONDARY_COLOR);
-        add(exitButton);
-        exitButton.addActionListener(this);
-        exitButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                KitnetRegistrationPage.this.dispose();
-                new LoginForm().setVisible(true);
-            }
-        });
-
-        kitnetsPageButton.setFont(new Font("Dialog", Font.BOLD, 14));
-        kitnetsPageButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        kitnetsPageButton.setBounds(1030, 10, 100, 30);
-        kitnetsPageButton.setBackground(Colors.QUATERNARY_COLOR);
-        kitnetsPageButton.setForeground(Colors.SECONDARY_COLOR);
-        add(kitnetsPageButton);
-        kitnetsPageButton.addActionListener(this);
-        kitnetsPageButton.addMouseListener(new MouseAdapter() {
+        goBackButton.setFont(new Font("Dialog", Font.BOLD, 14));
+        goBackButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        goBackButton.setBounds(1030, 10, 100, 30);
+        goBackButton.setBackground(Colors.QUATERNARY_COLOR);
+        goBackButton.setForeground(Colors.SECONDARY_COLOR);
+        add(goBackButton);
+        goBackButton.addActionListener(this);
+        goBackButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 KitnetRegistrationPage.this.dispose();
@@ -78,11 +66,31 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         });
 
         JLabel loginLabel = new JLabel("Cadastro de Kitnet");
-        loginLabel.setBounds(360, 25, 520, 100);
+        loginLabel.setBounds(370, 25, 520, 100);
         loginLabel.setForeground(Colors.TEXT_COLOR);
         loginLabel.setFont(new Font("Dialog", Font.BOLD, 40));
         loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(loginLabel);
+
+        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:");
+        nameKitnetLabel.setBounds(410, 135, 400, 25);
+        nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
+        nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        nameKitnetField.setBounds(410, 170, 220, 25);
+        nameKitnetField.setBackground(Colors.SECONDARY_COLOR);
+        nameKitnetField.setForeground(Colors.TEXT_COLOR);
+        nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
+
+        /*JLabel nKitnetLabel = new JLabel("N° Kitnet:");
+        nKitnetLabel.setBounds(410, 135, 400, 25);
+        nKitnetLabel.setForeground(Colors.TEXT_COLOR);
+        nKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        nKitnetField.setBounds(410, 170, 220, 25);
+        nKitnetField.setBackground(Colors.SECONDARY_COLOR);
+        nKitnetField.setForeground(Colors.TEXT_COLOR);
+        nKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));*/
 
         JLabel mobiliaLabel = new JLabel("Mobília:");
         mobiliaLabel.setBounds(640, 135, 400, 25);
@@ -109,27 +117,37 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         cepLabel.setForeground(Colors.TEXT_COLOR);
         cepLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cepField.setBounds(410, 235, 220, 25);
-        cepField.setBackground(Colors.SECONDARY_COLOR);
-        cepField.setForeground(Colors.TEXT_COLOR);
-        cepField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        try {
+            MaskFormatter cepFormatter = new MaskFormatter("#####-###");
+            cepFormatter.setPlaceholderCharacter('_');
+            JFormattedTextField cepField = new JFormattedTextField(cepFormatter);
+            cepField.setBounds(410, 235, 220, 25);
+            cepField.setBackground(Colors.SECONDARY_COLOR);
+            cepField.setForeground(Colors.TEXT_COLOR);
+            cepField.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+            add(cepLabel);
+            add(cepField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         JLabel estadoLabel = new JLabel("Estado:");
-        estadoLabel.setBounds(640, 265, 400, 25);
+        estadoLabel.setBounds(410, 265, 400, 25);
         estadoLabel.setForeground(Colors.TEXT_COLOR);
         estadoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        estadoField.setBounds(640, 295, 220, 25);
-        estadoField.setBackground(Colors.SECONDARY_COLOR);
-        estadoField.setForeground(Colors.TEXT_COLOR);
-        estadoField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        stateComboBox.setBounds(410, 295, 220, 25);
+        stateComboBox.setBackground(Colors.SECONDARY_COLOR);
+        stateComboBox.setForeground(Colors.TEXT_COLOR);
+        stateComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         JLabel cidadeLabel = new JLabel("Cidade:");
-        cidadeLabel.setBounds(410, 265, 400, 25);
+        cidadeLabel.setBounds(640, 265, 400, 25);
         cidadeLabel.setForeground(Colors.TEXT_COLOR);
         cidadeLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        cidadeField.setBounds(410, 295, 220, 25);
+        cidadeField.setBounds(640, 295, 220, 25);
         cidadeField.setBackground(Colors.SECONDARY_COLOR);
         cidadeField.setForeground(Colors.TEXT_COLOR);
         cidadeField.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -139,20 +157,10 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         enderecoLabel.setForeground(Colors.TEXT_COLOR);
         enderecoLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        enderecoField.setBounds(410, 360, 220, 25);
+        enderecoField.setBounds(410, 360, 450, 25);
         enderecoField.setBackground(Colors.SECONDARY_COLOR);
         enderecoField.setForeground(Colors.TEXT_COLOR);
         enderecoField.setFont(new Font("Dialog", Font.PLAIN, 24));
-
-        JLabel nameKitnetLabel = new JLabel("Nome da Kitnet:");
-        nameKitnetLabel.setBounds(640, 330, 200, 25);
-        nameKitnetLabel.setForeground(Colors.TEXT_COLOR);
-        nameKitnetLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        nameKitnetField.setBounds(640, 360, 220, 25);
-        nameKitnetField.setBackground(Colors.SECONDARY_COLOR);
-        nameKitnetField.setForeground(Colors.TEXT_COLOR);
-        nameKitnetField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
         salvarButton.setFont(new Font("Dialog", Font.BOLD, 18));
         salvarButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -167,7 +175,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         add(cepLabel);
         add(cepField);
         add(estadoLabel);
-        add(estadoField);
+        add(stateComboBox);
         add(cidadeLabel);
         add(cidadeField);
         add(enderecoLabel);
@@ -205,7 +213,7 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         kitnet.setFurniture(mobiliaField.getText().trim());
         kitnet.setStateOfUse(estadoUsoField.getText().trim());
         kitnet.setCep(cepField.getText().trim());
-        kitnet.setState(estadoField.getText().trim());
+        kitnet.setState(stateComboBox.getSelectedItem().toString().trim());
         kitnet.setCity(cidadeField.getText().trim());
         kitnet.setAddress(enderecoField.getText().trim());
         kitnet.setNameKitnet(nameKitnetField.getText().trim());

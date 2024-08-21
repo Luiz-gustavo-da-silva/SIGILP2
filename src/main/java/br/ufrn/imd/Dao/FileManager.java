@@ -280,4 +280,20 @@ public class FileManager {
             throw new RuntimeException(e);
         }
     }
+
+
+    public boolean deleteContract(UUID nContract) {
+        boolean removed = false;
+        try {
+            Owner owner = readOwnerLogged();
+            removed = owner.getContracts().removeIf(c -> c.getnContract().compareTo(nContract) == 0);
+            if (removed) {
+                saveOwner(owner);
+                return true;
+            }
+            return false;
+        } catch (OwnerNotLoggedException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

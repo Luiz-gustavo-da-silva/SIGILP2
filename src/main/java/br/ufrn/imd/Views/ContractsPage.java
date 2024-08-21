@@ -1,6 +1,9 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Controllers.ContractController;
+import br.ufrn.imd.Exceptions.OwnerNotLoggedException;
+import br.ufrn.imd.Models.Contract;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +14,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import java.io.IOException;
+import java.util.List;
 
 public class ContractsPage extends MyFrame implements ActionListener {
 
@@ -20,18 +25,17 @@ public class ContractsPage extends MyFrame implements ActionListener {
     JTable contractTable;
     DefaultTableModel tableModel;
 
+    ContractController cc = new ContractController();
+    List<Contract> contracts = cc.getAllContracts();
+
     public ContractsPage() {
         super("Página de Gestão de Contratos");
         setSize(1280, 680);
         addUIComponents();
     }
 
-    private void loadData() {
-
-    }
-
     private void addUIComponents() {
-        JLabel loginLabel = new JLabel("Olá, Usuário! Aqui estão os seus contratos:");
+        JLabel loginLabel = new JLabel("Olá! Aqui estão os seus contratos:");
         loginLabel.setBounds(140, 10, 1000, 100);
         loginLabel.setForeground(Colors.TEXT_COLOR);
         loginLabel.setFont(new Font("Dialog", Font.BOLD, 28));
@@ -88,14 +92,7 @@ public class ContractsPage extends MyFrame implements ActionListener {
                 "Reajuste", "Status", "Editar", "Deletar"};
 
 
-        Object[][] data = {
-                {"Alisson", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Editar", "Deletar"},
-                {"Beatriz", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Editar", "Deletar"},
-                {"Marcelo", 3, "20/02/2020", "20/02/2021", 500, 10, "Ativo", "Editar", "Deletar"},
-                {"Pedro", 3, "20/02/2020", "20/02/2021", 500, 10, "Vencido", "Editar", "Deletar"},
-                {"Alberto", 3, "20/02/2020", "20/02/2021", 500, 10, "Fechado", "Editar", "Deletar"},
-                {"Marjorie", 3, "20/02/2020", "20/02/2021", 500, 10, "Fechado", "Editar", "Deletar"}
-        };
+        Object[][] data = cc.convertListToArray(contracts);
 
         tableModel = new DefaultTableModel(data, columnNames);
         contractTable = new JTable(tableModel) {
@@ -174,7 +171,17 @@ public class ContractsPage extends MyFrame implements ActionListener {
                 if (label.equals("Editar")) {
                     JOptionPane.showMessageDialog(button, "Redirecting to Edit: " + row);
                 } else if (label.equals("Deletar")) {
-                    JOptionPane.showMessageDialog(button, "Redirecting to Delete: " + row);
+                    boolean res = cc.deleteContract(contracts.get(row).getnContract());
+                    if(res) {
+                        JOptionPane.showMessageDialog(button, "Contrato de ID nº " + contracts.get(row).getnContract() + " deletado com sucesso.");
+                        contracts.remove(row);
+                        tableModel.removeRow(row);
+                        contractTable.revalidate();
+                        contractTable.repaint();
+                    } else {
+                        JOptionPane.showMessageDialog(button, "Erro ao deletar contrato.");
+                    }
+
                 }
             });
         }
