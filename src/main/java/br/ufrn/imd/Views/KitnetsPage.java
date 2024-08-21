@@ -31,6 +31,8 @@ public class KitnetsPage extends MyFrame implements ActionListener {
 
     List<Kitnet> kitchenettes = new ArrayList<>();
 
+    private KitnetController kitnetController = new KitnetController();
+
     public KitnetsPage() {
         super("Lista de Kitnets");
         setSize(1280, 680);
@@ -87,22 +89,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         });
 
         String[] columnNames = {"Nome da Kitnet", "Mobília", "Estado de uso", "Cep", "Estado", "Cidade", "Endereço", "Editar", "Deletar"};
-
-        Object[][] data = new Object[kitchenettes.size()][10];
-
-        for (int i = 0; i < kitchenettes.size(); i++) {
-            Kitnet kitnet = kitchenettes.get(i);
-
-            data[i][0] = kitnet.getNameKitnet();
-            data[i][1] = kitnet.getFurniture();
-            data[i][2] = kitnet.getStateOfUse();
-            data[i][3] = kitnet.getCep();
-            data[i][4] = kitnet.getState();
-            data[i][5] = kitnet.getCity();
-            data[i][6] = kitnet.getAddress();
-            data[i][7] = "Editar";
-            data[i][8] = "Deletar";
-        }
+        Object[][] data = kitnetController.convertListToArray(kitchenettes);
 
         tableModel = new DefaultTableModel(data, columnNames);
         contractTable = new JTable(tableModel) {
@@ -143,7 +130,6 @@ public class KitnetsPage extends MyFrame implements ActionListener {
     }
 
     public List<Kitnet> recoverKitchenettes(){
-        KitnetController kitnetController = new KitnetController();
         return kitnetController.recoverKitchenettes();
     }
 
@@ -228,7 +214,6 @@ public class KitnetsPage extends MyFrame implements ActionListener {
 
 
     public boolean removeKitnet(UUID nKitnetUUID){
-        KitnetController kitnetController = new KitnetController();
         return kitnetController.removeKitnet(nKitnetUUID);
     }
 }
