@@ -25,7 +25,7 @@ public class KitnetController {
     }
 
     public boolean removeKitnet(int nKitnet){
-        return fm.removeKitnet(nKitnet, false);
+        return fm.removeKitnet(nKitnet);
     }
 
     public Kitnet searchKitnet(int nKitnet){
@@ -40,7 +40,7 @@ public class KitnetController {
     }
 
     public boolean validationKitnet(Kitnet kitnet){
-        if (kitnet.nKitnet >= 0 && kitnet.furniture.length() > 0 && kitnet.tenantName.length() >= 0 && kitnet.stateOfUse.length() > 0 && isValidCep(kitnet.cep) && kitnet.state.length() > 0 && kitnet.city.length() > 0 && kitnet.address.length() > 0 && kitnet.nContract >= -1 && kitnet.nameKitnet.length() >= 0){
+        if (kitnet.furniture.length() > 0 && kitnet.stateOfUse.length() > 0 && isValidCep(kitnet.cep) && kitnet.state.length() > 0 && kitnet.city.length() > 0 && kitnet.address.length() > 0 && kitnet.nameKitnet.length() >= 0){
             return true;
         }
         return false;

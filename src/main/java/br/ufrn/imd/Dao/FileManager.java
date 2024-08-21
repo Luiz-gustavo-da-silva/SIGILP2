@@ -220,21 +220,17 @@ public class FileManager {
      * que não têm um contrato associado (`nContract == -1`). Após a remoção, as alterações são salvas.
      *
      * @param nKitnet O número da kitnet a ser removida.
-     * @param edit Um booleano que determina se a remoção deve ignorar a existência de um contrato associado.
-     *             Se `true`, remove a kitnet independentemente do contrato; se `false`, remove apenas se o contrato não existir.
      * @return `true` se a kitnet foi removida com sucesso; `false` caso contrário.
      * @throws RuntimeException Se ocorrer um erro de leitura ou gravação dos dados do proprietário logado.
      */
-    public boolean removeKitnet(int nKitnet, boolean edit) {
+    public boolean removeKitnet(int nKitnet) {
 
         boolean removed = false;
         try {
             Owner owners = readOwnerLogged();
-            if(edit){
-                removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet);
-            }else{
-                removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet && k.getnContract() == -1);
-            }
+
+            removed = owners.getKitnets().removeIf(k -> k.getNKitnet() == nKitnet);
+
             if (removed) {
                 saveOwner(owners);
                 return true;
@@ -286,7 +282,7 @@ public class FileManager {
      * @return `true` se a kitnet foi editada e salva com sucesso; `false` caso contrário.
      */
     public boolean editKitnet(Kitnet kitnet){
-        if(removeKitnet(kitnet.getNKitnet(), true)){
+        if(removeKitnet(kitnet.getNKitnet())){
             if (saveKitnet(kitnet)){
                 return true;
             }else{

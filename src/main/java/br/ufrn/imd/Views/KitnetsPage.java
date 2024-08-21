@@ -109,7 +109,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         contractTable = new JTable(tableModel) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column >= 8;
+                return column >= 7;
             }
         };
 

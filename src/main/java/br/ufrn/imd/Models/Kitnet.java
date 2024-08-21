@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Kitnet {
     public int nKitnet;
-    public int nContract;
     public String furniture;
     public String tenantName;
     public String stateOfUse;
@@ -20,16 +19,14 @@ public class Kitnet {
     public String address;
     public String nameKitnet;
 
-    public Kitnet(int nKitnet, String furniture, String tenantName, String stateOfUse, String cep, String state, String city, String address, int nContract, String nameKitnet) {
+    public Kitnet(int nKitnet, String furniture, String stateOfUse, String cep, String state, String city, String address, String nameKitnet) {
         this.nKitnet = nKitnet;
         this.furniture = furniture;
-        this.tenantName = tenantName;
         this.stateOfUse = stateOfUse;
         this.cep = cep;
         this.state = state;
         this.city = city;
         this.address = address;
-        this.nContract = nContract;
         this.nameKitnet = nameKitnet;
     }
 
@@ -94,15 +91,6 @@ public class Kitnet {
     public String getAddress() {
         return address;
     }
-
-    public int getnContract() {
-        return nContract;
-    }
-
-    public void setnContract(int nContract) {
-        this.nContract = nContract;
-    }
-
 
     public void setAddress(String address) {
         this.address = address;
