@@ -1,5 +1,4 @@
 package br.ufrn.imd.Models;
-import br.ufrn.imd.Enums.Status;
 
 import java.util.Date;
 import java.util.UUID;
@@ -14,9 +13,9 @@ public class Contract {
     private Date endDate;
     private double rentAmount;
     private double adjustment;
-    private Status status;
+    private String status;
 
-    public Contract(String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, Status status) {
+    public Contract(String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
         this.nContractUUID = UUID.randomUUID();
         this.tenantName = tenantName;
         this.tenantEmail = tenantEmail;
@@ -29,7 +28,7 @@ public class Contract {
         this.status = status;
     }
 
-    public void updateContract(UUID nContractUUID, String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, Status status) {
+    public void updateContract(UUID nContractUUID, String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
         this.nContractUUID = nContractUUID;
         this.tenantName = tenantName;
         this.tenantEmail = tenantEmail;
@@ -102,11 +101,11 @@ public class Contract {
         this.adjustment = adjustment;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

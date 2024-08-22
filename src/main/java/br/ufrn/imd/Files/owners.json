@@ -1,8 +1,5 @@
 [
   {
-    "logged": false
-  },
-  {
     "name": "Luiz",
     "cpf": "01699171425",
     "logged": false,
@@ -14,206 +11,198 @@
     "password": "123",
     "contracts": [
       {
-        "nContract": 1,
+        "nContractUUID": "d290f1ee-6c54-4b01-90e6-d701748f0851",
         "tenantName": "Luiz",
         "tenantEmail": "luiz@gmail.com",
         "tenantPhoneNumber": "40028922",
-        "nKitnet": 1,
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0538",
         "startDate": "Aug 18, 2024, 9:59:15 PM",
         "endDate": "Aug 18, 2024, 9:59:15 PM",
         "rentAmount": 500.0,
         "adjustment": 1.0,
-        "status": "ativo"
+        "status": "ATIVO"
       }
     ],
     "kitnets": [
       {
-        "nKitnet": 1,
-        "nContract": 1,
         "furniture": "mobiliado",
-        "tenantName": "Luiz",
         "stateOfUse": "novo",
         "cep": "59086-340",
         "state": "rn",
         "city": "Natal",
-        "address": "Rua sei lá"
+        "address": "Rua sei lá",
+        "nameKitnet": "Perto da praça",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0538"
       }
     ]
   },
   {
-    "name": "Luiz",
-    "cpf": "01699171426",
+    "name": "João",
+    "cpf": "01699171427",
     "logged": false,
-    "username": "Luiz",
-    "telephone": "40028922",
-    "cep": "59086-340",
-    "address": "Rua sei lá",
-    "email": "luiz@gmail.com",
-    "password": "123",
+    "username": "João",
+    "telephone": "40028924",
+    "cep": "59086-342",
+    "address": "Rua acolá",
+    "email": "joao@gmail.com",
+    "password": "789",
     "contracts": [
       {
-        "nContract": 1,
-        "tenantName": "Luiz",
-        "tenantEmail": "luiz@gmail.com",
-        "tenantPhoneNumber": "40028922",
-        "nKitnet": 1,
-        "startDate": "Aug 18, 2024, 9:59:15 PM",
-        "endDate": "Aug 18, 2024, 9:59:15 PM",
-        "rentAmount": 500.0,
-        "adjustment": 1.0,
-        "status": "ativo"
+        "nContractUUID": "d290f1ee-6c54-4b01-90e6-d701748f0853",
+        "tenantName": "João",
+        "tenantEmail": "joao@gmail.com",
+        "tenantPhoneNumber": "40028924",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0540",
+        "startDate": "Oct 18, 2024, 9:59:15 PM",
+        "endDate": "Oct 18, 2024, 9:59:15 PM",
+        "rentAmount": 700.0,
+        "adjustment": 2.0,
+        "status": "ATIVO"
       }
     ],
     "kitnets": [
       {
-        "nKitnet": 1,
-        "nContract": 1,
-        "furniture": "mobiliado",
-        "tenantName": "Luiz",
+        "furniture": "não mobiliado",
         "stateOfUse": "novo",
-        "cep": "59086-340",
+        "cep": "59086-342",
         "state": "rn",
         "city": "Natal",
-        "address": "Rua sei lá"
+        "address": "Rua acolá",
+        "nameKitnet": "Perto do shopping",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0540"
       }
     ]
   },
   {
-    "name": "Luiz",
-    "cpf": "01699171424",
-    "logged": true,
-    "username": "Luiz",
-    "telephone": "40028922",
-    "cep": "59086-340",
-    "address": "Rua sei lá",
-    "email": "luiz@gmail.com",
-    "password": "123",
+    "name": "Ana",
+    "cpf": "01699171428",
+    "logged": false,
+    "username": "Ana",
+    "telephone": "40028925",
+    "cep": "59086-343",
+    "address": "Rua aqui",
+    "email": "ana@gmail.com",
+    "password": "101112",
     "contracts": [
       {
-        "nContract": 1,
-        "tenantName": "Luiz",
-        "tenantEmail": "luiz@gmail.com",
-        "tenantPhoneNumber": "40028922",
-        "nKitnet": 1,
-        "startDate": "Aug 18, 2024, 9:59:15 PM",
-        "endDate": "Aug 18, 2024, 9:59:15 PM",
-        "rentAmount": 500.0,
-        "adjustment": 1.0,
-        "status": "ativo"
-      },
-      {
-        "nContract": 2,
-        "tenantName": "Luiz2",
-        "tenantEmail": "luiz@gmail.com",
-        "tenantPhoneNumber": "40028922",
-        "nKitnet": 12345,
-        "startDate": "Aug 18, 2024, 9:59:15 PM",
-        "endDate": "Aug 18, 2024, 9:59:15 PM",
-        "rentAmount": 500.0,
-        "adjustment": 1.0,
-        "status": "ativo"
-      },
-      {
-        "nContract": 3,
-        "tenantName": "Luiz3",
-        "tenantEmail": "luiz@gmail.com",
-        "tenantPhoneNumber": "40028922",
-        "nKitnet": 15,
-        "startDate": "Aug 18, 2024, 9:59:15 PM",
-        "endDate": "Aug 18, 2024, 9:59:15 PM",
-        "rentAmount": 500.0,
-        "adjustment": 1.0,
-        "status": "ativo"
+        "nContractUUID": "d290f1ee-6c54-4b01-90e6-d701748f0854",
+        "tenantName": "Ana",
+        "tenantEmail": "ana@gmail.com",
+        "tenantPhoneNumber": "40028925",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0541",
+        "startDate": "Nov 18, 2024, 9:59:15 PM",
+        "endDate": "Nov 18, 2024, 9:59:15 PM",
+        "rentAmount": 800.0,
+        "adjustment": 2.5,
+        "status": "ATIVO"
       }
     ],
     "kitnets": [
       {
-        "nKitnet": 1,
-        "nContract": 1,
         "furniture": "mobiliado",
-        "tenantName": "Luiz",
-        "stateOfUse": "novo",
-        "cep": "59086-340",
+        "stateOfUse": "usado",
+        "cep": "59086-343",
         "state": "rn",
         "city": "Natal",
-        "address": "Rua sei lá"
-      },
+        "address": "Rua aqui",
+        "nameKitnet": "Perto da universidade",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0541"
+      }
+    ]
+  },
+  {
+    "name": "Carlos",
+    "cpf": "01699171429",
+    "logged": false,
+    "username": "Carlos",
+    "telephone": "40028926",
+    "cep": "59086-344",
+    "address": "Rua lá",
+    "email": "carlos@gmail.com",
+    "password": "131415",
+    "contracts": [
       {
-        "nKitnet": 2,
-        "nContract": 1,
-        "furniture": "mobiliado",
-        "tenantName": "Luiz",
+        "nContractUUID": "d290f1ee-6c54-4b01-90e6-d701748f0855",
+        "tenantName": "Carlos",
+        "tenantEmail": "carlos@gmail.com",
+        "tenantPhoneNumber": "40028926",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0542",
+        "startDate": "Dec 18, 2024, 9:59:15 PM",
+        "endDate": "Dec 18, 2024, 9:59:15 PM",
+        "rentAmount": 900.0,
+        "adjustment": 3.0,
+        "status": "ATIVO"
+      }
+    ],
+    "kitnets": [
+      {
+        "furniture": "semi-mobiliado",
         "stateOfUse": "novo",
-        "cep": "59086-340",
+        "cep": "59086-344",
         "state": "rn",
         "city": "Natal",
-        "address": "Rua sei lá"
+        "address": "Rua lá",
+        "nameKitnet": "Perto do parque",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0542"
+      }
+    ]
+  },
+  {
+    "name": "Maria",
+    "cpf": "01699171426",
+    "logged": true,
+    "username": "Maria",
+    "telephone": "40028923",
+    "cep": "59086-341",
+    "address": "Rua ali",
+    "email": "maria@gmail.com",
+    "password": "456",
+    "contracts": [
+      {
+        "nContractUUID": "d290f1ee-6c54-4b01-90e6-d701748f0852",
+        "tenantName": "Maria",
+        "tenantEmail": "maria@gmail.com",
+        "tenantPhoneNumber": "40028923",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0539",
+        "startDate": "Sep 18, 0024, 12:00:00 AM",
+        "endDate": "Sep 18, 0024, 12:00:00 AM",
+        "rentAmount": 600.0,
+        "adjustment": 1.5,
+        "status": "CANCELADO"
       },
       {
-        "nKitnet": 4,
-        "nContract": 0,
-        "furniture": "mobiliado",
-        "tenantName": "",
-        "stateOfUse": "novo",
-        "cep": "59086-340",
+        "nContractUUID": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+        "tenantName": "jOSEFINA",
+        "tenantEmail": "maria@gmail.com",
+        "tenantPhoneNumber": "40028923",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0540",
+        "startDate": "Sep 18, 0024, 12:00:00 AM",
+        "endDate": "Sep 18, 0024, 12:00:00 AM",
+        "rentAmount": 600.0,
+        "adjustment": 1.5,
+        "status": "ATIVO"
+      }
+    ],
+    "kitnets": [
+      {
+        "furniture": "semi-mobiliado",
+        "stateOfUse": "usado",
+        "cep": "59086-341",
         "state": "rn",
         "city": "Natal",
-        "address": "Rua sei lá"
+        "address": "Rua ali",
+        "nameKitnet": "Vista para o mar",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0539"
       },
       {
-        "nKitnet": 123,
-        "nContract": 12,
-        "furniture": "n�o mobiliado",
-        "tenantName": "luiz",
-        "stateOfUse": "novo",
-        "cep": "59200000",
+        "furniture": "semi-mobiliado",
+        "stateOfUse": "usado",
+        "cep": "59086-341",
         "state": "rn",
-        "city": "natal",
-        "address": "teste"
-      },
-      {
-        "nKitnet": 1234,
-        "nContract": 3,
-        "furniture": "n�o",
-        "tenantName": "luiz",
-        "stateOfUse": "novo",
-        "cep": "59200000",
-        "state": "rn",
-        "city": "natal",
-        "address": "aaaa"
-      },
-      {
-        "nKitnet": 12345,
-        "nContract": 3,
-        "furniture": "n�o",
-        "tenantName": "luiz teste 2",
-        "stateOfUse": "novo",
-        "cep": "59200000",
-        "state": "rn",
-        "city": "natal",
-        "address": "aaa"
-      },
-      {
-        "nKitnet": 12345,
-        "nContract": 2,
-        "furniture": "n",
-        "tenantName": "luizz",
-        "stateOfUse": "novo",
-        "cep": "59200000",
-        "state": "rn",
-        "city": "natal",
-        "address": "aaa"
-      },
-      {
-        "nKitnet": 15,
-        "nContract": 3,
-        "furniture": "n�o",
-        "tenantName": "luiz",
-        "stateOfUse": "novo",
-        "cep": "59200000",
-        "state": "rn",
-        "city": "natal",
-        "address": "aaa"
+        "city": "Natal",
+        "address": "Rua ali",
+        "nameKitnet": "KITNET COM VISTA PARA O PRECIPICIOO",
+        "nKitnetUUID": "c56a4180-65aa-42ec-a945-5fd21dec0540"
       }
     ]
   }

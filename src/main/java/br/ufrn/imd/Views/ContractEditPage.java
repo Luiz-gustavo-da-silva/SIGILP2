@@ -1,19 +1,21 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Constants.Status;
 import br.ufrn.imd.Controllers.ContractController;
-import br.ufrn.imd.Enums.Status;
+import br.ufrn.imd.Controllers.KitnetController;
 import br.ufrn.imd.Models.Contract;
+import br.ufrn.imd.Models.Kitnet;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
 
 public class ContractEditPage extends MyFrame {
 
@@ -25,12 +27,20 @@ public class ContractEditPage extends MyFrame {
     JTextField endDateField = new JTextField();
     JTextField rentAmountField = new JTextField();
     JTextField adjustmentField = new JTextField();
-    JTextField statusField = new JTextField();
+
     JButton goBackButton = new JButton("Voltar");
     JButton contractsPageButton = new JButton("Contratos");
 
     UUID nContractUUID;
     Contract contract;
+
+    KitnetController kc = new KitnetController();
+    List<Kitnet> kitchenettes = kc.recoverKitchenettes();
+    List<String> kitchenettesNames = kc.getKitchenettesNames(kitchenettes);
+
+    JComboBox<String> statusComboBox = new JComboBox<>(Status.status);
+
+    JComboBox<String> kitnetNameComboBox = new JComboBox<>();
 
     public ContractEditPage(UUID nContractUUID, Contract contract) {
         super("Editar Contrato");
@@ -147,25 +157,37 @@ public class ContractEditPage extends MyFrame {
         adjustmentField.setForeground(Colors.TEXT_COLOR);
         adjustmentField.setFont(new Font("Dialog", Font.PLAIN, 24));
 
+        setTextFields();
+
         JLabel statusLabel = new JLabel("Status:");
         statusLabel.setBounds(640, 385, 220, 25);
         statusLabel.setForeground(Colors.TEXT_COLOR);
         statusLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        setTextFields();
+        statusComboBox.setBounds(640, 420, 220, 25);
+        statusComboBox.setBackground(Colors.SECONDARY_COLOR);
+        statusComboBox.setForeground(Colors.TEXT_COLOR);
+        statusComboBox.setFont(new Font("Dialog", Font.PLAIN, 16));
 
-        JComboBox<Status> statusField = new JComboBox<>(Status.values());
-        statusField.setBounds(640, 420, 220, 25);
-        statusField.setBackground(Colors.SECONDARY_COLOR);
-        statusField.setForeground(Colors.TEXT_COLOR);
-        statusField.setFont(new Font("Dialog", Font.PLAIN, 16));
-        statusField.setSelectedItem(contract.getStatus());
+        JLabel kitnetNameLabel = new JLabel("Kitnet:");
+        kitnetNameLabel.setBounds(410, 455, 450, 25);
+        kitnetNameLabel.setForeground(Colors.TEXT_COLOR);
+        kitnetNameLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+
+        kitnetNameComboBox.setBounds(410, 490, 450, 25);
+        kitnetNameComboBox.setBackground(Colors.SECONDARY_COLOR);
+        kitnetNameComboBox.setForeground(Colors.TEXT_COLOR);
+        kitnetNameComboBox.setFont(new Font("Dialog", Font.PLAIN, 16));
+        for (String name : kitchenettesNames) {
+            kitnetNameComboBox.addItem(name);
+        }
 
         updateButton.setFont(new Font("Dialog", Font.BOLD, 18));
         updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         updateButton.setBackground(Colors.TERTIARY_COLOR);
         updateButton.setForeground(Colors.SECONDARY_COLOR);
-        updateButton.setBounds(500, 470, 250, 50);
+        updateButton.setBounds(500, 550, 250, 50);
 
         add(tenantNameLabel);
         add(tenantNameField);
@@ -182,8 +204,10 @@ public class ContractEditPage extends MyFrame {
         add(adjustmentLabel);
         add(adjustmentField);
         add(statusLabel);
-        add(statusField);
+        add(statusComboBox);
         add(updateButton);
+        add(kitnetNameLabel);
+        add(kitnetNameComboBox);
 
         updateButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -201,20 +225,20 @@ public class ContractEditPage extends MyFrame {
 
     public void editContract () throws IOException, ParseException{
         ContractController cc = new ContractController();
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            String tenantName = tenantNameField.getText().trim();
-            String tenantEmail = tenantEmailField.getText().trim();
-            String tenantPhoneNumber = tenantPhoneNumberField.getText().trim();
-            Date startDate = formatter.parse(startDateField.getText().trim()) ;
-            Date endDate = formatter.parse(endDateField.getText().trim()) ;
-            double rentAmount = Double.parseDouble(rentAmountField.getText().trim());
-            double adjustment = Double.parseDouble(adjustmentField.getText().trim());
-            Status status = Status.valueOf(statusField.getText().trim());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String tenantName = tenantNameField.getText().trim();
+        String tenantEmail = tenantEmailField.getText().trim();
+        String tenantPhoneNumber = tenantPhoneNumberField.getText().trim();
+        Date startDate = formatter.parse(startDateField.getText().trim()) ;
+        Date endDate = formatter.parse(endDateField.getText().trim()) ;
+        double rentAmount = Double.parseDouble(rentAmountField.getText().trim());
+        double adjustment = Double.parseDouble(adjustmentField.getText().trim());
+        String status = (String) statusComboBox.getSelectedItem();
+        String selectedKitnetName = (String) kitnetNameComboBox.getSelectedItem();
+        UUID selectedKitnetUUID = kc.getKitnetUUID(kitchenettes, selectedKitnetName);
 
-            contract.updateContract(nContractUUID, tenantName, tenantEmail,
-                    tenantPhoneNumber, contract.getnKitnetUUID(), startDate, endDate, rentAmount, adjustment, status);
-
-            cc.editContract(nContractUUID, contract);
+        contract.updateContract(nContractUUID, tenantName, tenantEmail,
+                tenantPhoneNumber, selectedKitnetUUID, startDate, endDate, rentAmount, adjustment, status);
     }
 
     public void setTextFields(){
@@ -226,5 +250,7 @@ public class ContractEditPage extends MyFrame {
         endDateField.setText(dateFormat.format(contract.getEndDate()));
         rentAmountField.setText(Double.toString(contract.getRentAmount()));
         adjustmentField.setText(Double.toString(contract.getAdjustment()));
+        statusComboBox.setSelectedItem(contract.getStatus());
+        kitnetNameComboBox.setSelectedItem(kc.getKitnetName(kitchenettes, contract.getnKitnetUUID()));
     }
 }

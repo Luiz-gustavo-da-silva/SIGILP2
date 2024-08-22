@@ -45,7 +45,7 @@ public class ContractController implements ControllerUtils<Contract> {
                 data[i][3] = dateFormat.format(contract.getEndDate());
                 data[i][4] = contract.getRentAmount();
                 data[i][5] = contract.getAdjustment();
-                data[i][6] = contract.getStatus().getText();
+                data[i][6] = contract.getStatus();
                 data[i][7] = "Editar";
                 data[i][8] = "Deletar";
             }
