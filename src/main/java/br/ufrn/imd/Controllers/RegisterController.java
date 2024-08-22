@@ -43,4 +43,26 @@ public class RegisterController {
         jsonArray.put(newUser);
         saveJsonFile(jsonArray);
     }
+
+    public boolean isCpfRegistered(String cpf) {
+        JSONArray jsonArray = loadJsonFile();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject user = jsonArray.getJSONObject(i);
+            if (user.has("cpf") && user.getString("cpf").equals(cpf)) {
+                return true; // CPF já registrado
+            }
+        }
+        return false; // CPF não registrado
+    }
+
+    public boolean isMailRegistered(String email) {
+        JSONArray jsonArray = loadJsonFile();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject user = jsonArray.getJSONObject(i);
+            if (user.has("email") && user.getString("email").equals(email)) {
+                return true; // E-mail já registrado
+            }
+        }
+        return false; // E-mail não registrado
+    }
 }
