@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Controllers.LoginController;
 import br.ufrn.imd.Enums.SystemMessage;
 import br.ufrn.imd.Models.Kitnet;
 import br.ufrn.imd.Views.KitnetEditPage;
@@ -36,6 +37,7 @@ public class KitnetsPage extends MyFrame implements ActionListener {
     List<Kitnet> kitchenettes = new ArrayList<>();
 
     private KitnetController kitnetController = new KitnetController();
+    private LoginController lc = new LoginController();
 
     /**
      * Construtor da classe `KitnetsPage`.
@@ -62,13 +64,6 @@ public class KitnetsPage extends MyFrame implements ActionListener {
         exitButton.setForeground(Colors.SECONDARY_COLOR);
         add(exitButton);
         exitButton.addActionListener(this);
-        exitButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                KitnetsPage.this.dispose();
-                new LoginForm().setVisible(true);
-            }
-        });
 
         contractButton.setFont(new Font("Dialog", Font.BOLD, 14));
         contractButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -135,9 +130,13 @@ public class KitnetsPage extends MyFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exitButton) {
-            JOptionPane.showMessageDialog(KitnetsPage.this, "Returning!");
-            KitnetsPage.this.dispose();
-            new ContractsPage().setVisible(true);
+            if(lc.Logout()){
+                JOptionPane.showMessageDialog(null, "Logout realizado com sucesso!");
+                KitnetsPage.this.dispose();
+                new LoginForm().setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Falha Logout!");
+            }
         }
     }
 

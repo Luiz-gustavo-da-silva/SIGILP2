@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.ContractController;
+import br.ufrn.imd.Controllers.LoginController;
 import br.ufrn.imd.Models.Contract;
 
 import javax.swing.*;
@@ -25,6 +26,8 @@ public class ContractsPage extends MyFrame {
 
     ContractController cc = new ContractController();
     List<Contract> contracts = cc.getAllContracts();
+
+    private LoginController lc = new LoginController();
 
     public ContractsPage() {
         super("Página de Gestão de Contratos");
@@ -77,8 +80,13 @@ public class ContractsPage extends MyFrame {
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ContractsPage.this.dispose();
-                new LoginForm().setVisible(true);
+                if(lc.Logout()){
+                    JOptionPane.showMessageDialog(null, "Logout realizado com sucesso!");
+                    ContractsPage.this.dispose();
+                    new LoginForm().setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Falha Logout!");
+                }
             }
         });
 

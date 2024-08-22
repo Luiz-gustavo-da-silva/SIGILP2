@@ -324,4 +324,71 @@ public class FileManager {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Retorna um objeto `Owner` correspondente ao nome de usuário e senha fornecidos.
+     *
+     * @param username O nome de usuário do proprietário que está tentando fazer login.
+     * @param password A senha associada ao nome de usuário fornecido.
+     * @return Um objeto `Owner` se o nome de usuário e a senha coincidirem; caso contrário, retorna `null`.
+     * @throws RuntimeException Se ocorrer um erro ao ler os proprietários do arquivo.
+     */
+    public Owner returnsOwnerLoginPassword(String username, String password){
+        List<Owner> lo = new ArrayList<>();
+
+        try {
+            lo = readAllOwners();
+
+            for (Owner o: lo){
+                if (o.getUsername().equals(username) && o.getPassword().equals(password)) {
+                    return o;
+                }
+            }
+            return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Autentica um proprietário com base no nome de usuário e senha fornecidos, marcando-o como logado.
+     *
+     * @param username O nome de usuário do proprietário que está tentando fazer login.
+     * @param password A senha associada ao nome de usuário fornecido.
+     * @return `true` se o login for bem-sucedido, `false` caso contrário.
+     * @throws RuntimeException Se ocorrer um erro ao salvar o estado do proprietário.
+     */
+    public boolean Login(String username, String password){
+
+        Owner o = returnsOwnerLoginPassword(username, password);
+
+        if(o != null){
+            o.setLogged(true);
+            try {
+                saveOwner(o);
+                return true;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Desloga o proprietário que está atualmente logado, marcando-o como não logado.
+     *
+     * @return `true` se o logout for bem-sucedido, `false` caso contrário.
+     * @throws RuntimeException Se ocorrer um erro ao ler ou salvar o proprietário logado ou se nenhum proprietário estiver logado.
+     */
+    public boolean Logout(){
+        Owner owner = new Owner();
+        try {
+            owner = readOwnerLogged();
+            owner.setLogged(false);
+            saveOwner(owner);
+            return true;
+        } catch (IOException | OwnerNotLoggedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

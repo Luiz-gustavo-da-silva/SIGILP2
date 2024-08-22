@@ -1,6 +1,7 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Controllers.LoginController;
 import br.ufrn.imd.Controllers.RegisterController;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,6 +20,8 @@ public class LoginForm extends MyFrame implements ActionListener {
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("Login");
     JLabel registerLabel = new JLabel("Não possui uma conta? Registre-se aqui.");
+
+    public LoginController loginController= new LoginController();
 
     private final RegisterController registerController;
 
@@ -85,27 +88,15 @@ public class LoginForm extends MyFrame implements ActionListener {
         });
     }
 
-    private Boolean checkUsernameAndPassword(String username, String password) {
-        // Use a instância de userController para chamar loadJsonFile
-        JSONArray users = registerController.loadJsonFile();
-
-        for (int i = 0; i < users.length(); i++) {
-            JSONObject user = users.getJSONObject(i);
-            if (user.has("username") && user.getString("username").equals(username)) {
-                String storedPassword = user.getString("password");
-                return storedPassword.equals(password);
-            }
-        }
-        return false;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
             String username = usernameField.getText();
             String password = String.valueOf(passwordField.getPassword());
+            boolean success = false;
+            success = loginController.Login(username, password);
 
-            if (checkUsernameAndPassword(username, password)) {
+            if (success) {
                 JOptionPane.showMessageDialog(LoginForm.this, "Login feito com sucesso!");
                 LoginForm.this.dispose();
                 new ContractsPage().setVisible(true);

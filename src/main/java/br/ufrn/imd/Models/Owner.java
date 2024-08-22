@@ -74,6 +74,10 @@ public class Owner {
         return kitnets;
     }
 
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+
     public void setKitnets(List<Kitnet> kitnets) {
         this.kitnets = kitnets;
     }
