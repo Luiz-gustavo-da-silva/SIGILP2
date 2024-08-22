@@ -297,7 +297,7 @@ public class FileManager {
         }
     }
 
-    public void saveContract(Contract contract) {
+    public void saveContract(Contract contract) throws IOException {
         try {
             Owner owner = readOwnerLogged();
             owner.getContracts().add(contract);

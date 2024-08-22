@@ -208,6 +208,21 @@ public class RegisterForm extends MyFrame implements ActionListener {
     }
 
     private void registerNewUser() {
+        String cpf = cpfField.getText().replace(".", "").replace("-", "");
+        String email = mailField.getText();
+
+        // Verificar se o CPF já está registrado
+        if (userController.isCpfRegistered(cpf)) {
+            JOptionPane.showMessageDialog(this, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Verificar se o E-mail já está registrado
+        if (userController.isMailRegistered(email)) {
+            JOptionPane.showMessageDialog(this, "Email já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         JSONObject newUser = new JSONObject();
         newUser.put("name", nameField.getText());
         newUser.put("cpf", cpfField.getText().replace(".", "").replace("-", ""));
@@ -222,16 +237,16 @@ public class RegisterForm extends MyFrame implements ActionListener {
         newUser.put("contracts", new JSONArray());
         newUser.put("kitnets", new JSONArray());
 
-        userController.addUser(newUser); // Chame o método do controlador
+        userController.addUser(newUser); // Chame o método do controlador para adicionar o usuário
+        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+        RegisterForm.this.dispose();
+        new LoginForm().setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registerButton) {
             registerNewUser();  // Chame a função de registro
-            JOptionPane.showMessageDialog(RegisterForm.this, "Cadastro realizado com sucesso!");
-            RegisterForm.this.dispose();
-            new LoginForm().setVisible(true);
         }
     }
 }

@@ -3,6 +3,7 @@ package br.ufrn.imd.Views;
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.ContractController;
 import br.ufrn.imd.Controllers.KitnetController;
+import br.ufrn.imd.Models.Contract;
 import br.ufrn.imd.Models.Kitnet;
 //import br.ufrn.imd.Controllers.KitnetController;
 
@@ -13,9 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class ContractRegistrationPage extends MyFrame implements ActionListener {
     JTextField nameField = new JTextField();
@@ -28,11 +33,15 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
     JButton registerButton = new JButton("Cadastrar");
     JButton goBackButton = new JButton("Voltar");
 
-    public List<Kitnet> listKitnet = new ArrayList<>();
+    KitnetController kc = new KitnetController();
+    List<Kitnet> kitchenettes = kc.recoverKitchenettes();
+    List<String> kitchenettesNames = kc.getKitchenettesNames(kitchenettes);
+
+    ContractController cc = new ContractController();
+
     public ContractRegistrationPage() {
         super("Página de Registro");
         setSize(1280, 680);
-        searchKitchenettes();
         addUIcomponents();
     }
 
@@ -116,9 +125,8 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         kitnetComboBox.setForeground(Colors.TEXT_COLOR);
         kitnetComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
 
-        // Popula o JComboBox com os nomes das Kitnets
-        for (Kitnet kitnet : listKitnet) {
-            kitnetComboBox.addItem(kitnet.getNameKitnet());
+        for (String name : kitchenettesNames) {
+            kitnetComboBox.addItem(name);
         }
 
         add(kitnetLabel);
@@ -186,25 +194,39 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         registerButton.setBounds(500, 455, 250, 50);
         add(registerButton);
         registerButton.addActionListener(this);
-        registerButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //Do nothing
-            }
-        });
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registerButton){
-            JOptionPane.showMessageDialog(ContractRegistrationPage.this, "Cadastro realizado com sucesso!");
-            ContractRegistrationPage.this.dispose();
-            new ContractsPage().setVisible(true);
+            try {
+                saveContract();
+                ContractRegistrationPage.this.dispose();
+                new ContractsPage().setVisible(true);
+            } catch (IOException | ParseException ex) {
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o contrato: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
-    public void searchKitchenettes(){
-        KitnetController kitnetController = new KitnetController();
-        listKitnet = kitnetController.recoverKitchenettes();
+    public void saveContract() throws IOException, ParseException{
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String tenantName = nameField.getText().trim();
+        String tenantEmail = mailField.getText().trim();
+        String tenantPhoneNumber = phoneField.getText().trim();
+        Date startDate = formatter.parse(startDateField.getText().trim()) ;
+        Date endDate = formatter.parse(endDateField.getText().trim());
+        double rentAmount = Double.parseDouble(rentField.getText().trim());
+        double adjustment = 1.5;
+        String status = "ATIVO";
+        String selectedKitnetName = (String) kitnetComboBox.getSelectedItem();
+        UUID selectedKitnetUUID = kc.getKitnetUUID(kitchenettes, selectedKitnetName);
+        System.out.println(startDate);
+        System.out.println(endDate);
+
+        Contract updatedContract = new Contract(tenantName, tenantEmail,
+                tenantPhoneNumber, selectedKitnetUUID, startDate, endDate, rentAmount, adjustment, status);
+        cc.saveContract(updatedContract);
     }
 }

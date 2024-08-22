@@ -1,12 +1,11 @@
 package br.ufrn.imd.Controllers;
 
 import br.ufrn.imd.Dao.FileManager;
-import br.ufrn.imd.Models.Contract;
 import br.ufrn.imd.Models.Kitnet;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Controlador para gerenciar operações relacionadas às Kitnets.
@@ -46,6 +45,30 @@ public class KitnetController implements ControllerUtils<Kitnet> {
      */
     public List<Kitnet> recoverKitchenettes() {
         return fm.searchKitchenettes();
+    }
+
+    public List<String> getKitchenettesNames(List<Kitnet> kitnetList) {
+        return kitnetList.stream()
+                .map(Kitnet::getNameKitnet)
+                .collect(Collectors.toList());
+    }
+
+    public UUID getKitnetUUID(List<Kitnet> kitnetList, String kitnetName) {
+        for (Kitnet kitnet : kitnetList) {
+            if (kitnet.getNameKitnet().equals(kitnetName)) {
+                return kitnet.getnKitnetUUID();
+            }
+        }
+        return null;
+    }
+
+    public String getKitnetName(List<Kitnet> kitnetList, UUID kitnetUUID) {
+        for (Kitnet kitnet : kitnetList) {
+            if (kitnet.getnKitnetUUID().equals(kitnetUUID)) {
+                return kitnet.getNameKitnet();
+            }
+        }
+        return null;
     }
 
     /**
