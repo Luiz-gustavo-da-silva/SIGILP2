@@ -2,6 +2,7 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Constants.CountryStates;
+import br.ufrn.imd.Controllers.RegisterController;
 import br.ufrn.imd.Models.Kitnet;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,9 +31,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
     JTextField addressField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton registerButton = new JButton("Registrar");
+    private final RegisterController userController;
     public RegisterForm() {
         super("Página de Registro");
         setSize(1280, 680);
+        userController = new RegisterController("src/main/java/br/ufrn/imd/Files/owners.json");
         addUIcomponents();
     }
 
@@ -204,37 +207,12 @@ public class RegisterForm extends MyFrame implements ActionListener {
         });
     }
 
-    private JSONArray loadJsonFile() {
-        try (FileReader reader = new FileReader("src/main/java/br/ufrn/imd/Files/owners.json")) {
-            StringBuilder jsonContent = new StringBuilder();
-            int i;
-            while ((i = reader.read()) != -1) {
-                jsonContent.append((char) i);
-            }
-            return new JSONArray(jsonContent.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new JSONArray();
-        }
-    }
-
-    // Método para salvar o arquivo JSON
-    private void saveJsonFile(JSONArray jsonArray) {
-        try (FileWriter file = new FileWriter("src/main/java/br/ufrn/imd/Files/owners.json")) {
-            file.write(jsonArray.toString(4)); // Formatação com indentação
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Método para registrar um novo usuário
     private void registerNewUser() {
-        JSONArray jsonArray = loadJsonFile();
-
         JSONObject newUser = new JSONObject();
         newUser.put("name", nameField.getText());
         newUser.put("cpf", cpfField.getText().replace(".", "").replace("-", ""));
         newUser.put("logged", false);
+        newUser.put("state", stateComboBox.getSelectedItem());
         newUser.put("username", usernameField.getText());
         newUser.put("telephone", phoneField.getText().replace("(", "").replace(")", "").replace("-", ""));
         newUser.put("cep", cepField.getText().replace("-", ""));
@@ -244,14 +222,13 @@ public class RegisterForm extends MyFrame implements ActionListener {
         newUser.put("contracts", new JSONArray());
         newUser.put("kitnets", new JSONArray());
 
-        jsonArray.put(newUser);
-
-        saveJsonFile(jsonArray);
+        userController.addUser(newUser); // Chame o método do controlador
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == registerButton){
-            registerNewUser();
+        if (e.getSource() == registerButton) {
+            registerNewUser();  // Chame a função de registro
             JOptionPane.showMessageDialog(RegisterForm.this, "Cadastro realizado com sucesso!");
             RegisterForm.this.dispose();
             new LoginForm().setVisible(true);
