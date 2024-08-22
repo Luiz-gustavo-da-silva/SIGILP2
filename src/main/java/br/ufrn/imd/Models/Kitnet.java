@@ -85,18 +85,4 @@ public class Kitnet {
         return nKitnetUUID;
     }
 
-    public void setnKitnetUUID(UUID nKitnetUUID) {
-        this.nKitnetUUID = nKitnetUUID;
-    }
-
-    @Override
-    public String toString() {
-        return "nKitnetUUID:" + nKitnetUUID +
-                ", furniture:" + furniture +
-                ", stateOfUse:" + stateOfUse +
-                ", cep:" + cep +
-                ", state:" + state +
-                ", city:" + city +
-                ", address:" + address;
-    }
 }

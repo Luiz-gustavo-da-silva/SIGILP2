@@ -80,24 +80,4 @@ public class Owner {
     public void setLogged(boolean logged) {
         this.logged = logged;
     }
-
-    public void setKitnets(List<Kitnet> kitnets) {
-        this.kitnets = kitnets;
-    }
-    @Override
-    public String toString() {
-        return "Owner{" +
-                "name='" + name + '\'' +
-                ",\ncpf='" + cpf + '\'' +
-                ",\nlogado=" + logged +
-                ",\nusername='" + username + '\'' +
-                ",\ntelephone='" + telephone + '\'' +
-                ",\ncep='" + cep + '\'' +
-                ",\naddress='" + address + '\'' +
-                ",\nemail='" + email + '\'' +
-                ",\npassword='" + password + '\'' +
-                ",\ncontracts=" + contracts +
-                ",\nkitnets=" + kitnets +
-                "\n}";
-    }
 }
