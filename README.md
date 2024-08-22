@@ -8,7 +8,7 @@ Nathalia Azevedo de Melo
 
 Luiz Gustavo da Silva
 
-Erick Marques Oliveira de Azevedo
+Erick Marques Oliveira Azevedo
 
 ## Organização do projeto com o respectivo diagrama de classes
 
@@ -45,7 +45,23 @@ Um contrato pode ter uma kitnet associada;
 
 ## Instruções de como realizar o build
 
+### No Linux:
 
+Requisitos: Tenha o Gradle e o Java instalados no sistema
+
+- Abra um terminal na pasta raiz do projeto e digite: ./gradlew build
+
+### No Windows: 
+
+Requisitos: Tenha o Gradle e o Java instalados no sistema
+
+- Abra o Powershell na pasta raiz do projeto e digite: gradle build
 
 ## Instruções de como executar
 
+### No Linux
+- Execute o .jar gerado na pasta /build/libs usando o comando: java -jar SIGILP2-1.0-SNAPSHOT.jar
+
+### No Windows
+
+- Execute o .jar gerado na pasta /build/libs
