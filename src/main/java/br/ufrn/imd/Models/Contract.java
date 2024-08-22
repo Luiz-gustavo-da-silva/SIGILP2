@@ -28,7 +28,7 @@ public class Contract {
         this.status = status;
     }
 
-    public void updateContract(UUID nContractUUID, String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
+    public Contract(UUID nContractUUID, String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
         this.nContractUUID = nContractUUID;
         this.tenantName = tenantName;
         this.tenantEmail = tenantEmail;

@@ -20,7 +20,7 @@ public class ContractController implements ControllerUtils<Contract> {
             throw new RuntimeException(e);
         }
     }
-    public void saveContract(Contract contract)  {
+    public void saveContract(Contract contract) throws IOException  {
         fm.saveContract(contract);
     }
 

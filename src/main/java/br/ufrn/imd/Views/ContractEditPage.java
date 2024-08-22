@@ -31,6 +31,7 @@ public class ContractEditPage extends MyFrame {
     JButton goBackButton = new JButton("Voltar");
     JButton contractsPageButton = new JButton("Contratos");
 
+    ContractController cc = new ContractController();
     UUID nContractUUID;
     Contract contract;
 
@@ -168,6 +169,7 @@ public class ContractEditPage extends MyFrame {
         statusComboBox.setBackground(Colors.SECONDARY_COLOR);
         statusComboBox.setForeground(Colors.TEXT_COLOR);
         statusComboBox.setFont(new Font("Dialog", Font.PLAIN, 16));
+        statusComboBox.setSelectedItem(contract.getStatus());
 
         JLabel kitnetNameLabel = new JLabel("Kitnet:");
         kitnetNameLabel.setBounds(410, 455, 450, 25);
@@ -182,6 +184,7 @@ public class ContractEditPage extends MyFrame {
         for (String name : kitchenettesNames) {
             kitnetNameComboBox.addItem(name);
         }
+        kitnetNameComboBox.setSelectedItem(kc.getKitnetName(kitchenettes, contract.getnKitnetUUID()));
 
         updateButton.setFont(new Font("Dialog", Font.BOLD, 18));
         updateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -224,7 +227,7 @@ public class ContractEditPage extends MyFrame {
     }
 
     public void editContract () throws IOException, ParseException{
-        ContractController cc = new ContractController();
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String tenantName = tenantNameField.getText().trim();
         String tenantEmail = tenantEmailField.getText().trim();
@@ -237,8 +240,12 @@ public class ContractEditPage extends MyFrame {
         String selectedKitnetName = (String) kitnetNameComboBox.getSelectedItem();
         UUID selectedKitnetUUID = kc.getKitnetUUID(kitchenettes, selectedKitnetName);
 
-        contract.updateContract(nContractUUID, tenantName, tenantEmail,
+        Contract updatedContract = new Contract(nContractUUID, tenantName, tenantEmail,
                 tenantPhoneNumber, selectedKitnetUUID, startDate, endDate, rentAmount, adjustment, status);
+        boolean res = cc.editContract(contract.getnContractUUID(), updatedContract);
+        if (res) {
+            System.out.println("Contrato existente e editado com sucesso.");
+        }
     }
 
     public void setTextFields(){
@@ -250,7 +257,5 @@ public class ContractEditPage extends MyFrame {
         endDateField.setText(dateFormat.format(contract.getEndDate()));
         rentAmountField.setText(Double.toString(contract.getRentAmount()));
         adjustmentField.setText(Double.toString(contract.getAdjustment()));
-        statusComboBox.setSelectedItem(contract.getStatus());
-        kitnetNameComboBox.setSelectedItem(kc.getKitnetName(kitchenettes, contract.getnKitnetUUID()));
     }
 }
