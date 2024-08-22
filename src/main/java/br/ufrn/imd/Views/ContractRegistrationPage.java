@@ -17,8 +17,10 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class ContractRegistrationPage extends MyFrame implements ActionListener {
     JTextField nameField = new JTextField();
@@ -26,6 +28,8 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
     JTextField phoneField = new JTextField();
     JComboBox<String> kitnetComboBox = new JComboBox<>();
     JTextField rentField = new JTextField();
+    JFormattedTextField startDateField;
+    JFormattedTextField endDateField;
     JButton registerButton = new JButton("Cadastrar");
     JButton goBackButton = new JButton("Voltar");
 
@@ -141,6 +145,44 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         add(rentLabel);
         add(rentField);
 
+        JLabel startDateLabel = new JLabel("Data de início do contrato");
+        startDateLabel.setBounds(640, 325, 400, 25);
+        startDateLabel.setForeground(Colors.TEXT_COLOR);
+        startDateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        try {
+            MaskFormatter startDateFormatter = new MaskFormatter("##/##/####");
+            startDateFormatter.setPlaceholderCharacter('_');
+            startDateField = new JFormattedTextField(startDateFormatter); // Altere aqui
+            startDateField.setBounds(640, 355, 220, 25);
+            startDateField.setBackground(Colors.SECONDARY_COLOR);
+            startDateField.setForeground(Colors.TEXT_COLOR);
+            startDateField.setFont(new Font("Dialog", Font.PLAIN, 18));
+            add(startDateField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        JLabel endDateLabel = new JLabel("Data de fim do contrato");
+        endDateLabel.setBounds(410, 385, 400, 25);
+        endDateLabel.setForeground(Colors.TEXT_COLOR);
+        endDateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+
+        try {
+            MaskFormatter endDateFormatter = new MaskFormatter("##/##/####");
+            endDateFormatter.setPlaceholderCharacter('_');
+            endDateField = new JFormattedTextField(endDateFormatter); // Altere aqui
+            endDateField.setBounds(410, 415, 220, 25);
+            endDateField.setBackground(Colors.SECONDARY_COLOR);
+            endDateField.setForeground(Colors.TEXT_COLOR);
+            endDateField.setFont(new Font("Dialog", Font.PLAIN, 18));
+            add(endDateField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         registerButton.setFont(new Font("Dialog", Font.BOLD, 18));
         registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerButton.setBackground(Colors.TERTIARY_COLOR);
@@ -163,14 +205,13 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         }
     }
 
-    public void saveContract() throws IOException, ParseException{
+    public void saveContract() throws IOException, ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String tenantName = nameField.getText().trim();
         String tenantEmail = mailField.getText().trim();
         String tenantPhoneNumber = phoneField.getText().trim();
-        Calendar calendar = Calendar.getInstance();
-        Date today = calendar.getTime();
-        calendar.add(Calendar.YEAR, 1);
-        Date aYearFromNow = calendar.getTime();
+        Date startDate = formatter.parse(startDateField.getText().trim());
+        Date endDate = formatter.parse(endDateField.getText().trim());
         double rentAmount = Double.parseDouble(rentField.getText().trim());
         double adjustment = 1.5;
         String status = "ATIVO";
@@ -178,7 +219,7 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         UUID selectedKitnetUUID = kc.getKitnetUUID(kitchenettes, selectedKitnetName);
 
         Contract updatedContract = new Contract(tenantName, tenantEmail,
-                tenantPhoneNumber, selectedKitnetUUID, today, aYearFromNow, rentAmount, adjustment, status);
+                tenantPhoneNumber, selectedKitnetUUID, startDate, endDate, rentAmount, adjustment, status);
         cc.saveContract(updatedContract);
     }
 }
