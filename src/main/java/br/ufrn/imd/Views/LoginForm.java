@@ -1,6 +1,9 @@
 package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
+import br.ufrn.imd.Controllers.RegisterController;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,15 +15,16 @@ import java.util.HashMap;
 
 public class LoginForm extends MyFrame implements ActionListener {
 
-    HashMap<String,String> credentials;
     JTextField usernameField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("Login");
     JLabel registerLabel = new JLabel("Não possui uma conta? Registre-se aqui.");
 
+    private final RegisterController registerController;
+
     public LoginForm() {
         super("Página de Login");
-        this.credentials = new MockedCredentials().getCredentials();
+        this.registerController = new RegisterController("src/main/java/br/ufrn/imd/Files/owners.json");
         addUIComponents();
     }
 
@@ -82,8 +86,15 @@ public class LoginForm extends MyFrame implements ActionListener {
     }
 
     private Boolean checkUsernameAndPassword(String username, String password) {
-        if (credentials.containsKey(username)) {
-            return credentials.get(username).equals(password);
+        // Use a instância de userController para chamar loadJsonFile
+        JSONArray users = registerController.loadJsonFile();
+
+        for (int i = 0; i < users.length(); i++) {
+            JSONObject user = users.getJSONObject(i);
+            if (user.has("username") && user.getString("username").equals(username)) {
+                String storedPassword = user.getString("password");
+                return storedPassword.equals(password);
+            }
         }
         return false;
     }
@@ -94,11 +105,11 @@ public class LoginForm extends MyFrame implements ActionListener {
             String username = usernameField.getText();
             String password = String.valueOf(passwordField.getPassword());
 
-            if(checkUsernameAndPassword(username, password)){
+            if (checkUsernameAndPassword(username, password)) {
                 JOptionPane.showMessageDialog(LoginForm.this, "Login feito com sucesso!");
                 LoginForm.this.dispose();
                 new ContractsPage().setVisible(true);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(LoginForm.this, "Usuário ou senha incorretos!");
             }
         }
