@@ -156,7 +156,6 @@ public class ContractsPage extends MyFrame {
                 fireEditingStopped();
                 int row = contractTable.getSelectedRow();
                 if (label.equals("Editar")) {
-                    JOptionPane.showMessageDialog(button, "Redirecting to Edit: " + row);
                     ContractsPage.this.dispose();
                     new ContractEditPage(contracts.get(row).getnContractUUID(), contracts.get(row)).setVisible(true);
                 } else if (label.equals("Deletar")) {

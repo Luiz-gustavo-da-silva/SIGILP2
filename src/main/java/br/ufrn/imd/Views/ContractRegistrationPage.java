@@ -17,10 +17,8 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 
 public class ContractRegistrationPage extends MyFrame implements ActionListener {
     JTextField nameField = new JTextField();
@@ -28,8 +26,6 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
     JTextField phoneField = new JTextField();
     JComboBox<String> kitnetComboBox = new JComboBox<>();
     JTextField rentField = new JTextField();
-    JTextField startDateField = new JTextField();
-    JTextField endDateField = new JTextField();
     JButton registerButton = new JButton("Cadastrar");
     JButton goBackButton = new JButton("Voltar");
 
@@ -82,7 +78,7 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         add(nameLabel);
         add(nameField);
 
-        JLabel mailLabel = new JLabel("Seu e-mail");
+        JLabel mailLabel = new JLabel("Email do Inquilino");
         mailLabel.setBounds(410, 200, 400, 25);
         mailLabel.setForeground(Colors.TEXT_COLOR);
         mailLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -101,8 +97,8 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         phoneLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         try{
-            MaskFormatter phoneFieldFormatter = new MaskFormatter("(##)#####-####"); //Formata o campo de data.
-            phoneFieldFormatter.setPlaceholderCharacter('_'); //Enquanto não há nada digitado esse caractere é colocado.
+            MaskFormatter phoneFieldFormatter = new MaskFormatter("(##)#####-####");
+            phoneFieldFormatter.setPlaceholderCharacter('_');
             JFormattedTextField phoneField = new JFormattedTextField(phoneFieldFormatter);
             phoneField.setBounds(410, 295, 220, 25);
             phoneField.setBackground(Colors.SECONDARY_COLOR);
@@ -145,48 +141,6 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         add(rentLabel);
         add(rentField);
 
-        JLabel startDateLabel = new JLabel("Data de início do contrato");
-        startDateLabel.setBounds(640, 325, 400, 25);
-        startDateLabel.setForeground(Colors.TEXT_COLOR);
-        startDateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        try{
-            MaskFormatter startDateFormatter = new MaskFormatter("##/##/####"); //Formata o campo de data.
-            startDateFormatter.setPlaceholderCharacter('_'); //Enquanto não há nada digitado esse caractere é colocado.
-            JFormattedTextField startDateField = new JFormattedTextField(startDateFormatter);
-            startDateField.setBounds(640, 355, 220, 25);
-            startDateField.setBackground(Colors.SECONDARY_COLOR);
-            startDateField.setForeground(Colors.TEXT_COLOR);
-            startDateField.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-            add(startDateLabel);
-            add(startDateField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        JLabel endDateLabel = new JLabel("Data de fim do contrato");
-        endDateLabel.setBounds(410, 385, 400, 25);
-        endDateLabel.setForeground(Colors.TEXT_COLOR);
-        endDateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-        try{
-            MaskFormatter endDateFormatter = new MaskFormatter("##/##/####"); //Formata o campo de data.
-            endDateFormatter.setPlaceholderCharacter('_'); //Enquanto não há nada digitado esse caractere é colocado.
-            JFormattedTextField endDateField = new JFormattedTextField(endDateFormatter);
-            endDateField.setBounds(410, 415, 220, 25);
-            endDateField.setBackground(Colors.SECONDARY_COLOR);
-            endDateField.setForeground(Colors.TEXT_COLOR);
-            endDateField.setFont(new Font("Dialog", Font.PLAIN, 18));
-
-            add(endDateLabel);
-            add(endDateField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
         registerButton.setFont(new Font("Dialog", Font.BOLD, 18));
         registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerButton.setBackground(Colors.TERTIARY_COLOR);
@@ -210,23 +164,21 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
     }
 
     public void saveContract() throws IOException, ParseException{
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String tenantName = nameField.getText().trim();
         String tenantEmail = mailField.getText().trim();
         String tenantPhoneNumber = phoneField.getText().trim();
-        Date startDate = formatter.parse(startDateField.getText().trim()) ;
-        Date endDate = formatter.parse(endDateField.getText().trim());
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        calendar.add(Calendar.YEAR, 1);
+        Date aYearFromNow = calendar.getTime();
         double rentAmount = Double.parseDouble(rentField.getText().trim());
         double adjustment = 1.5;
         String status = "ATIVO";
         String selectedKitnetName = (String) kitnetComboBox.getSelectedItem();
         UUID selectedKitnetUUID = kc.getKitnetUUID(kitchenettes, selectedKitnetName);
-        System.out.println(startDate);
-        System.out.println(endDate);
 
         Contract updatedContract = new Contract(tenantName, tenantEmail,
-                tenantPhoneNumber, selectedKitnetUUID, startDate, endDate, rentAmount, adjustment, status);
+                tenantPhoneNumber, selectedKitnetUUID, today, aYearFromNow, rentAmount, adjustment, status);
         cc.saveContract(updatedContract);
     }
 }
