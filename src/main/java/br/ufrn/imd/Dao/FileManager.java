@@ -286,13 +286,41 @@ public class FileManager {
         boolean removed = false;
         try {
             Owner owner = readOwnerLogged();
-            removed = owner.getContracts().removeIf(c -> c.getnContract().compareTo(nContract) == 0);
+            removed = owner.getContracts().removeIf(c -> c.getnContractUUID().compareTo(nContract) == 0);
             if (removed) {
                 saveOwner(owner);
                 return true;
             }
             return false;
         } catch (OwnerNotLoggedException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveContract(Contract contract) {
+        try {
+            Owner owner = readOwnerLogged();
+            owner.getContracts().add(contract);
+            saveOwner(owner);
+        } catch (OwnerNotLoggedException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean editContract(UUID nContract, Contract contract) throws IOException {
+        boolean exists = false;
+        try {
+            Owner owner = readOwnerLogged();
+            exists = owner.getContracts().stream()
+                    .anyMatch(c -> c.getnContractUUID().compareTo(nContract) == 0);
+            if (exists) {
+                deleteContract(nContract);
+                saveContract(contract);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (OwnerNotLoggedException e) {
             throw new RuntimeException(e);
         }
     }

@@ -1,25 +1,27 @@
 package br.ufrn.imd.Models;
+import br.ufrn.imd.Enums.Status;
+
 import java.util.Date;
 import java.util.UUID;
 
 public class Contract {
-    private UUID nContract;
+    private UUID nContractUUID;
     private String tenantName;
     private String tenantEmail;
     private String tenantPhoneNumber;
-    private int nKitnet;
+    private UUID nKitnetUUID;
     private Date startDate;
     private Date endDate;
     private double rentAmount;
     private double adjustment;
-    private String status;
+    private Status status;
 
-    public Contract(String tenantName, String tenantEmail, String tenantPhoneNumber, int nKitnet, Date startDate, Date endDate, double rentAmount, double adjustment, String status) {
-        this.nContract = UUID.randomUUID();
+    public Contract(String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, Status status) {
+        this.nContractUUID = UUID.randomUUID();
         this.tenantName = tenantName;
         this.tenantEmail = tenantEmail;
         this.tenantPhoneNumber = tenantPhoneNumber;
-        this.nKitnet = nKitnet;
+        this.nKitnetUUID = nKitnetUUID;
         this.startDate = startDate;
         this.endDate = endDate;
         this.rentAmount = rentAmount;
@@ -27,8 +29,21 @@ public class Contract {
         this.status = status;
     }
 
-    public UUID getnContract() {
-        return nContract;
+    public void updateContract(UUID nContractUUID, String tenantName, String tenantEmail, String tenantPhoneNumber, UUID nKitnetUUID, Date startDate, Date endDate, double rentAmount, double adjustment, Status status) {
+        this.nContractUUID = nContractUUID;
+        this.tenantName = tenantName;
+        this.tenantEmail = tenantEmail;
+        this.tenantPhoneNumber = tenantPhoneNumber;
+        this.nKitnetUUID = nKitnetUUID;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.rentAmount = rentAmount;
+        this.adjustment = adjustment;
+        this.status = status;
+    }
+
+    public UUID getnContractUUID() {
+        return nContractUUID;
     }
 
     public String getTenantName() {
@@ -41,10 +56,6 @@ public class Contract {
 
     public String getTenantPhoneNumber() {
         return tenantPhoneNumber;
-    }
-
-    public int getnKitnet() {
-        return nKitnet;
     }
 
     public Date getStartDate() {
@@ -63,10 +74,6 @@ public class Contract {
         return adjustment;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     public void setTenantName(String tenantName) {
         this.tenantName = tenantName;
     }
@@ -77,10 +84,6 @@ public class Contract {
 
     public void setTenantPhoneNumber(String tenantPhoneNumber) {
         this.tenantPhoneNumber = tenantPhoneNumber;
-    }
-
-    public void setKitnet(int nKitnet) {
-        this.nKitnet = nKitnet;
     }
 
     public void setStartDate(Date startDate) {
@@ -99,28 +102,16 @@ public class Contract {
         this.adjustment = adjustment;
     }
 
-    public void setStatus(String status) {
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public void setnKitnet(int nKitnet) {
-        this.nKitnet = nKitnet;
-    }
-
-    @Override
-    public String toString() {
-        return "Contract{" +
-                "nContract=" + nContract +
-                ",\ntenantName='" + tenantName + '\'' +
-                ",\ntenantEmail='" + tenantEmail + '\'' +
-                ",\ntenantPhoneNumber='" + tenantPhoneNumber + '\'' +
-                ",\nnKitnet=" + nKitnet +
-                ",\nstartDate=" + startDate +
-                ",\nendDate=" + endDate +
-                ",\nrentAmount=" + rentAmount +
-                ",\nadjustment=" + adjustment +
-                ",\nstatus='" + status + '\'' +
-                "\n}";
+    public UUID getnKitnetUUID() {
+        return nKitnetUUID;
     }
 
 }

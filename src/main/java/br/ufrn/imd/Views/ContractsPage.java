@@ -2,7 +2,6 @@ package br.ufrn.imd.Views;
 
 import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Controllers.ContractController;
-import br.ufrn.imd.Exceptions.OwnerNotLoggedException;
 import br.ufrn.imd.Models.Contract;
 
 import javax.swing.*;
@@ -14,10 +13,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import java.io.IOException;
 import java.util.List;
 
-public class ContractsPage extends MyFrame implements ActionListener {
+public class ContractsPage extends MyFrame {
 
     JButton exitButton = new JButton("Sair");
     JButton addContract = new JButton("Adicionar Contrato");
@@ -48,7 +46,6 @@ public class ContractsPage extends MyFrame implements ActionListener {
         kitnetsButton.setForeground(Colors.SECONDARY_COLOR);
         kitnetsButton.setBounds(800, 10, 100, 30);
         add(kitnetsButton);
-        kitnetsButton.addActionListener(this);
         kitnetsButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -63,7 +60,6 @@ public class ContractsPage extends MyFrame implements ActionListener {
         addContract.setForeground(Colors.SECONDARY_COLOR);
         addContract.setBounds(925, 10, 200, 30);
         add(addContract);
-        addContract.addActionListener(this);
         addContract.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -78,7 +74,6 @@ public class ContractsPage extends MyFrame implements ActionListener {
         exitButton.setForeground(Colors.SECONDARY_COLOR);
         exitButton.setBounds(1150, 10, 70, 30);
         add(exitButton);
-        exitButton.addActionListener(this);
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -122,14 +117,6 @@ public class ContractsPage extends MyFrame implements ActionListener {
         add(scrollPane);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == exitButton) {
-            ContractsPage.this.dispose();
-            new LoginForm().setVisible(true);
-        }
-    }
-
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer(String text) {
             setText(text);
@@ -170,10 +157,12 @@ public class ContractsPage extends MyFrame implements ActionListener {
                 int row = contractTable.getSelectedRow();
                 if (label.equals("Editar")) {
                     JOptionPane.showMessageDialog(button, "Redirecting to Edit: " + row);
+                    ContractsPage.this.dispose();
+                    new ContractEditPage(contracts.get(row).getnContractUUID(), contracts.get(row)).setVisible(true);
                 } else if (label.equals("Deletar")) {
-                    boolean res = cc.deleteContract(contracts.get(row).getnContract());
+                    boolean res = cc.deleteContract(contracts.get(row).getnContractUUID());
                     if(res) {
-                        JOptionPane.showMessageDialog(button, "Contrato de ID nº " + contracts.get(row).getnContract() + " deletado com sucesso.");
+                        JOptionPane.showMessageDialog(button, "Contrato de ID nº " + contracts.get(row).getnContractUUID() + " deletado com sucesso.");
                         contracts.remove(row);
                         tableModel.removeRow(row);
                         contractTable.revalidate();
