@@ -163,11 +163,6 @@ public class KitnetRegistrationPage extends MyFrame implements ActionListener {
         add(nameKitnetField);
         add(salvarButton);
         salvarButton.addActionListener(this);
-        salvarButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-        });
     }
 
     /**
