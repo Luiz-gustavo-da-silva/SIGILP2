@@ -132,7 +132,7 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         add(kitnetLabel);
         add(kitnetComboBox);
 
-        JLabel rentLabel = new JLabel("V. Aluguel:");
+        JLabel rentLabel = new JLabel("Aluguel");
         rentLabel.setBounds(410, 325, 400, 25);
         rentLabel.setForeground(Colors.TEXT_COLOR);
         rentLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -149,6 +149,7 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         startDateLabel.setBounds(640, 325, 400, 25);
         startDateLabel.setForeground(Colors.TEXT_COLOR);
         startDateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+        add(startDateLabel);
 
         try {
             MaskFormatter startDateFormatter = new MaskFormatter("##/##/####");
@@ -168,6 +169,7 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         endDateLabel.setBounds(410, 385, 400, 25);
         endDateLabel.setForeground(Colors.TEXT_COLOR);
         endDateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+        add(endDateLabel);
 
         try {
             MaskFormatter endDateFormatter = new MaskFormatter("##/##/####");
