@@ -44,7 +44,7 @@ public class LoginForm extends MyFrame implements ActionListener {
         usernameField.setBounds(30, 185, 450, 55);
         usernameField.setBackground(Colors.SECONDARY_COLOR);
         usernameField.setForeground(Colors.TEXT_COLOR);
-        usernameField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        usernameField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(usernameLabel);
         add(usernameField);
@@ -57,7 +57,7 @@ public class LoginForm extends MyFrame implements ActionListener {
         passwordField.setBounds(30, 365, 450, 55);
         passwordField.setBackground(Colors.SECONDARY_COLOR);
         passwordField.setForeground(Colors.TEXT_COLOR);
-        passwordField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        passwordField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         add(passwordLabel);
         add(passwordField);

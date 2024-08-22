@@ -81,12 +81,12 @@ public class ContractEditPage extends MyFrame {
             }
         });
 
-        JLabel loginLabel = new JLabel("Editar Contrato");
-        loginLabel.setBounds(360, 25, 520, 100);
-        loginLabel.setForeground(Colors.TEXT_COLOR);
-        loginLabel.setFont(new Font("Dialog", Font.BOLD, 40));
-        loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(loginLabel);
+        JLabel titleLabel = new JLabel("Editar Contrato");
+        titleLabel.setBounds(360, 25, 520, 100);
+        titleLabel.setForeground(Colors.TEXT_COLOR);
+        titleLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(titleLabel);
 
         JLabel tenantNameLabel = new JLabel("Nome do Inquilino:");
         tenantNameLabel.setBounds(410, 175, 220, 25);
@@ -96,7 +96,7 @@ public class ContractEditPage extends MyFrame {
         tenantNameField.setBounds(410, 210, 220, 25);
         tenantNameField.setBackground(Colors.SECONDARY_COLOR);
         tenantNameField.setForeground(Colors.TEXT_COLOR);
-        tenantNameField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        tenantNameField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         JLabel tenantEmailLabel = new JLabel("Email do Inquilino:");
         tenantEmailLabel.setBounds(640, 175, 220, 25);
@@ -106,7 +106,7 @@ public class ContractEditPage extends MyFrame {
         tenantEmailField.setBounds(640, 210, 220, 25);
         tenantEmailField.setBackground(Colors.SECONDARY_COLOR);
         tenantEmailField.setForeground(Colors.TEXT_COLOR);
-        tenantEmailField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        tenantEmailField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         JLabel tenantPhoneNumberLabel = new JLabel("Telefone do Inquilino:");
         tenantPhoneNumberLabel.setBounds(410, 245, 220, 25);
@@ -116,7 +116,7 @@ public class ContractEditPage extends MyFrame {
         tenantPhoneNumberField.setBounds(410, 280, 220, 25);
         tenantPhoneNumberField.setBackground(Colors.SECONDARY_COLOR);
         tenantPhoneNumberField.setForeground(Colors.TEXT_COLOR);
-        tenantPhoneNumberField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        tenantPhoneNumberField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         JLabel startDateLabel = new JLabel("Data de Início:");
         startDateLabel.setBounds(640, 245, 220, 25);
@@ -126,7 +126,7 @@ public class ContractEditPage extends MyFrame {
         startDateField.setBounds(640, 280, 220, 25);
         startDateField.setBackground(Colors.SECONDARY_COLOR);
         startDateField.setForeground(Colors.TEXT_COLOR);
-        startDateField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        startDateField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         JLabel endDateLabel = new JLabel("Data de Término:");
         endDateLabel.setBounds(410, 315, 220, 25);
@@ -136,7 +136,7 @@ public class ContractEditPage extends MyFrame {
         endDateField.setBounds(410, 350, 220, 25);
         endDateField.setBackground(Colors.SECONDARY_COLOR);
         endDateField.setForeground(Colors.TEXT_COLOR);
-        endDateField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        endDateField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         JLabel rentAmountLabel = new JLabel("Valor do Aluguel:");
         rentAmountLabel.setBounds(640, 315, 220, 25);
@@ -146,7 +146,7 @@ public class ContractEditPage extends MyFrame {
         rentAmountField.setBounds(640, 350, 220, 25);
         rentAmountField.setBackground(Colors.SECONDARY_COLOR);
         rentAmountField.setForeground(Colors.TEXT_COLOR);
-        rentAmountField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        rentAmountField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         JLabel adjustmentLabel = new JLabel("Ajuste:");
         adjustmentLabel.setBounds(410, 385, 220, 25);
@@ -156,7 +156,7 @@ public class ContractEditPage extends MyFrame {
         adjustmentField.setBounds(410, 420, 220, 25);
         adjustmentField.setBackground(Colors.SECONDARY_COLOR);
         adjustmentField.setForeground(Colors.TEXT_COLOR);
-        adjustmentField.setFont(new Font("Dialog", Font.PLAIN, 24));
+        adjustmentField.setFont(new Font("Dialog", Font.PLAIN, 18));
 
         setTextFields();
 
@@ -168,7 +168,7 @@ public class ContractEditPage extends MyFrame {
         statusComboBox.setBounds(640, 420, 220, 25);
         statusComboBox.setBackground(Colors.SECONDARY_COLOR);
         statusComboBox.setForeground(Colors.TEXT_COLOR);
-        statusComboBox.setFont(new Font("Dialog", Font.PLAIN, 16));
+        statusComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
         statusComboBox.setSelectedItem(contract.getStatus());
 
         JLabel kitnetNameLabel = new JLabel("Kitnet:");
@@ -180,7 +180,7 @@ public class ContractEditPage extends MyFrame {
         kitnetNameComboBox.setBounds(410, 490, 450, 25);
         kitnetNameComboBox.setBackground(Colors.SECONDARY_COLOR);
         kitnetNameComboBox.setForeground(Colors.TEXT_COLOR);
-        kitnetNameComboBox.setFont(new Font("Dialog", Font.PLAIN, 16));
+        kitnetNameComboBox.setFont(new Font("Dialog", Font.PLAIN, 18));
         for (String name : kitchenettesNames) {
             kitnetNameComboBox.addItem(name);
         }

@@ -209,19 +209,18 @@ public class RegisterForm extends MyFrame implements ActionListener {
         String cpf = cpfField.getText().replace(".", "").replace("-", "");
         String email = mailField.getText();
 
-        // Verificar se o CPF já está registrado
+
         if (userController.isCpfRegistered(cpf)) {
             JOptionPane.showMessageDialog(this, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Verificar se o E-mail já está registrado
+
         if (userController.isMailRegistered(email)) {
             JOptionPane.showMessageDialog(this, "Email já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Supondo que você tenha os campos de entrada já definidos
         String name = nameField.getText();
         boolean logged = false;
         String state = (String) stateComboBox.getSelectedItem();

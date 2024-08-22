@@ -62,12 +62,12 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
             }
         });
 
-        JLabel loginLabel = new JLabel("Cadastro de Contrato");
-        loginLabel.setBounds(370, 25, 520, 100);
-        loginLabel.setForeground(Colors.TEXT_COLOR);
-        loginLabel.setFont(new Font("Dialog", Font.BOLD, 40));
-        loginLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        add(loginLabel);
+        JLabel titleLabel = new JLabel("Cadastro de Contrato");
+        titleLabel.setBounds(370, 25, 520, 100);
+        titleLabel.setForeground(Colors.TEXT_COLOR);
+        titleLabel.setFont(new Font("Dialog", Font.BOLD, 40));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(titleLabel);
 
         JLabel nameLabel = new JLabel("Nome do Inquilino");
         nameLabel.setBounds(410, 130, 400, 25);
@@ -211,7 +211,7 @@ public class ContractRegistrationPage extends MyFrame implements ActionListener 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String tenantName = nameField.getText().trim();
         String tenantEmail = mailField.getText().trim();
-        String tenantPhoneNumber = phoneField.getText().trim();
+        String tenantPhoneNumber = phoneField.getText().trim().replace("(", "").replace(")", "").replace("-", "");;
         Date startDate = formatter.parse(startDateField.getText().trim());
         Date endDate = formatter.parse(endDateField.getText().trim());
         double rentAmount = Double.parseDouble(rentField.getText().trim());
