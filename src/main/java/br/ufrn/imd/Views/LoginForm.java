@@ -23,11 +23,8 @@ public class LoginForm extends MyFrame implements ActionListener {
 
     public LoginController loginController= new LoginController();
 
-    private final RegisterController registerController;
-
     public LoginForm() {
         super("Página de Login");
-        this.registerController = new RegisterController("src/main/java/br/ufrn/imd/Files/owners.json");
         addUIComponents();
     }
 

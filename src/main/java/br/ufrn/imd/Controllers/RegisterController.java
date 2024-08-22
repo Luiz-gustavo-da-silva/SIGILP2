@@ -1,67 +1,58 @@
 package br.ufrn.imd.Controllers;
-import org.json.JSONArray;
+
+import br.ufrn.imd.Dao.FileManager;
+import br.ufrn.imd.Models.Owner;
 import org.json.JSONObject;
-import java.io.FileReader;
-import java.io.FileWriter;
+
 import java.io.IOException;
+import java.util.List;
 
 public class RegisterController {
 
-    private final String jsonFilePath;
+    private final FileManager fileManager;
 
-    public RegisterController(String jsonFilePath) {
-        this.jsonFilePath = jsonFilePath;
-    }
-
-    // Método para carregar o arquivo JSON
-    public JSONArray loadJsonFile() {
-        try (FileReader reader = new FileReader(jsonFilePath)) {
-            StringBuilder jsonContent = new StringBuilder();
-            int i;
-            while ((i = reader.read()) != -1) {
-                jsonContent.append((char) i);
-            }
-            return new JSONArray(jsonContent.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new JSONArray(); // Retorna um array vazio em caso de erro
-        }
-    }
-
-    // Método para salvar o arquivo JSON
-    public void saveJsonFile(JSONArray jsonArray) {
-        try (FileWriter file = new FileWriter(jsonFilePath)) {
-            file.write(jsonArray.toString(4)); // Formatação com indentação
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public RegisterController() {
+        this.fileManager = new FileManager();
     }
 
     // Método para adicionar um novo usuário ao JSON
-    public void addUser(JSONObject newUser) {
-        JSONArray jsonArray = loadJsonFile();
-        jsonArray.put(newUser);
-        saveJsonFile(jsonArray);
+    public void addUser(Owner newUser) {
+        try {
+            fileManager.saveOwner(newUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isCpfRegistered(String cpf) {
-        JSONArray jsonArray = loadJsonFile();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject user = jsonArray.getJSONObject(i);
-            if (user.has("cpf") && user.getString("cpf").equals(cpf)) {
-                return true; // CPF já registrado
+        try {
+            List<Owner> owners = fileManager.readAllOwners();
+            if(!(owners==null)) {
+                for (Owner owner : owners) {
+                    if (owner.getCpf() != null && owner.getCpf().equals(cpf)) {
+                        return true; // CPF já registrado
+                    }
+                }
             }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false; // CPF não registrado
     }
 
     public boolean isMailRegistered(String email) {
-        JSONArray jsonArray = loadJsonFile();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject user = jsonArray.getJSONObject(i);
-            if (user.has("email") && user.getString("email").equals(email)) {
-                return true; // E-mail já registrado
+        try {
+            List<Owner> owners = fileManager.readAllOwners();
+            if(!(owners==null)) {
+                for (Owner owner : owners) {
+                    if (owner.getEmail() != null && owner.getEmail().equals(email)) {
+                        return true; // E-mail já registrado
+                    }
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false; // E-mail não registrado
     }

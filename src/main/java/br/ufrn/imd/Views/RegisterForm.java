@@ -4,6 +4,8 @@ import br.ufrn.imd.Constants.Colors;
 import br.ufrn.imd.Constants.CountryStates;
 import br.ufrn.imd.Controllers.RegisterController;
 import br.ufrn.imd.Models.Kitnet;
+import br.ufrn.imd.Models.Owner;
+import br.ufrn.imd.Models.Contract;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import javax.swing.*;
@@ -17,6 +19,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RegisterForm extends MyFrame implements ActionListener {
@@ -32,10 +36,11 @@ public class RegisterForm extends MyFrame implements ActionListener {
     JPasswordField passwordField = new JPasswordField();
     JButton registerButton = new JButton("Registrar");
     private final RegisterController userController;
+
     public RegisterForm() {
         super("Página de Registro");
         setSize(1280, 680);
-        userController = new RegisterController("src/main/java/br/ufrn/imd/Files/owners.json");
+        userController = new RegisterController();
         addUIcomponents();
     }
 
@@ -223,21 +228,21 @@ public class RegisterForm extends MyFrame implements ActionListener {
             return;
         }
 
-        JSONObject newUser = new JSONObject();
-        newUser.put("name", nameField.getText());
-        newUser.put("cpf", cpfField.getText().replace(".", "").replace("-", ""));
-        newUser.put("logged", false);
-        newUser.put("state", stateComboBox.getSelectedItem());
-        newUser.put("username", usernameField.getText());
-        newUser.put("telephone", phoneField.getText().replace("(", "").replace(")", "").replace("-", ""));
-        newUser.put("cep", cepField.getText().replace("-", ""));
-        newUser.put("address", addressField.getText());
-        newUser.put("email", mailField.getText());
-        newUser.put("password", new String(passwordField.getPassword()));
-        newUser.put("contracts", new JSONArray());
-        newUser.put("kitnets", new JSONArray());
+        // Supondo que você tenha os campos de entrada já definidos
+        String name = nameField.getText();
+        boolean logged = false;
+        String state = (String) stateComboBox.getSelectedItem();
+        String username = usernameField.getText();
+        String telephone = phoneField.getText().replace("(", "").replace(")", "").replace("-", "");
+        String cep = cepField.getText().replace("-", "");
+        String address = addressField.getText();
+        String password = new String(passwordField.getPassword());
+        List<Contract> contracts = new ArrayList<>();
+        List<Kitnet> kitnets = new ArrayList<>();
 
-        userController.addUser(newUser); // Chame o método do controlador para adicionar o usuário
+        Owner newUser = new Owner(name, cpf, logged, username, telephone, cep, address, email, password, state, contracts, kitnets);
+
+        userController.addUser(newUser);
         JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
         RegisterForm.this.dispose();
         new LoginForm().setVisible(true);

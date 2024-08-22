@@ -11,13 +11,14 @@ public class Owner {
     private String address;
     private String email;
     private String password;
+    private String state;
     private List<Contract> contracts ;
     private List<Kitnet> kitnets;
 
     public Owner() {
     }
 
-    public Owner(String name, String cpf, boolean logged, String username, String telephone, String cep, String address, String email, String password, List<Contract> contracts) {
+    public Owner(String name, String cpf, boolean logged, String username, String telephone, String cep, String address, String email, String password, String state, List<Contract> contracts, List<Kitnet> kitnets) {
         this.name = name;
         this.cpf = cpf;
         this.logged = logged;
@@ -27,7 +28,9 @@ public class Owner {
         this.address = address;
         this.email = email;
         this.password = password;
+        this.state = state;
         this.contracts = contracts;
+        this.kitnets = kitnets;
     }
 
     public String getName() {
