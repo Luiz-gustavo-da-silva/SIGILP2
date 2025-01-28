@@ -27,7 +27,7 @@ tasks.withType(JavaCompile) {
 jar {
     manifest {
         attributes(
-            'Main-Class': 'br.ufrn.imd.Main' // Substitua pelo caminho correto da sua classe principal
+            'Main-Class': 'br.ufrn.imd.Main'
         )
     }
     from {
